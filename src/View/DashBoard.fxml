@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.Glow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="514.0" prefWidth="718.0" style="-fx-background-color: lightgray;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/19" fx:controller="Contral.DashBoardController">
+   <children>
+      <HBox alignment="CENTER" layoutX="185.0" prefHeight="100.0" prefWidth="640.0" style="-fx-background-color: #00cc19;">
+         <effect>
+            <DropShadow />
+         </effect>
+         <children>
+            <Label alignment="CENTER" prefHeight="95.0" prefWidth="314.0" text="Docter Page">
+               <font>
+                  <Font name="Brush Script MT Italic" size="70.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
+      <VBox alignment="CENTER" layoutX="-1.0" layoutY="100.0" prefHeight="415.0" prefWidth="185.0" spacing="2.0" style="-fx-background-color: #00cc19;">
+         <effect>
+            <DropShadow />
+         </effect>
+         <children>
+            <Button fx:id="showPaBTN" mnemonicParsing="false" onAction="#ShowPatient" prefHeight="60.0" prefWidth="185.0" style="-fx-background-color: green; -fx-border-color: #0a5d15;" text="Show Patient" textFill="WHITE">
+               <font>
+                  <Font name="Bookman Old Style Italic" size="23.0" />
+               </font>
+            </Button>
+            <Button fx:id="createPaBTN" mnemonicParsing="false" onAction="#CreatePatient" prefHeight="60.0" prefWidth="185.0" style="-fx-background-color: green; -fx-border-color: #0a5d15;" text="Create Patient" textFill="WHITE">
+               <font>
+                  <Font name="Bookman Old Style Italic" size="22.0" />
+               </font>
+            </Button>
+            <Button fx:id="showApBTN" mnemonicParsing="false" onAction="#ShowAppointment" prefHeight="60.0" prefWidth="185.0" style="-fx-background-color: green; -fx-border-color: #0a5d15;" text="Show Appointment" textFill="WHITE">
+               <font>
+                  <Font name="Bookman Old Style Italic" size="17.0" />
+               </font>
+            </Button>
+            <Button fx:id="createApBTN" mnemonicParsing="false" onAction="#CreateAppointment" prefHeight="60.0" prefWidth="185.0" style="-fx-background-color: green; -fx-border-color: #0a5d15;" text="Create Appointment" textFill="WHITE">
+               <font>
+                  <Font name="Bookman Old Style Italic" size="16.0" />
+               </font>
+            </Button>
+            <Button fx:id="bookedApBTN" mnemonicParsing="false" onAction="#BookedAppointment" prefHeight="60.0" prefWidth="185.0" style="-fx-background-color: green; -fx-border-color: #0a5d15;" text="Booked Appointment" textFill="WHITE">
+               <font>
+                  <Font name="Bookman Old Style Italic" size="16.0" />
+               </font>
+            </Button>
+            <Button fx:id="logoutBTN" mnemonicParsing="false" onAction="#logout" prefHeight="101.0" prefWidth="185.0" style="-fx-background-color: #a94307; -fx-border-color: #0a5d15;" text="Log Out" textFill="WHITE">
+               <font>
+                  <Font name="Bookman Old Style Italic" size="24.0" />
+               </font>
+            </Button>
+         </children>
+      </VBox>
+      <Pane layoutX="-1.0" prefHeight="100.0" prefWidth="185.0" style="-fx-background-color: #00cc19;">
+         <effect>
+            <Glow />
+         </effect>
+      </Pane>
+      <ImageView fitHeight="415.0" fitWidth="666.0" layoutX="185.0" layoutY="100.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Img/MainPage.jpg" />
+         </image>
+      </ImageView>
+      <Label alignment="CENTER" layoutX="328.0" layoutY="143.0" prefHeight="95.0" prefWidth="354.0" text="Welcome To the Page System" textFill="#4267b2">
+         <font>
+            <Font name="Bodoni MT Black" size="22.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="250.0" layoutY="238.0" prefHeight="88.0" prefWidth="519.0" text="➯ Lets Check of any new Appointment">
+         <font>
+            <Font name="Calisto MT" size="29.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
