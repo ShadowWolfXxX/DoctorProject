@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #FFD700;" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Contral.AdminLoginController">
+    <stylesheets>
+        <URL value="@/Css/adminlogin.css" />
+    </stylesheets>
+   <children>
+      <HBox layoutX="-2.0" prefHeight="65.0" prefWidth="600.0" style="-fx-background-color: #fffa20;">
+         <children>
+            <Button fx:id="gobackBTN" mnemonicParsing="false" onAction="#goback" prefHeight="65.0" prefWidth="118.0" style="-fx-background-color: #fbe158;" text="&lt;&lt; GO Back">
+               <effect>
+                  <DropShadow height="12.45" radius="3.585" width="3.89" />
+               </effect></Button>
+            <Label alignment="CENTER" prefHeight="77.0" prefWidth="547.0" text="Adminsiter Login Page">
+               <font>
+                  <Font name="System Bold Italic" size="25.0" />
+               </font></Label>
+         </children>
+      </HBox>
+      <Button fx:id="loginBTN" layoutX="151.0" layoutY="327.0" mnemonicParsing="false" onAction="#login" prefHeight="36.0" prefWidth="421.0" style="-fx-background-color: #010100;" text="Login as Adminsiter" textFill="#f6ffd8">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Button>
+      <TextField fx:id="emailTF" layoutX="157.0" layoutY="160.0" prefHeight="36.0" prefWidth="421.0" promptText="Enter Your Email">
+         <effect>
+            <InnerShadow height="13.21" radius="5.1325" width="9.32" />
+         </effect></TextField>
+      <PasswordField fx:id="PasswordTF" layoutX="154.0" layoutY="238.0" prefHeight="36.0" prefWidth="421.0" promptText="Enter Your Password">
+         <effect>
+            <InnerShadow choke="0.03" height="9.32" radius="4.6475" width="11.27" />
+         </effect></PasswordField>
+      <Label alignment="CENTER" layoutX="40.0" layoutY="160.0" prefHeight="36.0" prefWidth="94.0" text="Email">
+         <font>
+            <Font name="System Bold" size="19.0" />
+         </font></Label>
+      <Label alignment="CENTER" layoutX="42.0" layoutY="238.0" prefHeight="36.0" prefWidth="94.0" text="Password">
+         <font>
+            <Font name="System Bold" size="19.0" />
+         </font></Label>
+   </children>
+</AnchorPane>
