@@ -5,8 +5,12 @@
  */
 package Contral;
 
+import View.ViewManger;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -31,6 +35,8 @@ public class DashBoardController implements Initializable {
     private Button bookedApBTN;
     @FXML
     private Button logoutBTN;
+    
+    ViewManger vm;
 
     /**
      * Initializes the controller class.
@@ -62,6 +68,12 @@ public class DashBoardController implements Initializable {
 
     @FXML
     private void logout(ActionEvent event) {
+        try {
+             vm = ViewManger.getInstance();
+        } catch (IOException ex) {
+            Logger.getLogger(PatientLoginController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+                vm.changeSceneToPatientLogin();
     }
     
 }

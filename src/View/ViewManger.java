@@ -7,7 +7,6 @@ package View;
 
 import java.io.IOException;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -18,6 +17,9 @@ public class ViewManger extends Stage {
     private Scene PatientLogin;
     private Scene AdminLogin;
     private Scene PatientRigester;
+    
+    
+    private Scene DashBord;
 
     private ViewManger() throws IOException {
 
@@ -32,6 +34,11 @@ public class ViewManger extends Stage {
         FXMLLoader load3 = new FXMLLoader(getClass().getResource("/View/PatientRegister.fxml"));
         Parent p3 = load3.load();
         PatientRigester = new Scene(p3);
+        
+        
+         FXMLLoader load4 = new FXMLLoader(getClass().getResource("/View/DashBoard.fxml"));
+        Parent p4 = load4.load();
+        DashBord = new Scene(p4);
 
         this.setScene(PatientLogin);
         this.show();
@@ -53,6 +60,12 @@ public class ViewManger extends Stage {
     public void changeSceneToPatientRegister() {
         this.setScene(PatientRigester);
         this.setTitle("PatientRegister");
+
+    }
+    
+    public void changeSceneToDashBoard() {
+        this.setScene(DashBord);
+        this.setTitle("DashBorad");
 
     }
     

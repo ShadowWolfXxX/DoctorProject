@@ -47,6 +47,12 @@ public class PatientLoginController implements Initializable {
 
     @FXML
     private void login(ActionEvent event) {
+        try {
+             vm = ViewManger.getInstance();
+        } catch (IOException ex) {
+            Logger.getLogger(PatientLoginController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+                vm.changeSceneToDashBoard();
     }
 
     @FXML
