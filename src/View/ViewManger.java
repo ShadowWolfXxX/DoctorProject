@@ -17,7 +17,7 @@ public class ViewManger extends Stage {
     private Scene PatientLogin;
     private Scene AdminLogin;
     private Scene PatientRigester;
-    
+    public static DashBoradManger dashBorad;
     
     private Scene DashBord;
 
@@ -36,9 +36,7 @@ public class ViewManger extends Stage {
         PatientRigester = new Scene(p3);
         
         
-         FXMLLoader load4 = new FXMLLoader(getClass().getResource("/View/DashBoard.fxml"));
-        Parent p4 = load4.load();
-        DashBord = new Scene(p4);
+         
 
         this.setScene(PatientLogin);
         this.show();
@@ -75,5 +73,22 @@ public class ViewManger extends Stage {
         }
         return instance;
     }
+    
+    public static void opendashBorad() throws IOException{
+        if (dashBorad == null) {
+            dashBorad = new DashBoradManger();
+            dashBorad.show();
+        } else {
+            dashBorad.show();
+        }
+        
+    }
+    
+    public static void closedashBorad(){
+        if(dashBorad != null)
+            dashBorad.close();
+    }
+ 
+    
 
 }
