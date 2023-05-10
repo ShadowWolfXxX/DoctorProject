@@ -19,7 +19,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -99,14 +101,47 @@ public class ShowPatientController implements Initializable {
 
     @FXML
     private void caretePatient(ActionEvent event) {
+        try {
+            FXMLLoader load = new FXMLLoader(getClass().getResource("/View/DoctorFxml/ShowPatient.fxml"));
+            Scene scene = new Scene(load.load());
+            UpdatePatientController con = load.getController();
+            con.save("Create", null);
+        } catch (IOException ex) {
+            Logger.getLogger(UpdatePatientController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        ViewManger.dashBorad.changeSceneToUpdatePation();
+        
     }
 
     @FXML
     private void UpdatePatient(ActionEvent event) {
+        try {
+            FXMLLoader load = new FXMLLoader(getClass().getResource("/View/DoctorFxml/ShowPatient.fxml"));
+            Scene scene = new Scene(load.load());
+            UpdatePatientController con = load.getController();
+            con.save("Update" , tableView.getSelectionModel().getSelectedItem());
+        } catch (IOException ex) {
+            Logger.getLogger(UpdatePatientController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        ViewManger.dashBorad.changeSceneToUpdatePation();
     }
 
     @FXML
     private void deletePatient(ActionEvent event) {
+        User use = tableView.getSelectionModel().getSelectedItem();
+         try {
+                Class.forName("com.mysql.cj.jdbc.Driver");
+                String url1 = "jdbc:mysql://127.0.0.1:3306/clinic_appointment?serverTimezone=UTC";
+                String usernameD = "root";
+                String passwordD = "";
+                Connection connection = DriverManager.getConnection(url1, usernameD, passwordD);
+                Statement stat = connection.createStatement();
+                String Sql = "DELETE FROM users WHERE id=" + use.getId();
+                int excut = stat.executeUpdate(Sql);
+                tableView.getItems().removeAll(use);
+            } catch (SQLException | ClassNotFoundException ex) {
+                Logger.getLogger(ShowPatientController.class.getName()).log(Level.SEVERE, null, ex);
+            }
     }
 
     @FXML

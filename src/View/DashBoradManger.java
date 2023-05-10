@@ -15,32 +15,37 @@ import javafx.stage.Stage;
  *
  * @author HP
  */
-public class DashBoradManger extends Stage{
-private Scene DashBord;
-private Scene ShowPation;
-private Scene ShowAppointment;
-private Scene BookedAppointment;
+public class DashBoradManger extends Stage {
 
+    private Scene DashBord;
+    private Scene ShowPation;
+    private Scene ShowAppointment;
+    private Scene BookedAppointment;
+    private Scene UpdatePation;
 
     public DashBoradManger() throws IOException {
         FXMLLoader load = new FXMLLoader(getClass().getResource("/View/DashBoard.fxml"));
         Parent p = load.load();
         DashBord = new Scene(p);
         this.setScene(DashBord);
-        
-         FXMLLoader load1 = new FXMLLoader(getClass().getResource("/View/DoctorFxml/ShowPatient.fxml"));
+
+        FXMLLoader load1 = new FXMLLoader(getClass().getResource("/View/DoctorFxml/ShowPatient.fxml"));
         Parent p1 = load1.load();
         ShowPation = new Scene(p1);
-        
+
         FXMLLoader load2 = new FXMLLoader(getClass().getResource("/View/DoctorFxml/ShowAppointment.fxml"));
         Parent p2 = load2.load();
         ShowAppointment = new Scene(p2);
-        
+
         FXMLLoader load3 = new FXMLLoader(getClass().getResource("/View/DoctorFxml/BookedAppointment.fxml"));
         Parent p3 = load3.load();
         BookedAppointment = new Scene(p3);
+
+        FXMLLoader load4 = new FXMLLoader(getClass().getResource("/View/DoctorFxml/UpdatePatient.fxml"));
+        Parent p4 = load4.load();
+        BookedAppointment = new Scene(p4);
     }
-    
+
     public void changeSceneToDashBord() {
         this.setScene(DashBord);
         this.setTitle("DashBord");
@@ -52,17 +57,22 @@ private Scene BookedAppointment;
         this.setTitle("ShowPation");
 
     }
-    
+
     public void changeSceneToShowAppointment() {
         this.setScene(ShowAppointment);
         this.setTitle("ShowAppointment");
 
     }
-    
+
     public void changeSceneToBookedAppointment() {
         this.setScene(BookedAppointment);
         this.setTitle("BookedAppointment");
 
     }
-    
+
+    public void changeSceneToUpdatePation() {
+        this.setScene(UpdatePation);
+        this.setTitle("UpdatePation");
+
+    }
 }
