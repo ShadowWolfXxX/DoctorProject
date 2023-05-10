@@ -2,17 +2,17 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.effect.Glow?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="514.0" prefWidth="718.0" style="-fx-background-color: lightgray;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Contral.DashBoardController">
+<AnchorPane id="AnchorPane" prefHeight="514.0" prefWidth="718.0" style="-fx-background-color: lightgray;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Contral.ShowPatientController">
    <children>
       <HBox alignment="CENTER" layoutX="185.0" prefHeight="100.0" prefWidth="640.0" style="-fx-background-color: #00cc19;">
          <effect>
@@ -58,20 +58,38 @@
             <Glow />
          </effect>
       </Pane>
-      <ImageView fitHeight="415.0" fitWidth="666.0" layoutX="185.0" layoutY="100.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../Img/MainPage.jpg" />
-         </image>
-      </ImageView>
-      <Label alignment="CENTER" layoutX="328.0" layoutY="143.0" prefHeight="95.0" prefWidth="354.0" text="Welcome To the Page System" textFill="#4267b2">
+      <TableView fx:id="tableView" layoutX="220.0" layoutY="159.0" prefHeight="343.0" prefWidth="570.0">
+        <columns>
+          <TableColumn prefWidth="51.33331298828125" text="id" />
+          <TableColumn prefWidth="100.66668701171875" text="username" />
+            <TableColumn prefWidth="102.66668701171875" text="firstname" />
+            <TableColumn prefWidth="109.3333740234375" text="lastname" />
+            <TableColumn prefWidth="70.0" text="age" />
+            <TableColumn prefWidth="132.0" text="gender" />
+        </columns>
+      </TableView>
+      <Button fx:id="createP" layoutX="220.0" layoutY="115.0" mnemonicParsing="false" onAction="#caretePatient" prefHeight="35.0" prefWidth="154.0" style="-fx-background-color: darkblue;" text="+ Create New Patient" textFill="WHITE">
+         <effect>
+            <DropShadow height="4.46" radius="2.4575" width="7.37" />
+         </effect>
          <font>
-            <Font name="Bodoni MT Black" size="22.0" />
-         </font>
-      </Label>
-      <Label alignment="CENTER" layoutX="250.0" layoutY="238.0" prefHeight="88.0" prefWidth="519.0" text="➯ Lets Check of any new Appointment">
+            <Font name="System Bold" size="12.0" />
+         </font></Button>
+      <Button fx:id="updateInfo" layoutX="534.0" layoutY="115.0" mnemonicParsing="false" onAction="#UpdatePatient" prefHeight="35.0" prefWidth="121.0" style="-fx-background-color: Darkgreen;" text="Update Info" textFill="WHITE">
+         <effect>
+            <Glow />
+         </effect>
          <font>
-            <Font name="Calisto MT" size="29.0" />
+            <Font name="System Bold" size="12.0" />
          </font>
-      </Label>
+      </Button>
+      <Button fx:id="deleteP" layoutX="662.0" layoutY="115.0" mnemonicParsing="false" onAction="#deletePatient" prefHeight="35.0" prefWidth="128.0" style="-fx-background-color: darkred;" text="Delete Patient" textFill="WHITE">
+         <effect>
+            <Glow />
+         </effect>
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

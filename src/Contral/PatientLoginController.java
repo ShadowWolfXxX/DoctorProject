@@ -65,7 +65,7 @@ public class PatientLoginController implements Initializable {
             Statement statement = connection.createStatement();
             String email = emailTF.getText();
             String password = passwordTF.getText();
-            ResultSet r = statement.executeQuery("Select email,passwrod From users");
+            ResultSet r = statement.executeQuery("Select email,passwrod From users where role='patient'");
             boolean state = false;
             while (r.next()) {
                 String emailDB = r.getString("email");

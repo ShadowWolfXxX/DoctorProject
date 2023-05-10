@@ -17,15 +17,31 @@ import javafx.stage.Stage;
  */
 public class DashBoradManger extends Stage{
 private Scene DashBord;
+private Scene ShowPation;
+
 
     public DashBoradManger() throws IOException {
-        FXMLLoader load4 = new FXMLLoader(getClass().getResource("/View/DashBoard.fxml"));
-        Parent p4 = load4.load();
-        DashBord = new Scene(p4);
+        FXMLLoader load = new FXMLLoader(getClass().getResource("/View/DashBoard.fxml"));
+        Parent p = load.load();
+        DashBord = new Scene(p);
         this.setScene(DashBord);
+        
+         FXMLLoader load1 = new FXMLLoader(getClass().getResource("/View/DoctorFxml/ShowPatient.fxml"));
+        Parent p1 = load1.load();
+        ShowPation = new Scene(p1);
     }
     
-    
+    public void changeSceneToDashBord() {
+        this.setScene(DashBord);
+        this.setTitle("DashBord");
+
+    }
+
+    public void changeSceneToShowPation() {
+        this.setScene(ShowPation);
+        this.setTitle("ShowPation");
+
+    }
     
     
 }

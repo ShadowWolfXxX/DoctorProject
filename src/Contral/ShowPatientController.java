@@ -22,7 +22,7 @@ import javafx.scene.control.TableView;
  *
  * @author HP
  */
-public class DashBoardController implements Initializable {
+public class ShowPatientController implements Initializable {
 
     @FXML
     private Button showPaBTN;
@@ -32,6 +32,14 @@ public class DashBoardController implements Initializable {
     private Button bookedApBTN;
     @FXML
     private Button logoutBTN;
+    @FXML
+    private TableView<?> tableView;
+    @FXML
+    private Button createP;
+    @FXML
+    private Button updateInfo;
+    @FXML
+    private Button deleteP;
     
     ViewManger vm;
 
@@ -45,15 +53,11 @@ public class DashBoardController implements Initializable {
 
     @FXML
     private void ShowPatient(ActionEvent event) {
-        ViewManger.dashBorad.changeSceneToShowPation();
     }
-    
-
 
     @FXML
     private void ShowAppointment(ActionEvent event) {
     }
-
 
     @FXML
     private void BookedAppointment(ActionEvent event) {
@@ -68,6 +72,18 @@ public class DashBoardController implements Initializable {
         }
                 vm.changeSceneToPatientLogin();
     }
+    
 
+    @FXML
+    private void caretePatient(ActionEvent event) {
+    }
+
+    @FXML
+    private void UpdatePatient(ActionEvent event) {
+    }
+
+    @FXML
+    private void deletePatient(ActionEvent event) {
+    }
     
 }
