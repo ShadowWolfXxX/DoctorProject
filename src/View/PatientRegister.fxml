@@ -3,6 +3,7 @@
 <?import java.net.URL?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleGroup?>
@@ -11,7 +12,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="446.0" prefWidth="600.0" style="-fx-background-color: linear-gradient(#fdbb2d,#22c1c3);;" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Contral.PatientRegisterController">
+<AnchorPane id="AnchorPane" prefHeight="469.0" prefWidth="600.0" style="-fx-background-color: linear-gradient(#fdbb2d,#22c1c3);;" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Contral.PatientRegisterController">
     <stylesheets>
         <URL value="@/Css/patientregister.css" />
     </stylesheets>
@@ -51,14 +52,14 @@
          <toggleGroup>
             <ToggleGroup fx:id="Gender" />
          </toggleGroup></RadioButton>
-      <RadioButton fx:id="adminRB" layoutX="142.0" layoutY="348.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="144.0" selected="true" text="Admin" textFill="RED">
+      <RadioButton fx:id="adminRB" layoutX="353.0" layoutY="348.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="144.0" selected="true" text="Admin" textFill="RED">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
          <toggleGroup>
             <ToggleGroup fx:id="Role" />
          </toggleGroup></RadioButton>
-      <RadioButton fx:id="patientRB" layoutX="353.0" layoutY="348.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="144.0" text="patient" textFill="WHITE" toggleGroup="$Role">
+      <RadioButton fx:id="patientRB" layoutX="142.0" layoutY="348.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="144.0" selected="true" text="patient" textFill="WHITE" toggleGroup="$Role">
          <font>
             <Font name="System Bold" size="15.0" />
          </font></RadioButton>
@@ -93,10 +94,15 @@
             <Font name="System Bold" size="11.0" />
          </font></Label>
       <TextField fx:id="emailTF" layoutX="138.0" layoutY="130.0" prefHeight="33.0" prefWidth="421.0" promptText="Enter your Email" />
-      <TextField fx:id="passwordTF" layoutX="138.0" layoutY="171.0" prefHeight="33.0" prefWidth="421.0" promptText="Enter your Password" />
       <TextField fx:id="lastNameTF" layoutX="384.0" layoutY="216.0" prefHeight="33.0" prefWidth="177.0" promptText="Enter your Last Name" />
       <TextField fx:id="firstNameTF" layoutX="138.0" layoutY="216.0" prefHeight="33.0" prefWidth="177.0" promptText="Enter your First Name" />
       <TextField fx:id="ageTF" layoutX="384.0" layoutY="265.0" prefHeight="33.0" prefWidth="177.0" promptText="Your Age" />
       <TextField fx:id="phoneTF" layoutX="137.0" layoutY="265.0" prefHeight="33.0" prefWidth="177.0" promptText="Enter your Phone Number" />
+      <PasswordField fx:id="passwordTF" layoutX="138.0" layoutY="171.0" prefHeight="33.0" prefWidth="421.0" promptText="Enter Your Password" />
+      <Label fx:id="stateInsert" alignment="CENTER" layoutX="140.0" layoutY="440.0" prefHeight="25.0" prefWidth="421.0" textFill="#00ff6a">
+         <font>
+            <Font name="System Bold" size="17.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
