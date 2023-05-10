@@ -29,7 +29,7 @@ import javafx.scene.control.ToggleGroup;
  * @author HP
  */
 public class PatientRegisterController implements Initializable {
-    
+
     @FXML
     private RadioButton genderMaleRB;
     @FXML
@@ -60,7 +60,7 @@ public class PatientRegisterController implements Initializable {
     private TextField ageTF;
     @FXML
     private TextField phoneTF;
-    
+
     @FXML
     private Label stateInsert;
 
@@ -69,12 +69,12 @@ public class PatientRegisterController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+
     }
-    
+
     @FXML
     private void signin(ActionEvent event) {
-        
+
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             String url1 = "jdbc:mysql://127.0.0.1:3306/clinic_appointment?serverTimezone=UTC";
@@ -95,37 +95,44 @@ public class PatientRegisterController implements Initializable {
             RadioButton selectedRole = (RadioButton) Role.getSelectedToggle();
             String roleName = selectedRole.getText();
             String role = roleName;
-           if(!(username.equals("")||email.equals("")||password.equals("")||Fname.equals("")||Lname.equals("")||Age.equals("")||Phone.equals(""))){
-            String Query = "insert into users (username, passwrod, firstname, lastname, age, email, phone, gender, role)"
-                    + "VALUES('" + username + "','" + password + "','" + Fname + "','"
-                    + Lname + "','" + Age + "','" + email + "','" + Phone + "','" + gender + "','" + role + "')";
-            int excut = statement.executeUpdate(Query);
-            if (excut>-1) {
-                stateInsert.setStyle("-fx-text-fill: green;");
-                stateInsert.setText("Add Succesfully");
-            }else{
+            if (!(username.equals("") || email.equals("") || password.equals("") || Fname.equals("") || Lname.equals("") || Age.equals("") || Phone.equals(""))) {
+                String Query = "insert into users (username, passwrod, firstname, lastname, age, email, phone, gender, role)"
+                        + "VALUES('" + username + "','" + password + "','" + Fname + "','"
+                        + Lname + "','" + Age + "','" + email + "','" + Phone + "','" + gender + "','" + role + "')";
+                int excut = statement.executeUpdate(Query);
+                if (excut > -1) {
+                    usernameTF.clear();
+                    emailTF.clear();
+                    passwordTF.clear();
+                    firstNameTF.clear();
+                    lastNameTF.clear();
+                    ageTF.clear();
+                    phoneTF.clear();
+                            ViewManger.getInstance().changeSceneToPatientLogin();
+                            ViewManger.openpatient();
+                } else {
+                    stateInsert.setStyle("-fx-text-fill: red;");
+                    stateInsert.setText("Add Falied");
+                }
+                statement.close();
+                connection.close();
+            } else {
                 stateInsert.setStyle("-fx-text-fill: red;");
                 stateInsert.setText("Add Falied");
             }
-            statement.close();
-            connection.close();
-            }else{
-                 stateInsert.setStyle("-fx-text-fill: red;");
-                stateInsert.setText("Add Falied");
-            }
-            
+
         } catch (Exception ex) {
             ex.getStackTrace();
         }
     }
-    
+
     @FXML
     private void goback(ActionEvent event) {
-         try {
+        try {
             ViewManger.getInstance().changeSceneToPatientLogin();
         } catch (IOException ex) {
             Logger.getLogger(DashBoardController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
 }

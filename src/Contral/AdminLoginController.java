@@ -77,6 +77,9 @@ public class AdminLoginController implements Initializable {
                 String emailDB = r.getString("email");
                 String passwordDB = r.getString("passwrod");
                 if (email.equals(emailDB) && password.equals(passwordDB)) {
+                    emailTF.clear();
+                    PasswordTF.clear();
+                    loginState.setText(" ");
                     ViewManger.opendashBorad();
                     ViewManger.dashBorad.changeSceneToDashBord();
                     state = true;

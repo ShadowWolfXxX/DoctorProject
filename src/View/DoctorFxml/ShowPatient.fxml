@@ -67,7 +67,7 @@
             <Glow />
          </effect>
       </Pane>
-      <TableView fx:id="tableView" layoutX="220.0" layoutY="195.0" prefHeight="307.0" prefWidth="570.0">
+      <TableView fx:id="tableView" layoutX="220.0" layoutY="195.0" prefHeight="269.0" prefWidth="570.0">
         <columns>
           <TableColumn fx:id="idCol" prefWidth="51.33331298828125" text="id" />
           <TableColumn fx:id="userNameCol" prefWidth="100.66668701171875" text="username" />
@@ -113,5 +113,10 @@
             <InnerShadow height="6.61" radius="2.125" width="3.89" />
          </effect>
       </TextField>
+      <Button fx:id="showBTN" layoutX="216.0" layoutY="475.0" mnemonicParsing="false" onAction="#ShowPatientRelsut" prefHeight="27.0" prefWidth="576.0" text="Show Patient">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

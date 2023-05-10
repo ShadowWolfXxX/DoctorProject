@@ -69,6 +69,9 @@ public class PatientLoginController implements Initializable {
                 String emailDB = r.getString("email");
                 String passwordDB = r.getString("passwrod");
                 if (email.equals(emailDB) && password.equals(passwordDB)) {
+                    emailTF.clear();
+                    passwordTF.clear();
+                    loginState.setText(" ");
                     ViewManger.openpatient();
                     state = true;
                 } else {
@@ -76,9 +79,11 @@ public class PatientLoginController implements Initializable {
                 }
 
             }
-            
-            if(!state){loginState.setText("Not Found Account");}
-            
+
+            if (!state) {
+                loginState.setText("Not Found Account");
+            }
+
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(PatientLoginController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -86,7 +91,7 @@ public class PatientLoginController implements Initializable {
 
     @FXML
     private void signin(ActionEvent event) {
-         try {
+        try {
             ViewManger.getInstance().changeSceneToPatientRegister();
         } catch (IOException ex) {
             Logger.getLogger(DashBoardController.class.getName()).log(Level.SEVERE, null, ex);
@@ -95,7 +100,7 @@ public class PatientLoginController implements Initializable {
 
     @FXML
     private void adminLogin(ActionEvent event) {
-         try {
+        try {
             ViewManger.getInstance().changeSceneToAdminLogin();
         } catch (IOException ex) {
             Logger.getLogger(DashBoardController.class.getName()).log(Level.SEVERE, null, ex);
