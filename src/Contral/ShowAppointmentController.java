@@ -15,6 +15,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
 /**
@@ -22,7 +23,7 @@ import javafx.scene.control.TableView;
  *
  * @author HP
  */
-public class DashBoardController implements Initializable {
+public class ShowAppointmentController implements Initializable {
 
     @FXML
     private Button showPaBTN;
@@ -32,7 +33,24 @@ public class DashBoardController implements Initializable {
     private Button bookedApBTN;
     @FXML
     private Button logoutBTN;
-    
+    @FXML
+    private TableView<?> tableView;
+    @FXML
+    private TableColumn<?, ?> idCol;
+    @FXML
+    private Button updateInfo;
+    @FXML
+    private TableColumn<?, ?> appointment_date;
+    @FXML
+    private TableColumn<?, ?> appointment_day;
+    @FXML
+    private TableColumn<?, ?> appointment_time;
+    @FXML
+    private TableColumn<?, ?> status;
+    @FXML
+    private Button createA;
+    @FXML
+    private Button deleteA;
 
     /**
      * Initializes the controller class.
@@ -46,14 +64,11 @@ public class DashBoardController implements Initializable {
     private void ShowPatient(ActionEvent event) {
         ViewManger.dashBorad.changeSceneToShowPation();
     }
-    
-
 
     @FXML
     private void ShowAppointment(ActionEvent event) {
-        ViewManger.dashBorad.changeSceneToShowAppointment();
+                //it here already
     }
-
 
     @FXML
     private void BookedAppointment(ActionEvent event) {
@@ -62,15 +77,19 @@ public class DashBoardController implements Initializable {
 
     @FXML
     private void logout(ActionEvent event) {
-        
-        try {
-            ViewManger.getInstance().changeSceneToPatientLogin();
-            ViewManger.closedashBorad();
-        } catch (IOException ex) {
-            Logger.getLogger(DashBoardController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
+        ViewManger.closedashBorad();
     }
 
+    @FXML
+    private void careteAppointment(ActionEvent event) {
+    }
+
+    @FXML
+    private void UpdateAppointment(ActionEvent event) {
+    }
+
+    @FXML
+    private void deleteAppointment(ActionEvent event) {
+    }
     
 }

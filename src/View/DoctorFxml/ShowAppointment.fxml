@@ -4,7 +4,6 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.effect.Glow?>
 <?import javafx.scene.effect.InnerShadow?>
@@ -14,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="514.0" prefWidth="718.0" style="-fx-background-color: lightgray;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Contral.ShowPatientController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Contral.ShowAppointmentController">
    <children>
       <HBox alignment="CENTER" layoutX="185.0" prefHeight="100.0" prefWidth="640.0" style="-fx-background-color: #00cc19;">
          <effect>
@@ -33,22 +32,22 @@
             <DropShadow />
          </effect>
          <children>
-            <Button fx:id="showPaBTN" mnemonicParsing="false" onAction="#ShowPatient" prefHeight="113.0" prefWidth="185.0" style="-fx-background-color: lightgreen; -fx-border-color: #0a5d15;" text="Show Patient">
+            <Button fx:id="showPaBTN" mnemonicParsing="false" onAction="#ShowPatient" prefHeight="113.0" prefWidth="185.0" style="-fx-background-color: green; -fx-border-color: #0a5d15;" text="Show Patient" textFill="WHITE">
                <font>
                   <Font name="Bookman Old Style Italic" size="23.0" />
                </font>
-               <effect>
-                  <InnerShadow height="15.81" radius="6.3725000000000005" width="11.68">
-                     <input>
-                        <Glow level="0.42" />
-                     </input>
-                  </InnerShadow>
-               </effect>
             </Button>
-            <Button fx:id="showApBTN" mnemonicParsing="false" onAction="#ShowAppointment" prefHeight="101.0" prefWidth="185.0" style="-fx-background-color: green; -fx-border-color: #0a5d15;" text="Show Appointment" textFill="WHITE">
+            <Button fx:id="showApBTN" mnemonicParsing="false" onAction="#ShowAppointment" prefHeight="101.0" prefWidth="185.0" style="-fx-background-color: lightGreen; -fx-border-color: #0a5d15;" text="Show Appointment">
                <font>
                   <Font name="Bookman Old Style Italic" size="17.0" />
                </font>
+               <effect>
+                  <InnerShadow height="9.32" radius="4.16" width="9.32">
+                     <input>
+                        <Glow level="0.32" />
+                     </input>
+                  </InnerShadow>
+               </effect>
             </Button>
             <Button fx:id="bookedApBTN" mnemonicParsing="false" onAction="#BookedAppointment" prefHeight="117.0" prefWidth="185.0" style="-fx-background-color: green; -fx-border-color: #0a5d15;" text="Booked Appointment" textFill="WHITE">
                <font>
@@ -67,24 +66,24 @@
             <Glow />
          </effect>
       </Pane>
-      <TableView fx:id="tableView" layoutX="220.0" layoutY="195.0" prefHeight="307.0" prefWidth="570.0">
-        <columns>
-          <TableColumn fx:id="idCol" prefWidth="51.33331298828125" text="id" />
-          <TableColumn fx:id="userNameCol" prefWidth="100.66668701171875" text="username" />
-            <TableColumn fx:id="firstNameCol" prefWidth="102.66668701171875" text="firstname" />
-            <TableColumn fx:id="lastNameCol" prefWidth="109.3333740234375" text="lastname" />
-            <TableColumn fx:id="ageCol" prefWidth="70.0" text="age" />
-            <TableColumn fx:id="genderCol" prefWidth="132.0" text="gender" />
-        </columns>
+      <TableView fx:id="tableView" layoutX="220.0" layoutY="163.0" prefHeight="339.0" prefWidth="570.0">
+         <columns>
+            <TableColumn fx:id="idCol" prefWidth="51.33331298828125" text="id" />
+            <TableColumn fx:id="appointment_date" prefWidth="143.3333740234375" text="appointment_date" />
+            <TableColumn fx:id="appointment_day" prefWidth="141.99996948242188" text="appointment_day" />
+            <TableColumn fx:id="appointment_time" prefWidth="142.0" text="appointment_time" />
+            <TableColumn fx:id="status" minWidth="6.0" prefWidth="90.0" text="status" />
+         </columns>
       </TableView>
-      <Button fx:id="createP" layoutX="220.0" layoutY="115.0" mnemonicParsing="false" onAction="#caretePatient" prefHeight="35.0" prefWidth="154.0" style="-fx-background-color: darkblue;" text="+ Create New Patient" textFill="WHITE">
+      <Button fx:id="createA" layoutX="220.0" layoutY="115.0" mnemonicParsing="false" onAction="#careteAppointment" prefHeight="35.0" prefWidth="175.0" style="-fx-background-color: darkblue;" text="+ Create New Appointment" textFill="WHITE">
          <effect>
             <DropShadow height="4.46" radius="2.4575" width="7.37" />
          </effect>
          <font>
             <Font name="System Bold" size="12.0" />
-         </font></Button>
-      <Button fx:id="updateInfo" layoutX="534.0" layoutY="115.0" mnemonicParsing="false" onAction="#UpdatePatient" prefHeight="35.0" prefWidth="121.0" style="-fx-background-color: Darkgreen;" text="Update Info" textFill="WHITE">
+         </font>
+      </Button>
+      <Button fx:id="updateInfo" layoutX="534.0" layoutY="115.0" mnemonicParsing="false" onAction="#UpdateAppointment" prefHeight="35.0" prefWidth="121.0" style="-fx-background-color: Darkgreen;" text="Update Info" textFill="WHITE">
          <effect>
             <Glow />
          </effect>
@@ -92,7 +91,7 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <Button fx:id="deleteP" layoutX="662.0" layoutY="115.0" mnemonicParsing="false" onAction="#deletePatient" prefHeight="35.0" prefWidth="128.0" style="-fx-background-color: darkred;" text="Delete Patient" textFill="WHITE">
+      <Button fx:id="deleteA" layoutX="658.0" layoutY="115.0" mnemonicParsing="false" onAction="#deleteAppointment" prefHeight="35.0" prefWidth="131.0" style="-fx-background-color: darkred;" text="Delete Appointment" textFill="WHITE">
          <effect>
             <Glow />
          </effect>
@@ -100,18 +99,5 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <Button fx:id="searchBTN" layoutX="718.0" layoutY="159.0" mnemonicParsing="false" onAction="#search" prefHeight="29.0" prefWidth="72.0" style="-fx-background-color: Darkgreen;" text="Search" textFill="WHITE">
-         <effect>
-            <Glow />
-         </effect>
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Button>
-      <TextField fx:id="searchTF" layoutX="221.0" layoutY="159.0" prefHeight="29.0" prefWidth="497.0" promptText="Search for Patient">
-         <effect>
-            <InnerShadow height="6.61" radius="2.125" width="3.89" />
-         </effect>
-      </TextField>
    </children>
 </AnchorPane>

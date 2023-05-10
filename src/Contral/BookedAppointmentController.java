@@ -15,14 +15,16 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 
 /**
  * FXML Controller class
  *
  * @author HP
  */
-public class DashBoardController implements Initializable {
+public class BookedAppointmentController implements Initializable {
 
     @FXML
     private Button showPaBTN;
@@ -32,7 +34,26 @@ public class DashBoardController implements Initializable {
     private Button bookedApBTN;
     @FXML
     private Button logoutBTN;
-    
+    @FXML
+    private TableView<?> tableView;
+    @FXML
+    private TableColumn<?, ?> idCol;
+    @FXML
+    private TableColumn<?, ?> appointment_id;
+    @FXML
+    private TableColumn<?, ?> user_id;
+    @FXML
+    private TableColumn<?, ?> status;
+    @FXML
+    private TableColumn<?, ?> doctor_commnet;
+    @FXML
+    private Button createBP;
+    @FXML
+    private Button searchBTN;
+    @FXML
+    private TextField searchTF;
+    @FXML
+    private Button doneBTN;
 
     /**
      * Initializes the controller class.
@@ -46,31 +67,29 @@ public class DashBoardController implements Initializable {
     private void ShowPatient(ActionEvent event) {
         ViewManger.dashBorad.changeSceneToShowPation();
     }
-    
-
 
     @FXML
     private void ShowAppointment(ActionEvent event) {
         ViewManger.dashBorad.changeSceneToShowAppointment();
     }
 
-
     @FXML
     private void BookedAppointment(ActionEvent event) {
-        ViewManger.dashBorad.changeSceneToBookedAppointment();
+                //it here already
     }
 
     @FXML
     private void logout(ActionEvent event) {
-        
-        try {
-            ViewManger.getInstance().changeSceneToPatientLogin();
-            ViewManger.closedashBorad();
-        } catch (IOException ex) {
-            Logger.getLogger(DashBoardController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
+        ViewManger.closedashBorad();
     }
 
+
+    @FXML
+    private void search(ActionEvent event) {
+    }
+
+    @FXML
+    private void careteBookedAppointment(ActionEvent event) {
+    }
     
 }

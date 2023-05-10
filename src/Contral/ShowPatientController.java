@@ -17,6 +17,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 
 /**
  * FXML Controller class
@@ -53,6 +54,10 @@ public class ShowPatientController implements Initializable {
     private TableColumn<?, ?> ageCol;
     @FXML
     private TableColumn<?, ?> genderCol;
+    @FXML
+    private Button searchBTN;
+    @FXML
+    private TextField searchTF;
     
 
     /**
@@ -65,24 +70,22 @@ public class ShowPatientController implements Initializable {
 
     @FXML
     private void ShowPatient(ActionEvent event) {
+        //it here already
     }
 
     @FXML
     private void ShowAppointment(ActionEvent event) {
+        ViewManger.dashBorad.changeSceneToShowAppointment();
     }
 
     @FXML
     private void BookedAppointment(ActionEvent event) {
+        ViewManger.dashBorad.changeSceneToBookedAppointment();
     }
 
     @FXML
     private void logout(ActionEvent event) {
-        try {
-            ViewManger.getInstance().changeSceneToPatientLogin();
-            ViewManger.closedashBorad();
-        } catch (IOException ex) {
-            Logger.getLogger(DashBoardController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        ViewManger.closedashBorad();
     }
     
 
@@ -96,6 +99,10 @@ public class ShowPatientController implements Initializable {
 
     @FXML
     private void deletePatient(ActionEvent event) {
+    }
+
+    @FXML
+    private void search(ActionEvent event) {
     }
     
 }

@@ -18,6 +18,8 @@ import javafx.stage.Stage;
 public class DashBoradManger extends Stage{
 private Scene DashBord;
 private Scene ShowPation;
+private Scene ShowAppointment;
+private Scene BookedAppointment;
 
 
     public DashBoradManger() throws IOException {
@@ -29,6 +31,14 @@ private Scene ShowPation;
          FXMLLoader load1 = new FXMLLoader(getClass().getResource("/View/DoctorFxml/ShowPatient.fxml"));
         Parent p1 = load1.load();
         ShowPation = new Scene(p1);
+        
+        FXMLLoader load2 = new FXMLLoader(getClass().getResource("/View/DoctorFxml/ShowAppointment.fxml"));
+        Parent p2 = load2.load();
+        ShowAppointment = new Scene(p2);
+        
+        FXMLLoader load3 = new FXMLLoader(getClass().getResource("/View/DoctorFxml/BookedAppointment.fxml"));
+        Parent p3 = load3.load();
+        BookedAppointment = new Scene(p3);
     }
     
     public void changeSceneToDashBord() {
@@ -43,5 +53,16 @@ private Scene ShowPation;
 
     }
     
+    public void changeSceneToShowAppointment() {
+        this.setScene(ShowAppointment);
+        this.setTitle("ShowAppointment");
+
+    }
+    
+    public void changeSceneToBookedAppointment() {
+        this.setScene(BookedAppointment);
+        this.setTitle("BookedAppointment");
+
+    }
     
 }
