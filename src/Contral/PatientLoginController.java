@@ -69,8 +69,7 @@ public class PatientLoginController implements Initializable {
                 String emailDB = r.getString("email");
                 String passwordDB = r.getString("passwrod");
                 if (email.equals(emailDB) && password.equals(passwordDB)) {
-                    ViewManger.opendashBorad();
-                    ViewManger.dashBorad.changeSceneToDashBord();
+                    ViewManger.openpatient();
                     state = true;
                 } else {
                     state = false;

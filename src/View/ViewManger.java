@@ -18,6 +18,8 @@ public class ViewManger extends Stage {
     private Scene AdminLogin;
     private Scene PatientRigester;
     public static DashBoradManger dashBorad;
+    public static PatientManger patient;
+
     
     private Scene DashBord;
 
@@ -87,6 +89,21 @@ public class ViewManger extends Stage {
     public static void closedashBorad(){
         if(dashBorad != null)
             dashBorad.close();
+    }
+    
+    public static void openpatient() throws IOException{
+        if (patient == null) {
+            patient = new PatientManger();
+            patient.show();
+        } else {
+            patient.show();
+        }
+        
+    }
+    
+    public static void closepatient(){
+        if(patient != null)
+            patient.close();
     }
  
     
