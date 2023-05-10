@@ -60,12 +60,12 @@
       </Pane>
       <TableView fx:id="tableView" layoutX="220.0" layoutY="159.0" prefHeight="343.0" prefWidth="570.0">
         <columns>
-          <TableColumn prefWidth="51.33331298828125" text="id" />
-          <TableColumn prefWidth="100.66668701171875" text="username" />
-            <TableColumn prefWidth="102.66668701171875" text="firstname" />
-            <TableColumn prefWidth="109.3333740234375" text="lastname" />
-            <TableColumn prefWidth="70.0" text="age" />
-            <TableColumn prefWidth="132.0" text="gender" />
+          <TableColumn fx:id="idCol" prefWidth="51.33331298828125" text="id" />
+          <TableColumn fx:id="userNameCol" prefWidth="100.66668701171875" text="username" />
+            <TableColumn fx:id="firstNameCol" prefWidth="102.66668701171875" text="firstname" />
+            <TableColumn fx:id="lastNameCol" prefWidth="109.3333740234375" text="lastname" />
+            <TableColumn fx:id="ageCol" prefWidth="70.0" text="age" />
+            <TableColumn fx:id="genderCol" prefWidth="132.0" text="gender" />
         </columns>
       </TableView>
       <Button fx:id="createP" layoutX="220.0" layoutY="115.0" mnemonicParsing="false" onAction="#caretePatient" prefHeight="35.0" prefWidth="154.0" style="-fx-background-color: darkblue;" text="+ Create New Patient" textFill="WHITE">

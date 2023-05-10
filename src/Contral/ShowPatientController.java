@@ -15,6 +15,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
 /**
@@ -40,6 +41,18 @@ public class ShowPatientController implements Initializable {
     private Button updateInfo;
     @FXML
     private Button deleteP;
+    @FXML
+    private TableColumn<?, ?> idCol;
+    @FXML
+    private TableColumn<?, ?> userNameCol;
+    @FXML
+    private TableColumn<?, ?> firstNameCol;
+    @FXML
+    private TableColumn<?, ?> lastNameCol;
+    @FXML
+    private TableColumn<?, ?> ageCol;
+    @FXML
+    private TableColumn<?, ?> genderCol;
     
 
     /**
