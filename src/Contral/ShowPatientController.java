@@ -41,7 +41,6 @@ public class ShowPatientController implements Initializable {
     @FXML
     private Button deleteP;
     
-    ViewManger vm;
 
     /**
      * Initializes the controller class.
@@ -66,11 +65,11 @@ public class ShowPatientController implements Initializable {
     @FXML
     private void logout(ActionEvent event) {
         try {
-             vm = ViewManger.getInstance();
+            ViewManger.getInstance().changeSceneToPatientLogin();
+            ViewManger.closedashBorad();
         } catch (IOException ex) {
-            Logger.getLogger(PatientLoginController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DashBoardController.class.getName()).log(Level.SEVERE, null, ex);
         }
-                vm.changeSceneToPatientLogin();
     }
     
 

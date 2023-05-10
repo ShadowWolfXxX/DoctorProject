@@ -61,7 +61,6 @@ public class PatientRegisterController implements Initializable {
     @FXML
     private TextField phoneTF;
     
-    ViewManger vm;
     @FXML
     private Label stateInsert;
 
@@ -122,12 +121,11 @@ public class PatientRegisterController implements Initializable {
     
     @FXML
     private void goback(ActionEvent event) {
-        try {
-            vm = ViewManger.getInstance();
+         try {
+            ViewManger.getInstance().changeSceneToPatientLogin();
         } catch (IOException ex) {
-            Logger.getLogger(PatientLoginController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DashBoardController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        vm.changeSceneToPatientLogin();
     }
     
 }

@@ -40,8 +40,6 @@ public class PatientLoginController implements Initializable {
     private Button signBTN;
     @FXML
     private Button adminBTN;
-
-    ViewManger vm;
     @FXML
     private Label loginState;
 
@@ -88,22 +86,20 @@ public class PatientLoginController implements Initializable {
 
     @FXML
     private void signin(ActionEvent event) {
-        try {
-            vm = ViewManger.getInstance();
+         try {
+            ViewManger.getInstance().changeSceneToPatientRegister();
         } catch (IOException ex) {
-            Logger.getLogger(PatientLoginController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DashBoardController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        vm.changeSceneToPatientRegister();
     }
 
     @FXML
     private void adminLogin(ActionEvent event) {
-        try {
-            vm = ViewManger.getInstance();
+         try {
+            ViewManger.getInstance().changeSceneToAdminLogin();
         } catch (IOException ex) {
-            Logger.getLogger(PatientLoginController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DashBoardController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        vm.changeSceneToAdminLogin();
 
     }
 

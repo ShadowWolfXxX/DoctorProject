@@ -40,7 +40,6 @@ public class AdminLoginController implements Initializable {
     @FXML
     private PasswordField PasswordTF;
     
-     ViewManger vm;
     @FXML
     private Label loginState;
     /**
@@ -54,11 +53,10 @@ public class AdminLoginController implements Initializable {
     @FXML
     private void goback(ActionEvent event) {
         try {
-             vm = ViewManger.getInstance();
+            ViewManger.getInstance().changeSceneToPatientLogin();
         } catch (IOException ex) {
-            Logger.getLogger(PatientLoginController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DashBoardController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        vm.changeSceneToPatientLogin();
     }
 
     @FXML
