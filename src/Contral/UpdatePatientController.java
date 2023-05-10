@@ -6,6 +6,7 @@
 package Contral;
 
 import Modle.User;
+import View.ViewManger;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -44,8 +45,6 @@ public class UpdatePatientController implements Initializable {
     @FXML
     private RadioButton genderFemaleRB;
     @FXML
-    private Button signBTN;
-    @FXML
     private TextField usernameTF;
     @FXML
     private TextField emailTF;
@@ -59,10 +58,14 @@ public class UpdatePatientController implements Initializable {
     private TextField phoneTF;
     @FXML
     private PasswordField passwordTF;
-    
-    String AddorUpdate;
-    User use;
-    
+
+    static String AddorUpdate;
+    static User use;
+
+    @FXML
+    private Button submitBTN;
+    @FXML
+    private Button backBTN;
 
     /**
      * Initializes the controller class.
@@ -70,31 +73,48 @@ public class UpdatePatientController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
-    }    
-    
-    public void save(String AddorUpdate , User use){
-    this.AddorUpdate = AddorUpdate;
-    this.use = use;
-     };
-    
+    }
+
+    public static void save(String AddorUpdate2, User use2) {
+        AddorUpdate = AddorUpdate2;
+        use = use2;
+    }
+
     @FXML
     private void ShowPatient(ActionEvent event) {
+           ViewManger.dashBorad.changeSceneToShowPation();
     }
 
     @FXML
     private void ShowAppointment(ActionEvent event) {
+                ViewManger.dashBorad.changeSceneToShowAppointment();
     }
 
     @FXML
     private void BookedAppointment(ActionEvent event) {
+        ViewManger.dashBorad.changeSceneToBookedAppointment();
     }
 
     @FXML
     private void logout(ActionEvent event) {
+        ViewManger.closedashBorad();
     }
 
     @FXML
     private void signin(ActionEvent event) {
+        System.out.println(AddorUpdate +"  "+use);
+        if (AddorUpdate.equals("Create")) {
+            // make insert user
+        } else if (AddorUpdate.equals("Update")) {
+            // make update querry on the selectd user
+        } else {
+            //error here
+        }
     }
-    
+
+    @FXML
+    private void goback(ActionEvent event) {
+        ViewManger.dashBorad.changeSceneToShowPation();
+    }
+
 }

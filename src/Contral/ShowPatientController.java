@@ -14,6 +14,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -101,34 +102,21 @@ public class ShowPatientController implements Initializable {
 
     @FXML
     private void caretePatient(ActionEvent event) {
-        try {
-            FXMLLoader load = new FXMLLoader(getClass().getResource("/View/DoctorFxml/ShowPatient.fxml"));
-            Scene scene = new Scene(load.load());
-            UpdatePatientController con = load.getController();
-            con.save("Create", null);
-        } catch (IOException ex) {
-            Logger.getLogger(UpdatePatientController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+       UpdatePatientController.save("Create", null);
         ViewManger.dashBorad.changeSceneToUpdatePation();
         
     }
 
     @FXML
     private void UpdatePatient(ActionEvent event) {
-        try {
-            FXMLLoader load = new FXMLLoader(getClass().getResource("/View/DoctorFxml/ShowPatient.fxml"));
-            Scene scene = new Scene(load.load());
-            UpdatePatientController con = load.getController();
-            con.save("Update" , tableView.getSelectionModel().getSelectedItem());
-        } catch (IOException ex) {
-            Logger.getLogger(UpdatePatientController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        UpdatePatientController.save("Update", tableView.getSelectionModel().getSelectedItem());
         ViewManger.dashBorad.changeSceneToUpdatePation();
     }
 
     @FXML
     private void deletePatient(ActionEvent event) {
         User use = tableView.getSelectionModel().getSelectedItem();
+        if(!Objects.isNull(use)){
          try {
                 Class.forName("com.mysql.cj.jdbc.Driver");
                 String url1 = "jdbc:mysql://127.0.0.1:3306/clinic_appointment?serverTimezone=UTC";
@@ -142,6 +130,7 @@ public class ShowPatientController implements Initializable {
             } catch (SQLException | ClassNotFoundException ex) {
                 Logger.getLogger(ShowPatientController.class.getName()).log(Level.SEVERE, null, ex);
             }
+        }
     }
 
     @FXML

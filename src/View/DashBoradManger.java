@@ -43,7 +43,7 @@ public class DashBoradManger extends Stage {
 
         FXMLLoader load4 = new FXMLLoader(getClass().getResource("/View/DoctorFxml/UpdatePatient.fxml"));
         Parent p4 = load4.load();
-        BookedAppointment = new Scene(p4);
+        UpdatePation = new Scene(p4);
     }
 
     public void changeSceneToDashBord() {

@@ -15,8 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: lightgray;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/19" fx:controller="Contral.UpdatePatientController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: lightgray;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Contral.UpdatePatientController">
    <children>
       <HBox alignment="CENTER" layoutX="185.0" prefHeight="100.0" prefWidth="640.0" style="-fx-background-color: #00cc19;">
          <effect>
@@ -120,7 +119,7 @@
             <Font name="System Bold" size="15.0" />
          </font>
       </RadioButton>
-      <Button fx:id="signBTN" layoutX="330.0" layoutY="461.0" mnemonicParsing="false" onAction="#signin" prefHeight="40.0" prefWidth="421.0" style="-fx-background-color: #0af18e;" text="Submit" textFill="WHITE">
+      <Button fx:id="submitBTN" layoutX="330.0" layoutY="461.0" mnemonicParsing="false" onAction="#signin" prefHeight="40.0" prefWidth="421.0" style="-fx-background-color: #0af18e;" text="Submit" textFill="WHITE">
          <font>
             <Font name="System Bold" size="19.0" />
          </font>
@@ -137,5 +136,10 @@
       <TextField fx:id="ageTF" layoutX="337.0" layoutY="377.0" prefHeight="33.0" prefWidth="421.0" promptText="Your Age" />
       <TextField fx:id="phoneTF" layoutX="337.0" layoutY="332.0" prefHeight="33.0" prefWidth="421.0" promptText="Enter your Phone Number" />
       <PasswordField fx:id="passwordTF" layoutX="339.0" layoutY="201.0" prefHeight="33.0" prefWidth="421.0" promptText="Enter Your Password" />
+      <Button fx:id="backBTN" layoutX="219.0" layoutY="461.0" mnemonicParsing="false" onAction="#goback" prefHeight="40.0" prefWidth="87.0" style="-fx-background-color: red;" text="Back" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="19.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>
