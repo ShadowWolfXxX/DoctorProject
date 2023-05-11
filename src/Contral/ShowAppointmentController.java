@@ -51,6 +51,8 @@ public class ShowAppointmentController implements Initializable {
     private Button createA;
     @FXML
     private Button deleteA;
+    @FXML
+    private Button showBTN;
 
     /**
      * Initializes the controller class.
@@ -82,14 +84,22 @@ public class ShowAppointmentController implements Initializable {
 
     @FXML
     private void careteAppointment(ActionEvent event) {
+                ViewManger.dashBorad.changeSceneToUpdateAppointment();
+
     }
 
     @FXML
     private void UpdateAppointment(ActionEvent event) {
+                ViewManger.dashBorad.changeSceneToUpdateAppointment();
+
     }
 
     @FXML
     private void deleteAppointment(ActionEvent event) {
+    }
+
+    @FXML
+    private void ShowAppointmentRelsut(ActionEvent event) {
     }
     
 }

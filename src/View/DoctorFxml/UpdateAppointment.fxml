@@ -12,8 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/19" fx:controller="Contral.UpdateAppointmentController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Contral.UpdateAppointmentController">
    <children>
       <HBox alignment="CENTER" layoutX="185.0" prefHeight="100.0" prefWidth="640.0" style="-fx-background-color: #00cc19;">
          <effect>
@@ -32,22 +31,22 @@
             <DropShadow />
          </effect>
          <children>
-            <Button fx:id="showPaBTN" mnemonicParsing="false" onAction="#ShowPatient" prefHeight="113.0" prefWidth="185.0" style="-fx-background-color: lightgreen; -fx-border-color: #0a5d15;" text="Show Patient">
+            <Button fx:id="showPaBTN" mnemonicParsing="false" onAction="#ShowPatient" prefHeight="113.0" prefWidth="185.0" style="-fx-background-color: green; -fx-border-color: #0a5d15;" text="Show Patient" textFill="WHITE">
                <font>
                   <Font name="Bookman Old Style Italic" size="23.0" />
                </font>
-               <effect>
-                  <InnerShadow height="15.81" radius="6.3725000000000005" width="11.68">
-                     <input>
-                        <Glow level="0.42" />
-                     </input>
-                  </InnerShadow>
-               </effect>
             </Button>
-            <Button fx:id="showApBTN" mnemonicParsing="false" onAction="#ShowAppointment" prefHeight="101.0" prefWidth="185.0" style="-fx-background-color: green; -fx-border-color: #0a5d15;" text="Show Appointment" textFill="WHITE">
+            <Button fx:id="showApBTN" mnemonicParsing="false" onAction="#ShowAppointment" prefHeight="101.0" prefWidth="185.0" style="-fx-background-color: lightgreen; -fx-border-color: #0a5d15;" text="Show Appointment">
                <font>
                   <Font name="Bookman Old Style Italic" size="17.0" />
                </font>
+               <effect>
+                  <Glow level="0.2">
+                     <input>
+                        <InnerShadow height="11.27" radius="4.16" width="7.37" />
+                     </input>
+                  </Glow>
+               </effect>
             </Button>
             <Button fx:id="bookedApBTN" mnemonicParsing="false" onAction="#BookedAppointment" prefHeight="117.0" prefWidth="185.0" style="-fx-background-color: green; -fx-border-color: #0a5d15;" text="Booked Appointment" textFill="WHITE">
                <font>

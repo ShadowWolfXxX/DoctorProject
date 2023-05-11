@@ -85,7 +85,6 @@ public class UpdatePatientController implements Initializable {
     public static void save(String AddorUpdate2, User use2) {
         AddorUpdate = AddorUpdate2;
         use = use2;
-
     }
 
     @FXML

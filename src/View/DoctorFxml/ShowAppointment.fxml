@@ -66,7 +66,7 @@
             <Glow />
          </effect>
       </Pane>
-      <TableView fx:id="tableView" layoutX="220.0" layoutY="163.0" prefHeight="339.0" prefWidth="570.0">
+      <TableView fx:id="tableView" layoutX="220.0" layoutY="163.0" prefHeight="307.0" prefWidth="570.0">
          <columns>
             <TableColumn fx:id="idCol" prefWidth="51.33331298828125" text="id" />
             <TableColumn fx:id="appointment_date" prefWidth="143.3333740234375" text="appointment_date" />
@@ -97,6 +97,11 @@
          </effect>
          <font>
             <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+      <Button fx:id="showBTN" layoutX="220.0" layoutY="480.0" mnemonicParsing="false" onAction="#ShowAppointmentRelsut" prefHeight="27.0" prefWidth="576.0" text="Show Appointment">
+         <font>
+            <Font name="System Bold" size="13.0" />
          </font>
       </Button>
    </children>
