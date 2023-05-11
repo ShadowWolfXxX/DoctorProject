@@ -72,7 +72,7 @@
             <TableColumn fx:id="appointment_date" prefWidth="143.3333740234375" text="appointment_date" />
             <TableColumn fx:id="appointment_day" prefWidth="141.99996948242188" text="appointment_day" />
             <TableColumn fx:id="appointment_time" prefWidth="142.0" text="appointment_time" />
-            <TableColumn fx:id="status" minWidth="6.0" prefWidth="90.0" text="status" />
+            <TableColumn fx:id="status" minWidth="6.0" prefWidth="87.3333740234375" text="status" />
          </columns>
       </TableView>
       <Button fx:id="createA" layoutX="220.0" layoutY="115.0" mnemonicParsing="false" onAction="#careteAppointment" prefHeight="35.0" prefWidth="175.0" style="-fx-background-color: darkblue;" text="+ Create New Appointment" textFill="WHITE">
@@ -96,7 +96,7 @@
             <Glow />
          </effect>
          <font>
-            <Font name="System Bold" size="12.0" />
+            <Font name="System Bold" size="11.0" />
          </font>
       </Button>
       <Button fx:id="showBTN" layoutX="220.0" layoutY="480.0" mnemonicParsing="false" onAction="#ShowAppointmentRelsut" prefHeight="27.0" prefWidth="576.0" text="Show Appointment">

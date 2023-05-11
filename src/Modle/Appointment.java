@@ -6,6 +6,7 @@
 package Modle;
 
 import java.sql.Date;
+import java.sql.Time;
 
 /**
  *
@@ -14,8 +15,8 @@ import java.sql.Date;
 public class Appointment {
      private int id;
     private Date appointment_date;
-    private Date appointment_day;
-    private Date appointment_time;
+    private String appointment_day;
+    private Time appointment_time;
     private String status;
 
     public int getId() {
@@ -34,21 +35,7 @@ public class Appointment {
         this.appointment_date = appointment_date;
     }
 
-    public Date getAppointment_day() {
-        return appointment_day;
-    }
-
-    public void setAppointment_day(Date appointment_day) {
-        this.appointment_day = appointment_day;
-    }
-
-    public Date getAppointment_time() {
-        return appointment_time;
-    }
-
-    public void setAppointment_time(Date appointment_time) {
-        this.appointment_time = appointment_time;
-    }
+    
 
     public String getStatus() {
         return status;
@@ -56,5 +43,21 @@ public class Appointment {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getAppointment_day() {
+        return appointment_day;
+    }
+
+    public void setAppointment_day(String appointment_day) {
+        this.appointment_day = appointment_day;
+    }
+
+    public Time getAppointment_time() {
+        return appointment_time;
+    }
+
+    public void setAppointment_time(Time appointment_time) {
+        this.appointment_time = appointment_time;
     }
 }
