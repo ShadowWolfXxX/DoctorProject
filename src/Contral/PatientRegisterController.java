@@ -90,11 +90,9 @@ public class PatientRegisterController implements Initializable {
             String Age = ageTF.getText();
             String Phone = phoneTF.getText();
             RadioButton selectedGender = (RadioButton) Gender.getSelectedToggle();
-            String genderName = selectedGender.getText();
-            String gender = genderName;
+            String gender = selectedGender.getText();
             RadioButton selectedRole = (RadioButton) Role.getSelectedToggle();
-            String roleName = selectedRole.getText();
-            String role = roleName;
+            String role = selectedRole.getText();
             if (!(username.equals("") || email.equals("") || password.equals("") || Fname.equals("") || Lname.equals("") || Age.equals("") || Phone.equals(""))) {
                 String Query = "insert into users (username, passwrod, firstname, lastname, age, email, phone, gender, role)"
                         + "VALUES('" + username + "','" + password + "','" + Fname + "','"

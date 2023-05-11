@@ -11,13 +11,17 @@ package Modle;
  */
 public class User {
     //لازم نفس اسماء بداتا بيز
-private int id;
-private String username;
-private String firstname;
-private String lastname;
-private String age;
-private String gender;
-private String role;
+
+    private int id;
+    private String username;
+    private String firstname;
+    private String lastname;
+    private String email;
+    private String passwrod;
+    private String age;
+    private String phone;
+    private String gender;
+    private String role;
 
     public int getId() {
         return id;
@@ -75,5 +79,28 @@ private String role;
         this.role = role;
     }
 
-    
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPasswrod() {
+        return passwrod;
+    }
+
+    public void setPasswrod(String passwrod) {
+        this.passwrod = passwrod;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
 }

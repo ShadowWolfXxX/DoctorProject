@@ -77,7 +77,6 @@ public class ShowPatientController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
-       
     }
 
     @FXML
@@ -102,9 +101,9 @@ public class ShowPatientController implements Initializable {
 
     @FXML
     private void caretePatient(ActionEvent event) {
-       UpdatePatientController.save("Create", null);
+        UpdatePatientController.save("Create", null);
         ViewManger.dashBorad.changeSceneToUpdatePation();
-        
+
     }
 
     @FXML
@@ -116,8 +115,8 @@ public class ShowPatientController implements Initializable {
     @FXML
     private void deletePatient(ActionEvent event) {
         User use = tableView.getSelectionModel().getSelectedItem();
-        if(!Objects.isNull(use)){
-         try {
+        if (!Objects.isNull(use)) {
+            try {
                 Class.forName("com.mysql.cj.jdbc.Driver");
                 String url1 = "jdbc:mysql://127.0.0.1:3306/clinic_appointment?serverTimezone=UTC";
                 String usernameD = "root";
@@ -135,37 +134,40 @@ public class ShowPatientController implements Initializable {
 
     @FXML
     private void search(ActionEvent event) {
-      
-            String word = searchTF.getText();
-            try {
-                Class.forName("com.mysql.cj.jdbc.Driver");
-                String url1 = "jdbc:mysql://127.0.0.1:3306/clinic_appointment?serverTimezone=UTC";
-                String usernameD = "root";
-                String passwordD = "";
-                Connection connection = DriverManager.getConnection(url1, usernameD, passwordD);
-                Statement stat = connection.createStatement();
-                String Sql = "SELECT * FROM users where firstname='" + word + "' and role='patient'";
-                ResultSet rs = stat.executeQuery(Sql);
-                this.tableView.getItems().clear();
-                while (rs.next()) {
-                    User user = new User();
-                    user.setId(rs.getInt("id"));
-                    user.setUsername(rs.getString("username"));
-                    user.setFirstname(rs.getString("firstname"));
-                    user.setLastname(rs.getString("lastname"));
-                    user.setAge(rs.getString("age"));
-                    user.setGender(rs.getString("gender"));
-                    this.tableView.getItems().add(user);
-                }
-            } catch (SQLException | ClassNotFoundException ex) {
-                Logger.getLogger(ShowPatientController.class.getName()).log(Level.SEVERE, null, ex);
-            }
 
+        String word = searchTF.getText();
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            String url1 = "jdbc:mysql://127.0.0.1:3306/clinic_appointment?serverTimezone=UTC";
+            String usernameD = "root";
+            String passwordD = "";
+            Connection connection = DriverManager.getConnection(url1, usernameD, passwordD);
+            Statement stat = connection.createStatement();
+            String Sql = "SELECT * FROM users where firstname='" + word + "' and role='patient'";
+            ResultSet rs = stat.executeQuery(Sql);
+            this.tableView.getItems().clear();
+            while (rs.next()) {
+                User user = new User();
+                user.setId(rs.getInt("id"));
+                user.setUsername(rs.getString("username"));
+                user.setFirstname(rs.getString("firstname"));
+                user.setLastname(rs.getString("lastname"));
+                user.setAge(rs.getString("age"));
+                user.setGender(rs.getString("gender"));
+                user.setPhone(rs.getString("phone"));
+                user.setPasswrod(rs.getString("passwrod"));
+                user.setEmail(rs.getString("email"));
+                this.tableView.getItems().add(user);
+            }
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(ShowPatientController.class.getName()).log(Level.SEVERE, null, ex);
         }
+
+    }
 
     @FXML
     private void ShowPatientRelsut(ActionEvent event) {
-         try {
+        try {
             // TODO
             Class.forName("com.mysql.cj.jdbc.Driver");
             String url1 = "jdbc:mysql://127.0.0.1:3306/clinic_appointment?serverTimezone=UTC";
@@ -193,6 +195,9 @@ public class ShowPatientController implements Initializable {
                 user.setAge(rs.getString("age"));
                 user.setGender(rs.getString("gender"));
                 user.setRole(rs.getString("role"));
+                user.setPhone(rs.getString("phone"));
+                user.setPasswrod(rs.getString("passwrod"));
+                user.setEmail(rs.getString("email"));
                 this.tableView.getItems().add(user);
             }
         } catch (SQLException ex) {
@@ -201,7 +206,5 @@ public class ShowPatientController implements Initializable {
             Logger.getLogger(ShowPatientController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
-    
 
 }

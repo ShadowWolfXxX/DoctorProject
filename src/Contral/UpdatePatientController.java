@@ -9,6 +9,10 @@ import Modle.User;
 import View.ViewManger;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.Statement;
+import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -40,7 +44,6 @@ public class UpdatePatientController implements Initializable {
     private Button logoutBTN;
     @FXML
     private RadioButton genderMaleRB;
-    @FXML
     private ToggleGroup Gender;
     @FXML
     private RadioButton genderFemaleRB;
@@ -66,6 +69,10 @@ public class UpdatePatientController implements Initializable {
     private Button submitBTN;
     @FXML
     private Button backBTN;
+    @FXML
+    private ToggleGroup ge;
+    @FXML
+    private Button oldDate;
 
     /**
      * Initializes the controller class.
@@ -78,16 +85,17 @@ public class UpdatePatientController implements Initializable {
     public static void save(String AddorUpdate2, User use2) {
         AddorUpdate = AddorUpdate2;
         use = use2;
+
     }
 
     @FXML
     private void ShowPatient(ActionEvent event) {
-           ViewManger.dashBorad.changeSceneToShowPation();
+        ViewManger.dashBorad.changeSceneToShowPation();
     }
 
     @FXML
     private void ShowAppointment(ActionEvent event) {
-                ViewManger.dashBorad.changeSceneToShowAppointment();
+        ViewManger.dashBorad.changeSceneToShowAppointment();
     }
 
     @FXML
@@ -102,11 +110,94 @@ public class UpdatePatientController implements Initializable {
 
     @FXML
     private void signin(ActionEvent event) {
-        System.out.println(AddorUpdate +"  "+use);
         if (AddorUpdate.equals("Create")) {
-            // make insert user
+            try {
+                Class.forName("com.mysql.cj.jdbc.Driver");
+                String url1 = "jdbc:mysql://127.0.0.1:3306/clinic_appointment?serverTimezone=UTC";
+                String usernameD = "root";
+                String passwordD = "";
+                Connection connection = DriverManager.getConnection(url1, usernameD, passwordD);
+                Statement statement = connection.createStatement();
+                String username = usernameTF.getText();
+                String email = emailTF.getText();
+                String password = passwordTF.getText();
+                String Fname = firstNameTF.getText();
+                String Lname = lastNameTF.getText();
+                String Age = ageTF.getText();
+                String Phone = phoneTF.getText();
+                RadioButton selectedGender = (RadioButton) ge.getSelectedToggle();
+                String gender = selectedGender.getText();
+                String role = "patient";
+                if (!(username.equals("") || email.equals("") || password.equals("") || Fname.equals("") || Lname.equals("") || Age.equals("") || Phone.equals(""))) {
+                    String Query = "insert into users (username, passwrod, firstname, lastname, age, email, phone, gender, role)"
+                            + "VALUES('" + username + "','" + password + "','" + Fname + "','"
+                            + Lname + "','" + Age + "','" + email + "','" + Phone + "','" + gender + "','" + role + "')";
+                    int excut = statement.executeUpdate(Query);
+                    if (excut > -1) {
+                        usernameTF.clear();
+                        emailTF.clear();
+                        passwordTF.clear();
+                        firstNameTF.clear();
+                        lastNameTF.clear();
+                        ageTF.clear();
+                        phoneTF.clear();
+                        ViewManger.dashBorad.changeSceneToShowPation();
+                    } else {
+
+                    }
+                    statement.close();
+                    connection.close();
+                } else {
+
+                }
+
+            } catch (Exception ex) {
+                ex.getStackTrace();
+            }
         } else if (AddorUpdate.equals("Update")) {
-            // make update querry on the selectd user
+            try {
+                Class.forName("com.mysql.cj.jdbc.Driver");
+                String url1 = "jdbc:mysql://127.0.0.1:3306/clinic_appointment?serverTimezone=UTC";
+                String usernameD = "root";
+                String passwordD = "";
+                Connection connection = DriverManager.getConnection(url1, usernameD, passwordD);
+                Statement statement = connection.createStatement();
+                String username = usernameTF.getText();
+                String email = emailTF.getText();
+                String password = passwordTF.getText();
+                String Fname = firstNameTF.getText();
+                String Lname = lastNameTF.getText();
+                String Age = ageTF.getText();
+                String Phone = phoneTF.getText();
+                RadioButton selectedGender = (RadioButton) ge.getSelectedToggle();
+                String genderName = selectedGender.getText();
+                String gender = genderName;
+                String roleName = "patient";
+                String role = roleName;
+                if (!(username.equals("") || email.equals("") || password.equals("") || Fname.equals("") || Lname.equals("") || Age.equals("") || Phone.equals(""))) {
+                    String Query = "UPDATE users SET username = '" + username + "' , passwrod = '" + password + "' , firstname ='" + Fname + "' , lastname ='" + Lname + "' , age ='" + Age + "' , email ='" + email + "' , gender ='" + gender + "' , role ='" + role + "' where id =" + this.use.getId();
+                    int excut = statement.executeUpdate(Query);
+                    if (excut > -1) {
+                        usernameTF.clear();
+                        emailTF.clear();
+                        passwordTF.clear();
+                        firstNameTF.clear();
+                        lastNameTF.clear();
+                        ageTF.clear();
+                        phoneTF.clear();
+                        ViewManger.dashBorad.changeSceneToShowPation();
+                    } else {
+
+                    }
+                    statement.close();
+                    connection.close();
+                } else {
+
+                }
+
+            } catch (Exception ex) {
+                ex.getStackTrace();
+            }
         } else {
             //error here
         }
@@ -114,7 +205,34 @@ public class UpdatePatientController implements Initializable {
 
     @FXML
     private void goback(ActionEvent event) {
+        usernameTF.clear();
+        emailTF.clear();
+        passwordTF.clear();
+        firstNameTF.clear();
+        lastNameTF.clear();
+        ageTF.clear();
+        phoneTF.clear();
         ViewManger.dashBorad.changeSceneToShowPation();
+    }
+
+    @FXML
+    private void showOldData(ActionEvent event) {
+        if (!Objects.isNull(use)) {
+            usernameTF.setText(use.getUsername());
+            passwordTF.setText(use.getPasswrod());
+            emailTF.setText(use.getEmail());
+            firstNameTF.setText(use.getFirstname());
+            lastNameTF.setText(use.getLastname());
+            ageTF.setText(use.getAge());
+            phoneTF.setText(use.getPhone());
+            if (use.getGender().equals("Male")) {
+                genderMaleRB.setSelected(true);
+                genderFemaleRB.setSelected(false);
+            } else {
+                genderMaleRB.setSelected(false);
+                genderFemaleRB.setSelected(true);
+            }
+        }
     }
 
 }
