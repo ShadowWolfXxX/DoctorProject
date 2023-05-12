@@ -47,8 +47,6 @@ public class BookedAppointmentController implements Initializable {
     @FXML
     private TableColumn<?, ?> doctor_commnet;
     @FXML
-    private Button createBP;
-    @FXML
     private Button searchBTN;
     @FXML
     private TextField searchTF;
@@ -90,9 +88,6 @@ public class BookedAppointmentController implements Initializable {
     private void search(ActionEvent event) {
     }
 
-    @FXML
-    private void careteBookedAppointment(ActionEvent event) {
-    }
 
     @FXML
     private void ShowAppointmentRelsut(ActionEvent event) {

@@ -67,7 +67,7 @@
             <Glow />
          </effect>
       </Pane>
-      <TableView fx:id="tableView" layoutX="220.0" layoutY="160.0" prefHeight="294.0" prefWidth="576.0">
+      <TableView fx:id="tableView" layoutX="220.0" layoutY="160.0" prefHeight="309.0" prefWidth="576.0">
          <columns>
             <TableColumn fx:id="idCol" prefWidth="57.33335876464844" text="id" />
             <TableColumn fx:id="appointment_id" prefWidth="124.66665649414062" text="appointment" />
@@ -76,14 +76,6 @@
             <TableColumn fx:id="doctor_commnet" prefWidth="188.6666259765625" text="commnet" />
          </columns>
       </TableView>
-      <Button fx:id="createBP" layoutX="220.0" layoutY="115.0" mnemonicParsing="false" onAction="#careteBookedAppointment" prefHeight="35.0" prefWidth="175.0" style="-fx-background-color: darkblue;" text="+ Booked Appointment" textFill="WHITE">
-         <effect>
-            <DropShadow height="4.46" radius="2.4575" width="7.37" />
-         </effect>
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Button>
       <Button fx:id="searchBTN" layoutX="729.0" layoutY="118.0" mnemonicParsing="false" onAction="#search" prefHeight="29.0" prefWidth="72.0" style="-fx-background-color: Darkgreen;" text="Search" textFill="WHITE">
          <effect>
             <Glow />
@@ -97,7 +89,7 @@
             <InnerShadow height="6.61" radius="2.125" width="3.89" />
          </effect>
       </TextField>
-      <Button fx:id="doneBTN" layoutX="491.0" layoutY="463.0" mnemonicParsing="false" onAction="#BookedAppointment" prefHeight="35.0" prefWidth="274.0" style="-fx-background-color: gold;" text="Done Appointment" textFill="WHITE">
+      <Button fx:id="doneBTN" layoutX="220.0" layoutY="119.0" mnemonicParsing="false" onAction="#BookedAppointment" prefHeight="27.0" prefWidth="185.0" style="-fx-background-color: gold;" text="Done Appointment" textFill="WHITE">
          <effect>
             <DropShadow height="4.46" radius="2.4575" width="7.37" />
          </effect>
@@ -105,7 +97,7 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <Button fx:id="showBTN" layoutX="230.0" layoutY="463.0" mnemonicParsing="false" onAction="#ShowAppointmentRelsut" prefHeight="35.0" prefWidth="248.0" text="Show Booked Appointment">
+      <Button fx:id="showBTN" layoutX="221.0" layoutY="475.0" mnemonicParsing="false" onAction="#ShowAppointmentRelsut" prefHeight="23.0" prefWidth="576.0" text="Show Booked Appointment">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
