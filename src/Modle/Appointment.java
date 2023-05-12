@@ -13,7 +13,8 @@ import java.sql.Time;
  * @author HP
  */
 public class Appointment {
-     private int id;
+
+    private int id;
     private Date appointment_date;
     private String appointment_day;
     private Time appointment_time;
@@ -26,16 +27,6 @@ public class Appointment {
     public void setId(int id) {
         this.id = id;
     }
-
-    public Date getAppointment_date() {
-        return appointment_date;
-    }
-
-    public void setAppointment_date(Date appointment_date) {
-        this.appointment_date = appointment_date;
-    }
-
-    
 
     public String getStatus() {
         return status;
@@ -60,4 +51,14 @@ public class Appointment {
     public void setAppointment_time(Time appointment_time) {
         this.appointment_time = appointment_time;
     }
+
+    public Date getAppointment_date() {
+        return appointment_date;
+    }
+
+    public void setAppointment_date(Date appointment_date) {
+        this.appointment_date = appointment_date;
+    }
+
+
 }

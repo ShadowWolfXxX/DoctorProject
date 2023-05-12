@@ -13,6 +13,7 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.Statement;
+import java.sql.Time;
 import java.time.LocalDate;
 import java.util.Objects;
 import java.util.ResourceBundle;
@@ -102,15 +103,15 @@ public class UpdateAppointmentController implements Initializable {
                 LocalDate Date = appDate.getValue();
                 String Day = appDay.getText();
                 String Time = appTime.getText();
-                if (!(Date.equals("") || Day.equals("") || ! Time.contains(":"))) {
+                if (!(Date.equals("") || Day.equals("") || !Time.contains(":"))) {
                     String Query = "insert into appointment (appointment_date, appointment_day, appointment_time, status)"
-                            + "VALUES('" + Date + "','" + Day + "','" + Time + "',' free ')";
+                            + "VALUES('" + Date + "','" + Day + "','" + Time + "','free')";
                     int excut = statement.executeUpdate(Query);
                     if (excut > -1) {
                         appDate.setValue(null);
                         appDay.setText("");
                         appTime.setText("");
-                        ViewManger.dashBorad.changeSceneToShowPation();
+                        ViewManger.dashBorad.changeSceneToShowAppointment();
                     } else {
 
                     }
@@ -141,7 +142,7 @@ public class UpdateAppointmentController implements Initializable {
                         appDate.setValue(null);
                         appDay.setText("");
                         appTime.setText("");
-                        ViewManger.dashBorad.changeSceneToShowPation();
+                        ViewManger.dashBorad.changeSceneToShowAppointment();
                     } else {
 
                     }
@@ -170,22 +171,12 @@ public class UpdateAppointmentController implements Initializable {
 
     @FXML
     private void showOldData(ActionEvent event) {
-//         if (!Objects.isNull(use)) {
-//            usernameTF.setText(use.getUsername());
-//            passwordTF.setText(use.getPasswrod());
-//            emailTF.setText(use.getEmail());
-//            firstNameTF.setText(use.getFirstname());
-//            lastNameTF.setText(use.getLastname());
-//            ageTF.setText(use.getAge());
-//            phoneTF.setText(use.getPhone());
-//            if (use.getGender().equals("Male")) {
-//                genderMaleRB.setSelected(true);
-//                genderFemaleRB.setSelected(false);
-//            } else {
-//                genderMaleRB.setSelected(false);
-//                genderFemaleRB.setSelected(true);
-//            }
-//        }
+        if (!Objects.isNull(app)) {
+            appDate.setValue(app.getAppointment_date().toLocalDate());
+            appDay.setText(app.getAppointment_day());
+            appTime.setText(String.valueOf(app.getAppointment_time()));
+
+        }
     }
 
     @FXML
