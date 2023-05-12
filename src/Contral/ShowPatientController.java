@@ -105,8 +105,11 @@ public class ShowPatientController implements Initializable {
 
     @FXML
     private void UpdatePatient(ActionEvent event) {
-        UpdatePatientController.save("Update", tableView.getSelectionModel().getSelectedItem());
+        User user = tableView.getSelectionModel().getSelectedItem();
+        if (!Objects.isNull(user)) {
+        UpdatePatientController.save("Update",user);
         ViewManger.dashBorad.changeSceneToUpdatePation();
+        }
     }
 
     @FXML
