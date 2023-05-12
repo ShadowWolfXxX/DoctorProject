@@ -54,6 +54,8 @@ public class BookedAppointmentController implements Initializable {
     private TextField searchTF;
     @FXML
     private Button doneBTN;
+    @FXML
+    private Button showBTN;
 
     /**
      * Initializes the controller class.
@@ -90,6 +92,10 @@ public class BookedAppointmentController implements Initializable {
 
     @FXML
     private void careteBookedAppointment(ActionEvent event) {
+    }
+
+    @FXML
+    private void ShowAppointmentRelsut(ActionEvent event) {
     }
     
 }
