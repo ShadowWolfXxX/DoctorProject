@@ -8,6 +8,7 @@ package Contral;
 import static Contral.UpdatePatientController.AddorUpdate;
 import Modle.Appointment;
 import View.ViewManger;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.Date;
@@ -86,7 +87,7 @@ public class UpdateAppointmentController implements Initializable {
     }
 
     @FXML
-    private void logout(ActionEvent event) {
+    private void logout(ActionEvent event) throws IOException {
         ViewManger.closedashBorad();
     }
 

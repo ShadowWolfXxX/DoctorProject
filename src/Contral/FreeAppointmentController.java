@@ -6,6 +6,7 @@
 package Contral;
 
 import View.ViewManger;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -41,13 +42,15 @@ public class FreeAppointmentController implements Initializable {
     @FXML
     private Button bookedABTN;
 
+    private static int userId;
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
+    }
 
     @FXML
     private void FreeAppointment(ActionEvent event) {
@@ -60,13 +63,17 @@ public class FreeAppointmentController implements Initializable {
     }
 
     @FXML
-    private void Logout(ActionEvent event) {
-                ViewManger.closepatient();
+    private void Logout(ActionEvent event) throws IOException {
+        ViewManger.closepatient();
 
     }
 
     @FXML
     private void BookedAppointment(ActionEvent event) {
     }
-    
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
 }

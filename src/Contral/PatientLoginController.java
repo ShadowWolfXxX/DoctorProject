@@ -63,7 +63,7 @@ public class PatientLoginController implements Initializable {
             Statement statement = connection.createStatement();
             String email = emailTF.getText();
             String password = passwordTF.getText();
-            ResultSet r = statement.executeQuery("Select email,passwrod From users where role='patient'");
+            ResultSet r = statement.executeQuery("Select id,email,passwrod From users where role='patient'");
             boolean state = false;
             while (r.next()) {
                 String emailDB = r.getString("email");
@@ -72,6 +72,10 @@ public class PatientLoginController implements Initializable {
                     emailTF.clear();
                     passwordTF.clear();
                     loginState.setText(" ");
+                    FreeAppointmentController fa = new FreeAppointmentController();
+                    fa.setUserId(r.getInt("id"));
+                    MyBookedAppointmentController ma = new MyBookedAppointmentController();
+                    ma.setUserId(r.getInt("id"));
                     ViewManger.openpatient();
                     state = true;
                 } else {

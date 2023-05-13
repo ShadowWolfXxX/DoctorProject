@@ -89,7 +89,7 @@
             <InnerShadow height="6.61" radius="2.125" width="3.89" />
          </effect>
       </TextField>
-      <Button fx:id="doneBTN" layoutX="220.0" layoutY="119.0" mnemonicParsing="false" onAction="#BookedAppointment" prefHeight="27.0" prefWidth="185.0" style="-fx-background-color: gold;" text="Done Appointment" textFill="WHITE">
+      <Button fx:id="doneBTN" layoutX="220.0" layoutY="119.0" mnemonicParsing="false" onAction="#BookedTheAppointment" prefHeight="27.0" prefWidth="185.0" style="-fx-background-color: gold;" text="Done Appointment" textFill="WHITE">
          <effect>
             <DropShadow height="4.46" radius="2.4575" width="7.37" />
          </effect>

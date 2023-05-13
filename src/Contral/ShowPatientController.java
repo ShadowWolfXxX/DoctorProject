@@ -7,6 +7,7 @@ package Contral;
 
 import Modle.User;
 import View.ViewManger;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -92,7 +93,7 @@ public class ShowPatientController implements Initializable {
     }
 
     @FXML
-    private void logout(ActionEvent event) {
+    private void logout(ActionEvent event) throws IOException {
         ViewManger.closedashBorad();
     }
 

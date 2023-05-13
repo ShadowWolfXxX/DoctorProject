@@ -15,8 +15,7 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="423.0" prefWidth="637.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/19" fx:controller="Contral.MyBookedAppointmentController">
+<AnchorPane id="AnchorPane" prefHeight="423.0" prefWidth="637.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Contral.MyBookedAppointmentController">
    <children>
       <VBox alignment="CENTER" prefHeight="423.0" prefWidth="147.0" spacing="20.0" style="-fx-background-color: gray;">
          <children>
@@ -102,22 +101,30 @@
             </Lighting>
          </effect>
       </VBox>
-      <TableView fx:id="viewTable" layoutX="161.0" layoutY="83.0" prefHeight="323.0" prefWidth="465.0">
+      <TableView fx:id="viewTable" layoutX="161.0" layoutY="83.0" prefHeight="290.0" prefWidth="465.0">
          <columns>
             <TableColumn fx:id="bookedAppName" prefWidth="137.3333282470703" text="Appointment Name" />
             <TableColumn fx:id="BookedAppstatus" prefWidth="67.33331298828125" text="Status" />
             <TableColumn fx:id="doctorComment" prefWidth="260.6667175292969" text="Doctor Comment" />
          </columns>
       </TableView>
-      <Button fx:id="watingAppBTN" layoutX="161.0" layoutY="26.0" mnemonicParsing="false" onAction="#BookedAppointment" prefHeight="42.0" prefWidth="211.0" style="-fx-background-color: blue;" text="Show My Wating Appointment" textFill="WHITE">
+      <Button fx:id="watingAppBTN" layoutX="161.0" layoutY="26.0" mnemonicParsing="false" onAction="#showWating" prefHeight="42.0" prefWidth="211.0" style="-fx-background-color: blue;" text="Show My Wating Appointment" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <Button fx:id="finishedAppBTN" layoutX="411.0" layoutY="26.0" mnemonicParsing="false" onAction="#BookedAppointment" prefHeight="42.0" prefWidth="211.0" style="-fx-background-color: green;" text="Show My finished Appointment" textFill="WHITE">
+      <Button fx:id="finishedAppBTN" layoutX="411.0" layoutY="26.0" mnemonicParsing="false" onAction="#showFinised" prefHeight="42.0" prefWidth="211.0" style="-fx-background-color: green;" text="Show My finished Appointment" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
+      </Button>
+      <Button fx:id="showCommentBTN" layoutX="161.0" layoutY="383.0" mnemonicParsing="false" onAction="#showComment" prefHeight="18.0" prefWidth="465.0" style="-fx-background-color: lightyellow;" text="Show Doctor Comment...">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+         <effect>
+            <DropShadow height="7.37" radius="2.6975" spread="0.67" width="5.42" />
+         </effect>
       </Button>
    </children>
 </AnchorPane>

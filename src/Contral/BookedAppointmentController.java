@@ -6,6 +6,7 @@
 package Contral;
 
 import Modle.BookedAppointments;
+import Modle.User;
 import View.ViewManger;
 import java.io.IOException;
 import java.net.URL;
@@ -14,6 +15,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -86,7 +88,7 @@ public class BookedAppointmentController implements Initializable {
     }
 
     @FXML
-    private void logout(ActionEvent event) {
+    private void logout(ActionEvent event) throws IOException {
         ViewManger.closedashBorad();
     }
 
@@ -166,6 +168,15 @@ public class BookedAppointmentController implements Initializable {
 
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(ShowPatientController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @FXML
+    private void BookedTheAppointment(ActionEvent event) {
+         BookedAppointments ba = tableView.getSelectionModel().getSelectedItem();
+        if (!Objects.isNull(ba)) {
+        CommentAppointmentController.save(ba);
+                ViewManger.dashBorad.changeSceneToCommentAppointment();
         }
     }
 

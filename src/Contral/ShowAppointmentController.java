@@ -87,7 +87,7 @@ public class ShowAppointmentController implements Initializable {
     }
 
     @FXML
-    private void logout(ActionEvent event) {
+    private void logout(ActionEvent event) throws IOException {
         ViewManger.closedashBorad();
     }
 

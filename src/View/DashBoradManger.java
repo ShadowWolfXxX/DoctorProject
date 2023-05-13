@@ -23,6 +23,7 @@ public class DashBoradManger extends Stage {
     private Scene BookedAppointment;
     private Scene UpdatePation;
     private Scene UpdateAppointment;
+    private Scene CommentAppointment;
 
     public DashBoradManger() throws IOException {
         FXMLLoader load = new FXMLLoader(getClass().getResource("/View/DashBoard.fxml"));
@@ -49,6 +50,10 @@ public class DashBoradManger extends Stage {
         FXMLLoader load5 = new FXMLLoader(getClass().getResource("/View/DoctorFxml/UpdateAppointment.fxml"));
         Parent p5 = load5.load();
         UpdateAppointment = new Scene(p5);
+        
+        FXMLLoader load6 = new FXMLLoader(getClass().getResource("/View/DoctorFxml/CommentAppointment.fxml"));
+        Parent p6 = load6.load();
+        CommentAppointment = new Scene(p6);
     }
 
     public void changeSceneToDashBord() {
@@ -84,6 +89,12 @@ public class DashBoradManger extends Stage {
     public void changeSceneToUpdateAppointment() {
         this.setScene(UpdateAppointment);
         this.setTitle("UpdateAppointment");
+
+    }
+    
+    public void changeSceneToCommentAppointment() {
+        this.setScene(CommentAppointment);
+        this.setTitle("CommentAppointment");
 
     }
 }
