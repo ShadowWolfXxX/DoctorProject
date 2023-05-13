@@ -13,14 +13,13 @@ import javafx.stage.Stage;
 
 public class ViewManger extends Stage {
 
-    private static ViewManger instance  = null;
+    private static ViewManger instance = null;
     private Scene PatientLogin;
     private Scene AdminLogin;
     private Scene PatientRigester;
     public static DashBoradManger dashBorad;
     public static PatientManger patient;
 
-    
     private Scene DashBord;
 
     private ViewManger() throws IOException {
@@ -32,13 +31,10 @@ public class ViewManger extends Stage {
         FXMLLoader load2 = new FXMLLoader(getClass().getResource("/View/AdminLogin.fxml"));
         Parent p2 = load2.load();
         AdminLogin = new Scene(p2);
-        
+
         FXMLLoader load3 = new FXMLLoader(getClass().getResource("/View/PatientRegister.fxml"));
         Parent p3 = load3.load();
         PatientRigester = new Scene(p3);
-        
-        
-         
 
         this.setScene(PatientLogin);
         this.show();
@@ -56,56 +52,65 @@ public class ViewManger extends Stage {
         this.setTitle("AdminLogin");
 
     }
-    
+
     public void changeSceneToPatientRegister() {
         this.setScene(PatientRigester);
         this.setTitle("PatientRegister");
 
     }
-    
+
     public void changeSceneToDashBoard() {
         this.setScene(DashBord);
         this.setTitle("DashBorad");
 
     }
-    
+
     public static ViewManger getInstance() throws IOException {
         if (instance == null) {
             instance = new ViewManger();
         }
         return instance;
     }
-    
-    public static void opendashBorad() throws IOException{
+
+    public static void opendashBorad() throws IOException {
         if (dashBorad == null) {
             dashBorad = new DashBoradManger();
             dashBorad.show();
+            ViewManger.getInstance().close();
         } else {
             dashBorad.show();
+            ViewManger.getInstance().close();
+
         }
-        
+
     }
-    
-    public static void closedashBorad(){
-        if(dashBorad != null)
+
+    public static void closedashBorad() throws IOException {
+        if (dashBorad != null) {
             dashBorad.close();
+            ViewManger.getInstance().show();
+        }
     }
-    
-    public static void openpatient() throws IOException{
+
+    public static void openpatient() throws IOException {
         if (patient == null) {
             patient = new PatientManger();
             patient.show();
+            ViewManger.getInstance().close();
+
         } else {
             patient.show();
+            ViewManger.getInstance().close();
+
         }
-        
+
     }
-    
-    public static void closepatient(){
-        if(patient != null)
+
+    public static void closepatient() throws IOException {
+        if (patient != null) {
             patient.close();
+            ViewManger.getInstance().show();
+        }
     }
- 
-    
 
 }

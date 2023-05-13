@@ -73,7 +73,7 @@
             <TableColumn fx:id="appointment_id" prefWidth="124.66665649414062" text="appointment" />
             <TableColumn fx:id="user_id" prefWidth="113.99996948242188" text="user" />
             <TableColumn fx:id="status" prefWidth="91.33331298828125" text="status" />
-            <TableColumn fx:id="doctor_commnet" prefWidth="188.6666259765625" text="commnet" />
+            <TableColumn fx:id="doctor_commnet" prefWidth="185.3333740234375" text="commnet" />
          </columns>
       </TableView>
       <Button fx:id="searchBTN" layoutX="729.0" layoutY="118.0" mnemonicParsing="false" onAction="#search" prefHeight="29.0" prefWidth="72.0" style="-fx-background-color: Darkgreen;" text="Search" textFill="WHITE">

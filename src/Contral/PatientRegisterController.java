@@ -107,7 +107,6 @@ public class PatientRegisterController implements Initializable {
                     ageTF.clear();
                     phoneTF.clear();
                             ViewManger.getInstance().changeSceneToPatientLogin();
-                            ViewManger.openpatient();
                 } else {
                     stateInsert.setStyle("-fx-text-fill: red;");
                     stateInsert.setText("Add Falied");
