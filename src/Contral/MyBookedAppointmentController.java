@@ -79,6 +79,7 @@ public class MyBookedAppointmentController implements Initializable {
 
     @FXML
     private void showComment(ActionEvent event) {
+        ViewManger.patient.changeSceneToShowMyDoctorComment();
     }
 
     public void setUserId(int userId) {

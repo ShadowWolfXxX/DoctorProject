@@ -18,6 +18,7 @@ import javafx.stage.Stage;
 public class PatientManger extends Stage{
 private Scene FreeAppointment;
 private Scene MyBookedAppointment;
+private Scene ShowMyDoctorComment;
 
     public PatientManger() throws IOException {
          FXMLLoader load1 = new FXMLLoader(getClass().getResource("/View/PatientFxml/FreeAppointment.fxml"));
@@ -29,6 +30,9 @@ private Scene MyBookedAppointment;
         Parent p2 = load2.load();
         MyBookedAppointment = new Scene(p2);
         
+        FXMLLoader load3 = new FXMLLoader(getClass().getResource("/View/PatientFxml/ShowMyDoctorComment.fxml"));
+        Parent p3 = load3.load();
+        ShowMyDoctorComment = new Scene(p3);
     }
     
     public void changeSceneToFreeAppointment() {
@@ -40,6 +44,12 @@ private Scene MyBookedAppointment;
     public void changeSceneToMyBookedAppointment() {
         this.setScene(MyBookedAppointment);
         this.setTitle("MyBookedAppointment");
+
+    }
+    
+    public void changeSceneToShowMyDoctorComment() {
+        this.setScene(ShowMyDoctorComment);
+        this.setTitle("ShowMyDoctorComment");
 
     }
     
