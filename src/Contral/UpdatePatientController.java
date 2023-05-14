@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Objects;
 import java.util.ResourceBundle;
@@ -21,6 +22,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.RadioButton;
@@ -44,7 +46,6 @@ public class UpdatePatientController implements Initializable {
     private Button logoutBTN;
     @FXML
     private RadioButton genderMaleRB;
-    private ToggleGroup Gender;
     @FXML
     private RadioButton genderFemaleRB;
     @FXML
@@ -108,51 +109,34 @@ public class UpdatePatientController implements Initializable {
     }
 
     @FXML
-    private void signin(ActionEvent event) {
+    private void signin(ActionEvent event) throws SQLException, IOException {
         if (AddorUpdate.equals("Create")) {
-            try {
-                Class.forName("com.mysql.cj.jdbc.Driver");
-                String url1 = "jdbc:mysql://127.0.0.1:3306/clinic_appointment?serverTimezone=UTC";
-                String usernameD = "root";
-                String passwordD = "";
-                Connection connection = DriverManager.getConnection(url1, usernameD, passwordD);
-                Statement statement = connection.createStatement();
-                String username = usernameTF.getText();
-                String email = emailTF.getText();
-                String password = passwordTF.getText();
-                String Fname = firstNameTF.getText();
-                String Lname = lastNameTF.getText();
-                String Age = ageTF.getText();
-                String Phone = phoneTF.getText();
-                RadioButton selectedGender = (RadioButton) ge.getSelectedToggle();
-                String gender = selectedGender.getText();
-                String role = "patient";
-                if (!(username.equals("") || email.equals("") || password.equals("") || Fname.equals("") || Lname.equals("") || Age.equals("") || Phone.equals(""))) {
-                    String Query = "insert into users (username, passwrod, firstname, lastname, age, email, phone, gender, role)"
-                            + "VALUES('" + username + "','" + password + "','" + Fname + "','"
-                            + Lname + "','" + Age + "','" + email + "','" + Phone + "','" + gender + "','" + role + "')";
-                    int excut = statement.executeUpdate(Query);
-                    if (excut > -1) {
-                        usernameTF.clear();
-                        emailTF.clear();
-                        passwordTF.clear();
-                        firstNameTF.clear();
-                        lastNameTF.clear();
-                        ageTF.clear();
-                        phoneTF.clear();
-                        ViewManger.dashBorad.changeSceneToShowPation();
-                    } else {
+           String username = usernameTF.getText();
+        String email = emailTF.getText();
+        String password = passwordTF.getText();
+        String Fname = firstNameTF.getText();
+        String Lname = lastNameTF.getText();
+        String Age = ageTF.getText();
+        String Phone = phoneTF.getText();
+        RadioButton genderrd = (RadioButton) ge.getSelectedToggle();
+         String gender = genderrd.getText();
+        String role = "patient";
+        User user = new User(username, Fname, Lname, email, password, Age, Phone, gender, role);
+        int excut = user.save();
 
-                    }
-                    statement.close();
-                    connection.close();
-                } else {
-
-                }
-
-            } catch (Exception ex) {
-                ex.getStackTrace();
-            }
+        if (excut > 0) {
+            usernameTF.clear();
+            emailTF.clear();
+            passwordTF.clear();
+            firstNameTF.clear();
+            lastNameTF.clear();
+            ageTF.clear();
+            phoneTF.clear();
+            Alert alret = new Alert(Alert.AlertType.CONFIRMATION);
+            alret.setContentText("User have been add it");
+            alret.showAndWait();
+            ViewManger.dashBorad.changeSceneToShowPation();
+             }
         } else if (AddorUpdate.equals("Update")) {
             try {
                 Class.forName("com.mysql.cj.jdbc.Driver");

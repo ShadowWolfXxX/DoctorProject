@@ -5,6 +5,7 @@
  */
 package Contral;
 
+import Modle.DB;
 import View.ViewManger;
 import java.io.IOException;
 import java.net.URL;
@@ -63,12 +64,8 @@ public class AdminLoginController implements Initializable {
     private void login(ActionEvent event) {
         try {
 
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            String url1 = "jdbc:mysql://127.0.0.1:3306/clinic_appointment?serverTimezone=UTC";
-            String usernameD = "root";
-            String passwordD = "";
-            Connection connection = DriverManager.getConnection(url1, usernameD, passwordD);
-            Statement statement = connection.createStatement();
+           Connection c = DB.getinstend().getConntectin();
+            Statement statement = c.createStatement();
             String email = emailTF.getText();
             String password = PasswordTF.getText();
             ResultSet r = statement.executeQuery("Select email,passwrod From users where role='Admin'");
@@ -91,7 +88,7 @@ public class AdminLoginController implements Initializable {
             
             if(!state){loginState.setText("Not Found Account");}
             
-        } catch (ClassNotFoundException | SQLException ex) {
+        } catch (SQLException ex) {
             Logger.getLogger(PatientLoginController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
             Logger.getLogger(AdminLoginController.class.getName()).log(Level.SEVERE, null, ex);

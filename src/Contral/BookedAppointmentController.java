@@ -69,7 +69,11 @@ public class BookedAppointmentController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        idCol.setCellValueFactory(new PropertyValueFactory("id"));
+        appointment_id.setCellValueFactory(new PropertyValueFactory("appointment_id"));
+        user_id.setCellValueFactory(new PropertyValueFactory("user_id"));
+        status.setCellValueFactory(new PropertyValueFactory("status"));
+        doctor_commnet.setCellValueFactory(new PropertyValueFactory("doctor_commnet"));
     }
 
     @FXML
@@ -96,7 +100,7 @@ public class BookedAppointmentController implements Initializable {
     private void search(ActionEvent event) {
 
         String word = searchTF.getText();
-        int id = -1 ;
+        int id = -1;
         try {
             // TODO
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -106,26 +110,17 @@ public class BookedAppointmentController implements Initializable {
             Connection connection = DriverManager.getConnection(url1, usernameD, passwordD);
             Statement stat = connection.createStatement();
 
-            idCol.setCellValueFactory(new PropertyValueFactory("id"));
-            appointment_id.setCellValueFactory(new PropertyValueFactory("appointment_id"));
-            user_id.setCellValueFactory(new PropertyValueFactory("user_id"));
-            status.setCellValueFactory(new PropertyValueFactory("status"));
-            doctor_commnet.setCellValueFactory(new PropertyValueFactory("doctor_commnet"));
-            String Sql2 = "SELECT id FROM users where firstname ='"+word+"'";
+            String Sql2 = "SELECT id FROM users where firstname ='" + word + "'";
             ResultSet rs2 = stat.executeQuery(Sql2);
-             while (rs2.next()) {
-                  id = rs2.getInt("id");
-             }
-            String Sql = "SELECT * FROM booked_appointments where user_id  ="+id;
+            while (rs2.next()) {
+                id = rs2.getInt("id");
+            }
+            String Sql = "SELECT * FROM booked_appointments where user_id  =" + id;
             ResultSet rs = stat.executeQuery(Sql);
             this.tableView.getItems().clear();
             while (rs.next()) {
-                BookedAppointments ba = new BookedAppointments();
+                BookedAppointments ba = new BookedAppointments(rs.getInt("appointment_id"), rs.getInt("user_id"), rs.getString("status"), rs.getString("doctor_commnet"));
                 ba.setId(rs.getInt("id"));
-                ba.setAppointment_id(rs.getInt("appointment_id"));
-                ba.setUser_id(rs.getInt("user_id"));
-                ba.setStatus(rs.getString("status"));
-                ba.setDoctor_commnet(rs.getString("doctor_commnet"));
                 this.tableView.getItems().add(ba);
             }
         } catch (SQLException ex) {
@@ -156,12 +151,8 @@ public class BookedAppointmentController implements Initializable {
             ResultSet rs = stat.executeQuery(Sql);
             this.tableView.getItems().clear();
             while (rs.next()) {
-                BookedAppointments ba = new BookedAppointments();
+                BookedAppointments ba = new BookedAppointments(rs.getInt("appointment_id"), rs.getInt("user_id"), rs.getString("status"), rs.getString("doctor_commnet"));
                 ba.setId(rs.getInt("id"));
-                ba.setAppointment_id(rs.getInt("appointment_id"));
-                ba.setUser_id(rs.getInt("user_id"));
-                ba.setStatus(rs.getString("status"));
-                ba.setDoctor_commnet(rs.getString("doctor_commnet"));
                 this.tableView.getItems().add(ba);
             }
         } catch (SQLException ex) {
@@ -173,10 +164,10 @@ public class BookedAppointmentController implements Initializable {
 
     @FXML
     private void BookedTheAppointment(ActionEvent event) {
-         BookedAppointments ba = tableView.getSelectionModel().getSelectedItem();
+        BookedAppointments ba = tableView.getSelectionModel().getSelectedItem();
         if (!Objects.isNull(ba)) {
-        CommentAppointmentController.save(ba);
-                ViewManger.dashBorad.changeSceneToCommentAppointment();
+            CommentAppointmentController.save(ba);
+            ViewManger.dashBorad.changeSceneToCommentAppointment();
         }
     }
 

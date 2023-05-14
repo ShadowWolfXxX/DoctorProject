@@ -5,7 +5,12 @@
  */
 package Modle;
 
+import java.sql.Connection;
 import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 
 
 
@@ -21,6 +26,14 @@ public class BookedAppointments {
     private String status;
     private String doctor_commnet;
 
+    public BookedAppointments(int appointment_id, int user_id, String status, String doctor_commnet) {
+        this.appointment_id = appointment_id;
+        this.user_id = user_id;
+        this.status = status;
+        this.doctor_commnet = doctor_commnet;
+    }
+
+    
     public int getId() {
         return id;
     }
@@ -62,6 +75,46 @@ public class BookedAppointments {
     }
     
     
+    public int save() throws SQLException{
+        Connection c = DB.getinstend().getConntectin();
+        PreparedStatement ps = null;
+        int counter = 0;
+                String sql = "INSERT INTO booked_appointments (appointment_id, user_id, status, doctor_commnet) VALUES (?,?,?,?)";
+                ps = c.prepareStatement(sql);
+                ps.setInt(1, this.getAppointment_id());
+                ps.setInt(2, this.getUser_id());
+                ps.setString(3, this.getStatus());
+                ps.setString(4, this.getDoctor_commnet());
+                counter = ps.executeUpdate();
+                if(counter>0){
+                    //succes
+                }
+                if(ps != null){
+                 ps.close();
+                }
+                c.close();
+                return counter;      
+    }
     
+    public static ArrayList<BookedAppointments> getAll() throws SQLException{
+     Connection c = DB.getinstend().getConntectin();   
+     PreparedStatement ps = null;
+     ResultSet rs = null;
+     ArrayList<BookedAppointments> bookedP = new ArrayList<>();
+     String sql = "SELECT * FROM booked_appointments";
+     ps= c.prepareCall(sql);
+     rs = ps.executeQuery();
+        while (rs.next()) {
+            BookedAppointments bp = new BookedAppointments(rs.getInt(2), rs.getInt(3),
+                        rs.getString(4), rs.getString(5));
+            bp.setId(rs.getInt(1));
+            bookedP.add(bp);
+        }
+        if(ps != null){
+            ps.close();
+        }
+        c.close();
+     return bookedP;
+    }
     
 }

@@ -5,6 +5,7 @@
  */
 package Contral;
 
+import Modle.DB;
 import View.ViewManger;
 import java.io.IOException;
 import java.net.URL;
@@ -55,12 +56,8 @@ public class PatientLoginController implements Initializable {
     private void login(ActionEvent event) throws IOException {
         try {
 
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            String url1 = "jdbc:mysql://127.0.0.1:3306/clinic_appointment?serverTimezone=UTC";
-            String usernameD = "root";
-            String passwordD = "";
-            Connection connection = DriverManager.getConnection(url1, usernameD, passwordD);
-            Statement statement = connection.createStatement();
+            Connection c = DB.getinstend().getConntectin();
+            Statement statement = c.createStatement();
             String email = emailTF.getText();
             String password = passwordTF.getText();
             ResultSet r = statement.executeQuery("Select id,email,passwrod From users where role='patient'");
@@ -88,7 +85,7 @@ public class PatientLoginController implements Initializable {
                 loginState.setText("Not Found Account");
             }
 
-        } catch (ClassNotFoundException | SQLException ex) {
+        } catch (SQLException ex) {
             Logger.getLogger(PatientLoginController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

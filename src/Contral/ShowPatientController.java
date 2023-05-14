@@ -18,6 +18,8 @@ import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -74,6 +76,12 @@ public class ShowPatientController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        idCol.setCellValueFactory(new PropertyValueFactory("id"));
+        userNameCol.setCellValueFactory(new PropertyValueFactory("username"));
+        firstNameCol.setCellValueFactory(new PropertyValueFactory("firstname"));
+        lastNameCol.setCellValueFactory(new PropertyValueFactory("lastname"));
+        ageCol.setCellValueFactory(new PropertyValueFactory("age"));
+        genderCol.setCellValueFactory(new PropertyValueFactory("gender"));
 
     }
 
@@ -108,8 +116,8 @@ public class ShowPatientController implements Initializable {
     private void UpdatePatient(ActionEvent event) {
         User user = tableView.getSelectionModel().getSelectedItem();
         if (!Objects.isNull(user)) {
-        UpdatePatientController.save("Update",user);
-        ViewManger.dashBorad.changeSceneToUpdatePation();
+            UpdatePatientController.save("Update", user);
+            ViewManger.dashBorad.changeSceneToUpdatePation();
         }
     }
 
@@ -148,16 +156,9 @@ public class ShowPatientController implements Initializable {
             ResultSet rs = stat.executeQuery(Sql);
             this.tableView.getItems().clear();
             while (rs.next()) {
-                User user = new User();
-                user.setId(rs.getInt("id"));
-                user.setUsername(rs.getString("username"));
-                user.setFirstname(rs.getString("firstname"));
-                user.setLastname(rs.getString("lastname"));
-                user.setAge(rs.getString("age"));
-                user.setGender(rs.getString("gender"));
-                user.setPhone(rs.getString("phone"));
-                user.setPasswrod(rs.getString("passwrod"));
-                user.setEmail(rs.getString("email"));
+                User user = new User(rs.getString("username"), rs.getString("firstname"),
+                        rs.getString("lastname"), rs.getString("email"), rs.getString("passwrod"),
+                        rs.getString("age"), rs.getString("phone"), rs.getString("gender"), rs.getString("role"));
                 this.tableView.getItems().add(user);
             }
         } catch (SQLException | ClassNotFoundException ex) {
@@ -167,45 +168,9 @@ public class ShowPatientController implements Initializable {
     }
 
     @FXML
-    private void ShowPatientRelsut(ActionEvent event) {
-        try {
-            // TODO
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            String url1 = "jdbc:mysql://127.0.0.1:3306/clinic_appointment?serverTimezone=UTC";
-            String usernameD = "root";
-            String passwordD = "";
-            Connection connection = DriverManager.getConnection(url1, usernameD, passwordD);
-            Statement stat = connection.createStatement();
-
-            idCol.setCellValueFactory(new PropertyValueFactory("id"));
-            userNameCol.setCellValueFactory(new PropertyValueFactory("username"));
-            firstNameCol.setCellValueFactory(new PropertyValueFactory("firstname"));
-            lastNameCol.setCellValueFactory(new PropertyValueFactory("lastname"));
-            ageCol.setCellValueFactory(new PropertyValueFactory("age"));
-            genderCol.setCellValueFactory(new PropertyValueFactory("gender"));
-
-            String Sql = "SELECT * FROM users where role='patient' ";
-            ResultSet rs = stat.executeQuery(Sql);
-            this.tableView.getItems().clear();
-            while (rs.next()) {
-                User user = new User();
-                user.setId(rs.getInt("id"));
-                user.setUsername(rs.getString("username"));
-                user.setFirstname(rs.getString("firstname"));
-                user.setLastname(rs.getString("lastname"));
-                user.setAge(rs.getString("age"));
-                user.setGender(rs.getString("gender"));
-                user.setRole(rs.getString("role"));
-                user.setPhone(rs.getString("phone"));
-                user.setPasswrod(rs.getString("passwrod"));
-                user.setEmail(rs.getString("email"));
-                this.tableView.getItems().add(user);
-            }
-        } catch (SQLException ex) {
-
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ShowPatientController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    private void ShowPatientRelsut(ActionEvent event) throws SQLException {
+      ObservableList <User> ul = FXCollections.observableArrayList(User.getAll());
+      tableView.setItems(ul);
     }
 
 }

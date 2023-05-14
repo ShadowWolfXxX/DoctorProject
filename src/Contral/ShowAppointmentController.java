@@ -19,6 +19,8 @@ import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -68,7 +70,13 @@ public class ShowAppointmentController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+           // name virable in class Appoitnment
+            idCol.setCellValueFactory(new PropertyValueFactory("id"));
+            appointment_date.setCellValueFactory(new PropertyValueFactory("appointment_date"));
+            appointment_day.setCellValueFactory(new PropertyValueFactory("appointment_day"));
+            appointment_time.setCellValueFactory(new PropertyValueFactory("appointment_time"));
+            status.setCellValueFactory(new PropertyValueFactory("status"));
+     
     }
 
     @FXML
@@ -128,37 +136,8 @@ public class ShowAppointmentController implements Initializable {
     }
 
     @FXML
-    private void ShowAppointmentRelsut(ActionEvent event) {
-        try {
-            // TODO
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            String url1 = "jdbc:mysql://127.0.0.1:3306/clinic_appointment?serverTimezone=UTC";
-            String usernameD = "root";
-            String passwordD = "";
-            Connection connection = DriverManager.getConnection(url1, usernameD, passwordD);
-            Statement stat = connection.createStatement();
-              // name virable in class Appoitnment
-            idCol.setCellValueFactory(new PropertyValueFactory("id"));
-            appointment_date.setCellValueFactory(new PropertyValueFactory("appointment_date"));
-            appointment_day.setCellValueFactory(new PropertyValueFactory("appointment_day"));
-            appointment_time.setCellValueFactory(new PropertyValueFactory("appointment_time"));
-            status.setCellValueFactory(new PropertyValueFactory("status"));
-
-            String Sql = "SELECT * FROM  appointment ";
-            ResultSet rs = stat.executeQuery(Sql);
-            this.tableView.getItems().clear();
-            while (rs.next()) {// rs and the datatype then the name in dataBase
-                Appointment appointment = new Appointment();
-                appointment.setId(rs.getInt("id"));
-                appointment.setAppointment_date(rs.getDate("appointment_date"));
-                appointment.setAppointment_day(rs.getString("appointment_day"));
-                appointment.setAppointment_time(rs.getTime("appointment_time"));
-                appointment.setStatus(rs.getString("status"));
-                this.tableView.getItems().add(appointment);
-            }
-
-        } catch (ClassNotFoundException | SQLException ex) {
-            Logger.getLogger(ShowAppointmentController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    private void ShowAppointmentRelsut(ActionEvent event) throws SQLException {
+       ObservableList <Appointment> ul = FXCollections.observableArrayList(Appointment.getAll());
+      tableView.setItems(ul);
     }
 }

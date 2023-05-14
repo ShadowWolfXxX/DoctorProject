@@ -13,6 +13,7 @@ import java.net.URL;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Time;
 import java.time.LocalDate;
@@ -21,6 +22,7 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.RadioButton;
@@ -92,39 +94,26 @@ public class UpdateAppointmentController implements Initializable {
     }
 
     @FXML
-    private void signin(ActionEvent event) {
+    private void signin(ActionEvent event) throws SQLException {
         if (AddorUpdate.equals("Create")) {
-            try {
-                Class.forName("com.mysql.cj.jdbc.Driver");
-                String url1 = "jdbc:mysql://127.0.0.1:3306/clinic_appointment?serverTimezone=UTC";
-                String usernameD = "root";
-                String passwordD = "";
-                Connection connection = DriverManager.getConnection(url1, usernameD, passwordD);
-                Statement statement = connection.createStatement();
-                LocalDate Date = appDate.getValue();
-                String Day = appDay.getText();
-                String Time = appTime.getText();
-                if (!(Date.equals("") || Day.equals("") || !Time.contains(":"))) {
-                    String Query = "insert into appointment (appointment_date, appointment_day, appointment_time, status)"
-                            + "VALUES('" + Date + "','" + Day + "','" + Time + "','free')";
-                    int excut = statement.executeUpdate(Query);
-                    if (excut > -1) {
-                        appDate.setValue(null);
-                        appDay.setText("");
-                        appTime.setText("");
-                        ViewManger.dashBorad.changeSceneToShowAppointment();
-                    } else {
 
-                    }
-                    statement.close();
-                    connection.close();
-                } else {
+            Date date = Date.valueOf(appDate.getValue());
+            String Day = appDay.getText();
+            Time time = Time.valueOf(appTime.getText());
+            Appointment app = new Appointment(date, Day, time, "free");
+            int excut = app.save();
+            if (excut > 0) {
+                appDate.setValue(null);
+                appDay.setText("");
+                appTime.setText("");
+                Alert alret = new Alert(Alert.AlertType.CONFIRMATION);
+                alret.setContentText("Appointment have been add it");
+                alret.showAndWait();
+                ViewManger.dashBorad.changeSceneToShowAppointment();
+            } else {
 
-                }
-
-            } catch (Exception ex) {
-                ex.getStackTrace();
             }
+
         } else if (AddorUpdate.equals("Update")) {
             try {
                 Class.forName("com.mysql.cj.jdbc.Driver");

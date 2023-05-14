@@ -5,11 +5,13 @@
  */
 package Contral;
 
+import Modle.User;
 import View.ViewManger;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -17,6 +19,7 @@ import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
@@ -73,53 +76,32 @@ public class PatientRegisterController implements Initializable {
     }
 
     @FXML
-    private void signin(ActionEvent event) {
+    private void signin(ActionEvent event) throws SQLException, IOException {
 
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            String url1 = "jdbc:mysql://127.0.0.1:3306/clinic_appointment?serverTimezone=UTC";
-            String usernameD = "root";
-            String passwordD = "";
-            Connection connection = DriverManager.getConnection(url1, usernameD, passwordD);
-            Statement statement = connection.createStatement();
-            String username = usernameTF.getText();
-            String email = emailTF.getText();
-            String password = passwordTF.getText();
-            String Fname = firstNameTF.getText();
-            String Lname = lastNameTF.getText();
-            String Age = ageTF.getText();
-            String Phone = phoneTF.getText();
-            RadioButton selectedGender = (RadioButton) Gender.getSelectedToggle();
-            String gender = selectedGender.getText();
-            RadioButton selectedRole = (RadioButton) Role.getSelectedToggle();
-            String role = selectedRole.getText();
-            if (!(username.equals("") || email.equals("") || password.equals("") || Fname.equals("") || Lname.equals("") || Age.equals("") || Phone.equals(""))) {
-                String Query = "insert into users (username, passwrod, firstname, lastname, age, email, phone, gender, role)"
-                        + "VALUES('" + username + "','" + password + "','" + Fname + "','"
-                        + Lname + "','" + Age + "','" + email + "','" + Phone + "','" + gender + "','" + role + "')";
-                int excut = statement.executeUpdate(Query);
-                if (excut > -1) {
-                    usernameTF.clear();
-                    emailTF.clear();
-                    passwordTF.clear();
-                    firstNameTF.clear();
-                    lastNameTF.clear();
-                    ageTF.clear();
-                    phoneTF.clear();
-                            ViewManger.getInstance().changeSceneToPatientLogin();
-                } else {
-                    stateInsert.setStyle("-fx-text-fill: red;");
-                    stateInsert.setText("Add Falied");
-                }
-                statement.close();
-                connection.close();
-            } else {
-                stateInsert.setStyle("-fx-text-fill: red;");
-                stateInsert.setText("Add Falied");
-            }
+        String username = usernameTF.getText();
+        String email = emailTF.getText();
+        String password = passwordTF.getText();
+        String Fname = firstNameTF.getText();
+        String Lname = lastNameTF.getText();
+        String Age = ageTF.getText();
+        String Phone = phoneTF.getText();
+        String gender = ((RadioButton) Gender.getSelectedToggle()).getText();
+        String role = ((RadioButton) Role.getSelectedToggle()).getText();
+        User user = new User(username, Fname, Lname, email, password, Age, Phone, gender, role);
+        int excut = user.save();
 
-        } catch (Exception ex) {
-            ex.getStackTrace();
+        if (excut > 0) {
+            usernameTF.clear();
+            emailTF.clear();
+            passwordTF.clear();
+            firstNameTF.clear();
+            lastNameTF.clear();
+            ageTF.clear();
+            phoneTF.clear();
+            Alert alret = new Alert(Alert.AlertType.CONFIRMATION);
+            alret.setContentText("User have been add it");
+            alret.showAndWait();
+            ViewManger.getInstance().changeSceneToPatientLogin();
         }
     }
 
