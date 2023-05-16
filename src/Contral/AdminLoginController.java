@@ -6,6 +6,7 @@
 package Contral;
 
 import Modle.DB;
+import Modle.User;
 import View.ViewManger;
 import java.io.IOException;
 import java.net.URL;
@@ -14,6 +15,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -61,39 +63,40 @@ public class AdminLoginController implements Initializable {
     }
 
     @FXML
-    private void login(ActionEvent event) {
-        try {
+    private void login(ActionEvent event) throws IOException, SQLException {
+        ArrayList<User> ar = User.getAllForAdmin();
+        String email = emailTF.getText();
+        String password = PasswordTF.getText();
+        boolean state = false;
 
-           Connection c = DB.getinstend().getConntectin();
-            Statement statement = c.createStatement();
-            String email = emailTF.getText();
-            String password = PasswordTF.getText();
-            ResultSet r = statement.executeQuery("Select email,passwrod From users where role='Admin'");
-            boolean state = false;
-            while (r.next()) {
-                String emailDB = r.getString("email");
-                String passwordDB = r.getString("passwrod");
-                if (email.equals(emailDB) && password.equals(passwordDB)) {
-                    emailTF.clear();
-                    PasswordTF.clear();
-                    loginState.setText(" ");
-                    ViewManger.opendashBorad();
-                    ViewManger.dashBorad.changeSceneToDashBord();
-                    state = true;
-                    break;
-                } else {
-                    state = false;
-                }
+        for (User user : ar) {
+            if (email.equals(user.getEmail()) && password.equals(user.getPasswrod())) {
+                emailTF.clear();
+                PasswordTF.clear();
+                loginState.setText(" ");
+                FreeAppointmentController fa = new FreeAppointmentController();
+                fa.setUserId(user.getId());
+                MyBookedAppointmentController ma = new MyBookedAppointmentController();
+                ma.setUserId(user.getId());
+                ViewManger.opendashBorad();
+                state = true;
+                break;
+            } else {
+                state = false;
+            }
+        }
+        if (!state) {
+            loginState.setText("Not Found Account");
+        } else {
+            loginState.setText(" ");
+        }
+        
 
             }
             
-            if(!state){loginState.setText("Not Found Account");}else{loginState.setText(" ");}
+           
             
-        } catch (SQLException ex) {
-            Logger.getLogger(PatientLoginController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(AdminLoginController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+       
     }
     
-}
+

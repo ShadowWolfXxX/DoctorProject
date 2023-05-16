@@ -10,19 +10,18 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
-
-
 
 /**
  *
  * @author HP
  */
 public class BookedAppointments {
-   
+
     private int id;
-    private int appointment_id ;
-    private int user_id ;
+    private int appointment_id;
+    private int user_id;
     private String status;
     private String doctor_commnet;
 
@@ -33,7 +32,6 @@ public class BookedAppointments {
         this.doctor_commnet = doctor_commnet;
     }
 
-    
     public int getId() {
         return id;
     }
@@ -73,48 +71,92 @@ public class BookedAppointments {
     public void setDoctor_commnet(String doctor_commnet) {
         this.doctor_commnet = doctor_commnet;
     }
-    
-    
-    public int save() throws SQLException{
+
+    public int save() throws SQLException {
         Connection c = DB.getinstend().getConntectin();
         PreparedStatement ps = null;
         int counter = 0;
-                String sql = "INSERT INTO booked_appointments (appointment_id, user_id, status, doctor_commnet) VALUES (?,?,?,?)";
-                ps = c.prepareStatement(sql);
-                ps.setInt(1, this.getAppointment_id());
-                ps.setInt(2, this.getUser_id());
-                ps.setString(3, this.getStatus());
-                ps.setString(4, this.getDoctor_commnet());
-                counter = ps.executeUpdate();
-                if(counter>0){
-                    //succes
-                }
-                if(ps != null){
-                 ps.close();
-                }
-                c.close();
-                return counter;      
-    }
-    
-    public static ArrayList<BookedAppointments> getAll() throws SQLException{
-     Connection c = DB.getinstend().getConntectin();   
-     PreparedStatement ps = null;
-     ResultSet rs = null;
-     ArrayList<BookedAppointments> bookedP = new ArrayList<>();
-     String sql = "SELECT * FROM booked_appointments";
-     ps= c.prepareCall(sql);
-     rs = ps.executeQuery();
-        while (rs.next()) {
-            BookedAppointments bp = new BookedAppointments(rs.getInt(2), rs.getInt(3),
-                        rs.getString(4), rs.getString(5));
-            bp.setId(rs.getInt(1));
-            bookedP.add(bp);
+        String sql = "INSERT INTO booked_appointments (appointment_id, user_id, status, doctor_commnet) VALUES (?,?,?,?)";
+        ps = c.prepareStatement(sql);
+        ps.setInt(1, this.getAppointment_id());
+        ps.setInt(2, this.getUser_id());
+        ps.setString(3, this.getStatus());
+        ps.setString(4, this.getDoctor_commnet());
+        counter = ps.executeUpdate();
+        if (counter > 0) {
+            //succes
         }
-        if(ps != null){
+        if (ps != null) {
             ps.close();
         }
         c.close();
-     return bookedP;
+        return counter;
     }
-    
+
+    public static ArrayList<BookedAppointments> getAll() throws SQLException {
+        Connection c = DB.getinstend().getConntectin();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        ArrayList<BookedAppointments> bookedP = new ArrayList<>();
+        String sql = "SELECT * FROM booked_appointments";
+        ps = c.prepareCall(sql);
+        rs = ps.executeQuery();
+        while (rs.next()) {
+            BookedAppointments bp = new BookedAppointments(rs.getInt(2), rs.getInt(3),
+                    rs.getString(4), rs.getString(5));
+            bp.setId(rs.getInt(1));
+            bookedP.add(bp);
+        }
+        if (ps != null) {
+            ps.close();
+        }
+        c.close();
+        return bookedP;
+    }
+
+    public static ArrayList<BookedAppointments> search(String word) throws SQLException {
+        Connection c = DB.getinstend().getConntectin();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        ArrayList<BookedAppointments> bookedP = new ArrayList<>();
+        Statement stat = c.createStatement();
+        int id = -1;
+        String Sql2 = "SELECT id FROM users where firstname ='" + word + "'";
+        ResultSet rs2 = stat.executeQuery(Sql2);
+        while (rs2.next()) {
+            id = rs2.getInt("id");
+        }
+        String Sql = "SELECT * FROM booked_appointments where user_id  =" + id;
+        ps = c.prepareCall(Sql);
+        rs = ps.executeQuery();
+        while (rs.next()) {
+            BookedAppointments bp = new BookedAppointments(rs.getInt(2), rs.getInt(3),
+                    rs.getString(4), rs.getString(5));
+            bp.setId(rs.getInt(1));
+            bookedP.add(bp);
+        }
+        if (ps != null) {
+            ps.close();
+        }
+        c.close();
+        return bookedP;
+    }
+
+    public int makeFinish(String comment) throws SQLException {
+        Connection c = DB.getinstend().getConntectin();
+        PreparedStatement ps = null;
+        int counter = 0;
+        String sql = "Update booked_appointments set doctor_commnet=?,status=? where id=?";
+        ps = c.prepareStatement(sql);
+        ps.setString(1, comment);
+        ps.setString(2, "finished");
+        ps.setInt(3, this.getId());
+        counter = ps.executeUpdate();
+
+        if (ps != null) {
+            ps.close();
+        }
+        c.close();
+        return counter;
+    }
 }

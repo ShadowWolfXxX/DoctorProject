@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -78,34 +79,9 @@ public class CommentAppointmentController implements Initializable {
     }
 
     @FXML
-    private void save(ActionEvent event) {
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            String url1 = "jdbc:mysql://127.0.0.1:3306/clinic_appointment?serverTimezone=UTC";
-            String usernameD = "root";
-            String passwordD = "";
-            Connection connection = DriverManager.getConnection(url1, usernameD, passwordD);
-            Statement statement = connection.createStatement();
-
-            String comment = commentTA.getText();
-            if (!(comment.equals(""))) {
-                String Query = "UPDATE booked_appointments SET doctor_commnet='" + comment + "' , status='finished' where id="+this.ba.getId();
-                int excut = statement.executeUpdate(Query);
-                if (excut > -1) {
-                    commentTA.clear();
-                    ViewManger.dashBorad.changeSceneToBookedAppointment();
-                } else {
-
-                }
-                statement.close();
-                connection.close();
-            } else {
-
-            }
-
-        } catch (Exception ex) {
-            ex.getStackTrace();
-        }
+    private void save(ActionEvent event) throws SQLException {
+        BookedAppointments ba = new BookedAppointments(0, 0, AddorUpdate, AddorUpdate);
+        ba.makeFinish(commentTA.getText());
     }
 
     public static void save(BookedAppointments ba2) {

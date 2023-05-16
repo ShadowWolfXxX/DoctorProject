@@ -36,19 +36,9 @@ import javafx.scene.control.TextField;
 public class UpdateAppointmentController implements Initializable {
 
     @FXML
-    private Button showPaBTN;
-    @FXML
-    private Button showApBTN;
-    @FXML
-    private Button bookedApBTN;
-    @FXML
-    private Button logoutBTN;
-    @FXML
     private Button submitBTN;
     @FXML
     private Button backBTN;
-    @FXML
-    private Button oldDate;
     @FXML
     private DatePicker appDate;
     @FXML
@@ -72,26 +62,7 @@ public class UpdateAppointmentController implements Initializable {
         app = app2;
     }
 
-    @FXML
-    private void ShowPatient(ActionEvent event) {
-        ViewManger.dashBorad.changeSceneToShowPation();
-    }
-
-    @FXML
-    private void ShowAppointment(ActionEvent event) {
-        ViewManger.dashBorad.changeSceneToShowAppointment();
-    }
-
-    @FXML
-    private void BookedAppointment(ActionEvent event) {
-        ViewManger.dashBorad.changeSceneToBookedAppointment();
-
-    }
-
-    @FXML
-    private void logout(ActionEvent event) throws IOException {
-        ViewManger.closedashBorad();
-    }
+ 
 
     @FXML
     private void signin(ActionEvent event) throws SQLException {
@@ -160,16 +131,6 @@ public class UpdateAppointmentController implements Initializable {
     }
 
     @FXML
-    private void showOldData(ActionEvent event) {
-        if (!Objects.isNull(app)) {
-            appDate.setValue(app.getAppointment_date().toLocalDate());
-            appDay.setText(app.getAppointment_day());
-            appTime.setText(String.valueOf(app.getAppointment_time()));
-
-        }
-    }
-
-    @FXML
     private void MakeDate(ActionEvent event) {
     }
 
@@ -181,4 +142,9 @@ public class UpdateAppointmentController implements Initializable {
     private void MakeTime(ActionEvent event) {
     }
 
-}
+   
+    }
+
+  
+
+

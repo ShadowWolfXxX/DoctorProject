@@ -19,6 +19,8 @@ import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -97,69 +99,21 @@ public class BookedAppointmentController implements Initializable {
     }
 
     @FXML
-    private void search(ActionEvent event) {
+    private void search(ActionEvent event) throws SQLException {
 
         String word = searchTF.getText();
-        int id = -1;
-        try {
-            // TODO
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            String url1 = "jdbc:mysql://127.0.0.1:3306/clinic_appointment?serverTimezone=UTC";
-            String usernameD = "root";
-            String passwordD = "";
-            Connection connection = DriverManager.getConnection(url1, usernameD, passwordD);
-            Statement stat = connection.createStatement();
-
-            String Sql2 = "SELECT id FROM users where firstname ='" + word + "'";
-            ResultSet rs2 = stat.executeQuery(Sql2);
-            while (rs2.next()) {
-                id = rs2.getInt("id");
-            }
-            String Sql = "SELECT * FROM booked_appointments where user_id  =" + id;
-            ResultSet rs = stat.executeQuery(Sql);
-            this.tableView.getItems().clear();
-            while (rs.next()) {
-                BookedAppointments ba = new BookedAppointments(rs.getInt("appointment_id"), rs.getInt("user_id"), rs.getString("status"), rs.getString("doctor_commnet"));
-                ba.setId(rs.getInt("id"));
-                this.tableView.getItems().add(ba);
-            }
-        } catch (SQLException ex) {
-
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ShowPatientController.class.getName()).log(Level.SEVERE, null, ex);
+        if (word.equals("")) {
+            
+        } else {
+            ObservableList<BookedAppointments> ul = FXCollections.observableArrayList(BookedAppointments.search(word));
+            tableView.setItems(ul);
         }
     }
 
     @FXML
-    private void ShowAppointmentRelsut(ActionEvent event) {
-        try {
-            // TODO
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            String url1 = "jdbc:mysql://127.0.0.1:3306/clinic_appointment?serverTimezone=UTC";
-            String usernameD = "root";
-            String passwordD = "";
-            Connection connection = DriverManager.getConnection(url1, usernameD, passwordD);
-            Statement stat = connection.createStatement();
-
-            idCol.setCellValueFactory(new PropertyValueFactory("id"));
-            appointment_id.setCellValueFactory(new PropertyValueFactory("appointment_id"));
-            user_id.setCellValueFactory(new PropertyValueFactory("user_id"));
-            status.setCellValueFactory(new PropertyValueFactory("status"));
-            doctor_commnet.setCellValueFactory(new PropertyValueFactory("doctor_commnet"));
-
-            String Sql = "SELECT * FROM booked_appointments ";
-            ResultSet rs = stat.executeQuery(Sql);
-            this.tableView.getItems().clear();
-            while (rs.next()) {
-                BookedAppointments ba = new BookedAppointments(rs.getInt("appointment_id"), rs.getInt("user_id"), rs.getString("status"), rs.getString("doctor_commnet"));
-                ba.setId(rs.getInt("id"));
-                this.tableView.getItems().add(ba);
-            }
-        } catch (SQLException ex) {
-
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ShowPatientController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    private void ShowAppointmentRelsut(ActionEvent event) throws SQLException {
+        ObservableList<BookedAppointments> ul = FXCollections.observableArrayList(BookedAppointments.getAll());
+        tableView.setItems(ul);
     }
 
     @FXML

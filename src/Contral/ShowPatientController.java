@@ -28,6 +28,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -70,6 +71,8 @@ public class ShowPatientController implements Initializable {
     private TextField searchTF;
     @FXML
     private Button showBTN;
+    static User use;//update.use lollool
+    public static Stage updateCrate;
 
     /**
      * Initializes the controller class.
@@ -142,35 +145,21 @@ public class ShowPatientController implements Initializable {
     }
 
     @FXML
-    private void search(ActionEvent event) {
+    private void search(ActionEvent event) throws SQLException {
 
         String word = searchTF.getText();
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            String url1 = "jdbc:mysql://127.0.0.1:3306/clinic_appointment?serverTimezone=UTC";
-            String usernameD = "root";
-            String passwordD = "";
-            Connection connection = DriverManager.getConnection(url1, usernameD, passwordD);
-            Statement stat = connection.createStatement();
-            String Sql = "SELECT * FROM users where firstname='" + word + "' and role='patient'";
-            ResultSet rs = stat.executeQuery(Sql);
-            this.tableView.getItems().clear();
-            while (rs.next()) {
-                User user = new User(rs.getString("username"), rs.getString("firstname"),
-                        rs.getString("lastname"), rs.getString("email"), rs.getString("passwrod"),
-                        rs.getString("age"), rs.getString("phone"), rs.getString("gender"), rs.getString("role"));
-                this.tableView.getItems().add(user);
-            }
-        } catch (SQLException | ClassNotFoundException ex) {
-            Logger.getLogger(ShowPatientController.class.getName()).log(Level.SEVERE, null, ex);
+        if(word.equals("")){
+            
+        }else{
+        ObservableList<User> ul = FXCollections.observableArrayList(User.search(word));
+        tableView.setItems(ul);
         }
-
     }
 
     @FXML
     private void ShowPatientRelsut(ActionEvent event) throws SQLException {
-      ObservableList <User> ul = FXCollections.observableArrayList(User.getAll());
-      tableView.setItems(ul);
+        ObservableList<User> ul = FXCollections.observableArrayList(User.getAll());
+        tableView.setItems(ul);
     }
 
 }

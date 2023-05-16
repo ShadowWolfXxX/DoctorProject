@@ -6,6 +6,7 @@
 package Contral;
 
 import Modle.DB;
+import Modle.User;
 import View.ViewManger;
 import java.io.IOException;
 import java.net.URL;
@@ -14,6 +15,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -53,48 +55,39 @@ public class PatientLoginController implements Initializable {
     }
 
     @FXML
-    private void login(ActionEvent event) throws IOException {
-        try {
+    private void login(ActionEvent event) throws IOException, SQLException {
+        ArrayList<User> ar = User.getAll();
+        String email = emailTF.getText();
+        String password = passwordTF.getText();
+        boolean state = false;
 
-            Connection c = DB.getinstend().getConntectin();
-            Statement statement = c.createStatement();
-            String email = emailTF.getText();
-            String password = passwordTF.getText();
-            ResultSet r = statement.executeQuery("Select id,email,passwrod From users where role='patient'");
-            boolean state = false;
-            while (r.next()) {
-                String emailDB = r.getString("email");
-                String passwordDB = r.getString("passwrod");
-                if (email.equals(emailDB) && password.equals(passwordDB)) {
-                    emailTF.clear();
-                    passwordTF.clear();
-                    loginState.setText(" ");
-                    FreeAppointmentController fa = new FreeAppointmentController();
-                    fa.setUserId(r.getInt("id"));
-                    MyBookedAppointmentController ma = new MyBookedAppointmentController();
-                    ma.setUserId(r.getInt("id"));
-                    ViewManger.openpatient();
-                    state = true;
-                    break;
-                } else {
-                    state = false;
-                }
-
-            }
-
-            if (!state) {
-                loginState.setText("Not Found Account");
-            }else{
+        for (User user : ar) {
+            if (email.equals(user.getEmail()) && password.equals(user.getPasswrod())) {
+                emailTF.clear();
+                passwordTF.clear();
                 loginState.setText(" ");
+                FreeAppointmentController fa = new FreeAppointmentController();
+                fa.setUserId(user.getId());
+                MyBookedAppointmentController ma = new MyBookedAppointmentController();
+                ma.setUserId(user.getId());
+                ViewManger.openpatient();
+                state = true;
+                break;
+            } else {
+                state = false;
             }
-
-        } catch (SQLException ex) {
-            Logger.getLogger(PatientLoginController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        if (!state) {
+            loginState.setText("Not Found Account");
+        } else {
+            loginState.setText(" ");
+        }
+
     }
 
     @FXML
-    private void signin(ActionEvent event) {
+    private void signin(ActionEvent event
+    ) {
         try {
             ViewManger.getInstance().changeSceneToPatientRegister();
         } catch (IOException ex) {
@@ -103,7 +96,8 @@ public class PatientLoginController implements Initializable {
     }
 
     @FXML
-    private void adminLogin(ActionEvent event) {
+    private void adminLogin(ActionEvent event
+    ) {
         try {
             ViewManger.getInstance().changeSceneToAdminLogin();
         } catch (IOException ex) {
