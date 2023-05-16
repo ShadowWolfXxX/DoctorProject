@@ -5,6 +5,8 @@
  */
 package Contral;
 
+import View.ViewManger;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -32,18 +34,24 @@ public class ShowMyDoctorCommentController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
+    }
 
     @FXML
     private void FreeAppointment(ActionEvent event) {
+        ViewManger.patient.changeSceneToFreeAppointment();
+
     }
 
     @FXML
     private void MyBookedAppointment(ActionEvent event) {
+        ViewManger.patient.changeSceneToMyBookedAppointment();
+
     }
 
     @FXML
-    private void Logout(ActionEvent event) {
+    private void Logout(ActionEvent event) throws IOException {
+        ViewManger.closepatient();
+
     }
-    
+
 }

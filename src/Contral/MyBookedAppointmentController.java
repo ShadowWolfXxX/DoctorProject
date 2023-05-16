@@ -5,6 +5,7 @@
  */
 package Contral;
 
+import Modle.BookedAppointments;
 import View.ViewManger;
 import java.io.IOException;
 import java.net.URL;
@@ -30,13 +31,13 @@ public class MyBookedAppointmentController implements Initializable {
     @FXML
     private Button logoutBTN;
     @FXML
-    private TableView<?> viewTable;
+    private TableView<BookedAppointments> viewTable;
     @FXML
-    private TableColumn<?, ?> bookedAppName;
+    private TableColumn<BookedAppointments, Integer> bookedAppID;
     @FXML
-    private TableColumn<?, ?> BookedAppstatus;
+    private TableColumn<BookedAppointments, String> BookedAppstatus;
     @FXML
-    private TableColumn<?, ?> doctorComment;
+    private TableColumn<BookedAppointments, String> doctorComment;
     @FXML
     private Button watingAppBTN;
     @FXML
@@ -45,6 +46,7 @@ public class MyBookedAppointmentController implements Initializable {
     private Button showCommentBTN;
 
     private static int userId;
+    
 
     /**
      * Initializes the controller class.

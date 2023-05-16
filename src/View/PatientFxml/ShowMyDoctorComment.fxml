@@ -14,8 +14,7 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/19" fx:controller="Contral.ShowMyDoctorCommentController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="674.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Contral.ShowMyDoctorCommentController">
    <children>
       <VBox alignment="CENTER" prefHeight="423.0" prefWidth="147.0" spacing="20.0" style="-fx-background-color: gray;">
          <children>
@@ -101,17 +100,17 @@
             </Lighting>
          </effect>
       </VBox>
-      <Button layoutX="307.0" layoutY="368.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="260.0" style="-fx-background-color: lightgreen;" text="Show Comment" textFill="WHITE">
+      <Button layoutX="308.0" layoutY="368.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="348.0" style="-fx-background-color: lightgreen;" text="Show Comment" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <Label alignment="CENTER" layoutX="234.0" layoutY="41.0" prefHeight="28.0" prefWidth="251.0" text="My Doctor Comment" textAlignment="CENTER">
+      <Label alignment="CENTER" layoutX="284.0" layoutY="38.0" prefHeight="28.0" prefWidth="251.0" text="My Doctor Comment" textAlignment="CENTER">
          <font>
             <Font name="System Bold Italic" size="19.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" layoutX="164.0" layoutY="86.0" prefHeight="271.0" prefWidth="416.0" style="-fx-border-color: gray; -fx-border-width: 3px; -fx-background-color: lightgray;" textAlignment="CENTER" wrapText="true">
+      <Label alignment="CENTER" layoutX="164.0" layoutY="86.0" prefHeight="271.0" prefWidth="492.0" style="-fx-border-color: gray; -fx-border-width: 3px; -fx-background-color: lightgray;" textAlignment="CENTER" wrapText="true">
          <padding>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </padding>

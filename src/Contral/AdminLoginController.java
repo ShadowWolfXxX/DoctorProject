@@ -80,13 +80,14 @@ public class AdminLoginController implements Initializable {
                     ViewManger.opendashBorad();
                     ViewManger.dashBorad.changeSceneToDashBord();
                     state = true;
+                    break;
                 } else {
                     state = false;
                 }
 
             }
             
-            if(!state){loginState.setText("Not Found Account");}
+            if(!state){loginState.setText("Not Found Account");}else{loginState.setText(" ");}
             
         } catch (SQLException ex) {
             Logger.getLogger(PatientLoginController.class.getName()).log(Level.SEVERE, null, ex);

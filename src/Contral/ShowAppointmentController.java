@@ -11,10 +11,12 @@ import View.ViewManger;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Time;
 import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -51,11 +53,11 @@ public class ShowAppointmentController implements Initializable {
     @FXML
     private Button updateInfo;
     @FXML
-    private TableColumn<Appointment, String> appointment_date;
+    private TableColumn<Appointment, Date> appointment_date;
     @FXML
     private TableColumn<Appointment, String> appointment_day;
     @FXML
-    private TableColumn<Appointment, String> appointment_time;
+    private TableColumn<Appointment, Time> appointment_time;
     @FXML
     private TableColumn<Appointment, String> status;
     @FXML

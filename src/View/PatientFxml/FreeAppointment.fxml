@@ -15,8 +15,7 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="423.0" prefWidth="634.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/19" fx:controller="Contral.FreeAppointmentController">
+<AnchorPane id="AnchorPane" prefHeight="423.0" prefWidth="674.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Contral.FreeAppointmentController">
    <children>
       <VBox alignment="CENTER" prefHeight="423.0" prefWidth="147.0" spacing="20.0" style="-fx-background-color: gray;">
          <children>
@@ -102,12 +101,13 @@
             </Lighting>
          </effect>
       </VBox>
-      <TableView fx:id="viewTable" layoutX="161.0" layoutY="83.0" prefHeight="323.0" prefWidth="465.0">
+      <TableView fx:id="viewTable" layoutX="161.0" layoutY="83.0" prefHeight="303.0" prefWidth="504.0">
         <columns>
-          <TableColumn fx:id="appointmentDate" prefWidth="129.9999542236328" text="Appointment Date" />
-          <TableColumn fx:id="appointmentDay" prefWidth="128.00006103515625" text="Appointment Day" />
-            <TableColumn fx:id="appointmentTime" prefWidth="126.66665649414062" text="Appointment Time" />
-            <TableColumn fx:id="status" prefWidth="79.33331298828125" text="Status" />
+            <TableColumn fx:id="idCol" prefWidth="48.66668701171875" text="ID" />
+          <TableColumn fx:id="appointmentDate" prefWidth="120.00001525878906" text="Appointment Date" />
+          <TableColumn fx:id="appointmentDay" prefWidth="128.66668701171875" text="Appointment Day" />
+            <TableColumn fx:id="appointmentTime" prefWidth="143.33331298828125" text="Appointment Time" />
+            <TableColumn fx:id="status" prefWidth="58.6666259765625" text="Status" />
         </columns>
       </TableView>
       <Button fx:id="bookedABTN" layoutX="161.0" layoutY="26.0" mnemonicParsing="false" onAction="#BookedAppointment" prefHeight="42.0" prefWidth="179.0" style="-fx-background-color: darkBlue;" text="+ Booked an Appointment" textFill="WHITE">
@@ -120,5 +120,13 @@
             <Font name="System Bold Italic" size="12.0" />
          </font>
       </Label>
+      <Button fx:id="showBTN" layoutX="161.0" layoutY="392.0" mnemonicParsing="false" onAction="#ShowApp" prefHeight="25.0" prefWidth="504.0" style="-fx-background-color: lightyellow; -fx-background-radius: 10px;" text="Show Appointment">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+         <effect>
+            <DropShadow height="9.32" radius="4.6475" width="11.27" />
+         </effect>
+      </Button>
    </children>
 </AnchorPane>

@@ -5,16 +5,23 @@
  */
 package Contral;
 
+import Modle.Appointment;
 import View.ViewManger;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Date;
+import java.sql.SQLException;
+import java.sql.Time;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 /**
  * FXML Controller class
@@ -30,26 +37,35 @@ public class FreeAppointmentController implements Initializable {
     @FXML
     private Button logoutBTN;
     @FXML
-    private TableView<?> viewTable;
+    private TableView<Appointment> viewTable; 
     @FXML
-    private TableColumn<?, ?> appointmentDate;
+    private TableColumn<Appointment, Integer> idCol;
     @FXML
-    private TableColumn<?, ?> appointmentDay;
+    private TableColumn<Appointment, Date> appointmentDate;
     @FXML
-    private TableColumn<?, ?> appointmentTime;
+    private TableColumn<Appointment, String> appointmentDay;
     @FXML
-    private TableColumn<?, ?> status;
+    private TableColumn<Appointment, Time> appointmentTime;
+    @FXML
+    private TableColumn<Appointment, String> status;
     @FXML
     private Button bookedABTN;
 
     private static int userId;
+    @FXML
+    private Button showBTN;
+    
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        idCol.setCellValueFactory(new PropertyValueFactory("id"));
+        appointmentDate.setCellValueFactory(new PropertyValueFactory("appointment_date"));
+        appointmentDay.setCellValueFactory(new PropertyValueFactory("appointment_day"));
+        appointmentTime.setCellValueFactory(new PropertyValueFactory("appointment_time"));
+        status.setCellValueFactory(new PropertyValueFactory("status"));
     }
 
     @FXML
@@ -74,6 +90,12 @@ public class FreeAppointmentController implements Initializable {
 
     public void setUserId(int userId) {
         this.userId = userId;
+    }
+
+    @FXML
+    private void ShowApp(ActionEvent event) throws SQLException {
+        ObservableList<Appointment> ul = FXCollections.observableArrayList(Appointment.getAll());
+        viewTable.setItems(ul);
     }
 
 }

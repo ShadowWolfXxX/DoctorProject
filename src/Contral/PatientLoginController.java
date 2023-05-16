@@ -75,6 +75,7 @@ public class PatientLoginController implements Initializable {
                     ma.setUserId(r.getInt("id"));
                     ViewManger.openpatient();
                     state = true;
+                    break;
                 } else {
                     state = false;
                 }
@@ -83,6 +84,8 @@ public class PatientLoginController implements Initializable {
 
             if (!state) {
                 loginState.setText("Not Found Account");
+            }else{
+                loginState.setText(" ");
             }
 
         } catch (SQLException ex) {
