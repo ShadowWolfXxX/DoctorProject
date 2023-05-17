@@ -159,4 +159,22 @@ public class BookedAppointments {
         c.close();
         return counter;
     }
+    
+   
+
+    public int delete() throws SQLException, ClassNotFoundException {
+        Connection c = DB.getinstend().getConntectin();
+        PreparedStatement ps = null;
+        int recordCounter = 0;
+        String sql = "DELETE FROM booked_appointments WHERE ID=? ";
+        ps = c.prepareStatement(sql);
+        ps.setInt(1, this.getId());
+        recordCounter = ps.executeUpdate();
+
+        if (ps != null) {
+            ps.close();
+        }
+        c.close();
+        return recordCounter;
+    }
 }

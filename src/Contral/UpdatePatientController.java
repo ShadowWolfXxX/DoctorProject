@@ -55,9 +55,6 @@ public class UpdatePatientController implements Initializable {
     private TextField phoneTF;
     @FXML
     private PasswordField passwordTF;
-
-    static String AddorUpdate;
-
     @FXML
     private Button submitBTN;
     @FXML
@@ -65,28 +62,36 @@ public class UpdatePatientController implements Initializable {
     @FXML
     private ToggleGroup ge;
 
+    private User oldUser;
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        User use = ShowPatientController.use;
-//        usernameTF.setText(use.getUsername());
-//
-//        if (use.getGender().equals("famela")) {
-//
-//        }
+        if (ShowAppointmentController.statie.equals("update")) {
+            this.oldUser = ShowPatientController.use;
+            usernameTF.setText(oldUser.getUsername());
+            emailTF.setText(oldUser.getEmail());
+            passwordTF.setText(oldUser.getPasswrod());
+            firstNameTF.setText(oldUser.getFirstname());
+            lastNameTF.setText(oldUser.getLastname());
+            phoneTF.setText(oldUser.getPhone());
+            ageTF.setText(oldUser.getAge());
+            if (oldUser.getGender().equals("female")) {
+                ge.selectToggle(genderFemaleRB);
+            }
+
+        } else {
+
+        }
     }
 
-    public static void save(String AddorUpdate2, User use2) {
-        AddorUpdate = AddorUpdate2;
-    }
-
-  
+ 
 
     @FXML
     private void signin(ActionEvent event) throws SQLException, IOException {
-        if (AddorUpdate.equals("Create")) {
+        if (ShowPatientController.statie.equals("create")) {
             String username = usernameTF.getText();
             String email = emailTF.getText();
             String password = passwordTF.getText();
@@ -111,25 +116,24 @@ public class UpdatePatientController implements Initializable {
                 Alert alret = new Alert(Alert.AlertType.CONFIRMATION);
                 alret.setContentText("User have been add it");
                 alret.showAndWait();
-                ViewManger.dashBorad.changeSceneToShowPation();
-            }
-        } else if (AddorUpdate.equals("Update")) {
-            String username = usernameTF.getText();
-            String email = emailTF.getText();
-            String password = passwordTF.getText();
-            String Fname = firstNameTF.getText();
-            String Lname = lastNameTF.getText();
-            String Age = ageTF.getText();
-            String Phone = phoneTF.getText();
-            RadioButton genderrd = (RadioButton) ge.getSelectedToggle();
-            String gender = genderrd.getText();
-            //id
-            String role = "patient";
-            User user = new User(username, Fname, Lname, email, password, Age, Phone, gender, role);
-            int excut = user.save();
-
-            if (excut > 0) {
                 ShowPatientController.updateCrate.close();
+            }
+        } else if (ShowPatientController.statie.equals("update")) {
+            String username = usernameTF.getText();
+            String email = emailTF.getText();
+            String password = passwordTF.getText();
+            String Fname = firstNameTF.getText();
+            String Lname = lastNameTF.getText();
+            String Age = ageTF.getText();
+            String Phone = phoneTF.getText();
+            RadioButton genderrd = (RadioButton) ge.getSelectedToggle();
+            String gender = genderrd.getText();
+            String role = "patient";
+            User user = new User(username, Fname, Lname, email, password, Age, Phone, gender, role);
+            user.setId(this.oldUser.getId());
+            int excut = user.update();
+
+            if (excut > 0) {
                 usernameTF.clear();
                 emailTF.clear();
                 passwordTF.clear();
@@ -138,9 +142,9 @@ public class UpdatePatientController implements Initializable {
                 ageTF.clear();
                 phoneTF.clear();
                 Alert alret = new Alert(Alert.AlertType.CONFIRMATION);
-                alret.setContentText("User have been add it");
+                alret.setContentText("User have been Updating it");
                 alret.showAndWait();
-                ViewManger.dashBorad.changeSceneToShowPation();
+                ShowPatientController.updateCrate.close();
             } else {
                 //error here
             }
@@ -156,10 +160,8 @@ public class UpdatePatientController implements Initializable {
         lastNameTF.clear();
         ageTF.clear();
         phoneTF.clear();
-        ViewManger.dashBorad.changeSceneToShowPation();
-    }
+        ShowPatientController.updateCrate.close();
 
-   
-    
+    }
 
 }

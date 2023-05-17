@@ -166,8 +166,8 @@ public class User {
         c.close();
         return users;
     }
-    
-      public static ArrayList<User> getAllForAdmin() throws SQLException {
+
+    public static ArrayList<User> getAllForAdmin() throws SQLException {
         Connection c = DB.getinstend().getConntectin();
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -188,8 +188,8 @@ public class User {
         c.close();
         return users;
     }
-    
-     public static ArrayList<User> search(String word) throws SQLException {
+
+    public static ArrayList<User> search(String word) throws SQLException {
         Connection c = DB.getinstend().getConntectin();
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -235,7 +235,21 @@ public class User {
         c.close();
         return counter;
     }
-    
-    //delete?
+
+    public int delete() throws SQLException, ClassNotFoundException {
+        Connection c = DB.getinstend().getConntectin();
+        PreparedStatement ps = null;
+        int recordCounter = 0;
+        String sql = "DELETE FROM users WHERE ID=? ";
+        ps = c.prepareStatement(sql);
+        ps.setInt(1, this.getId());
+        recordCounter = ps.executeUpdate();
+
+        if (ps != null) {
+            ps.close();
+        }
+        c.close();
+        return recordCounter;
+    }
 
 }

@@ -112,5 +112,41 @@ public class Appointment {
         c.close();
         return appointments;
     }
+    
+    public int update() throws SQLException {
+        Connection c = DB.getinstend().getConntectin();
+        PreparedStatement ps = null;
+        int counter = 0;
+        String sql = "Update appointment set appointment_date=?,appointment_day=?,appointment_time=?,status=? where id=?";
+        ps = c.prepareStatement(sql);
+        ps.setDate(1, this.getAppointment_date());
+        ps.setString(2, this.getAppointment_day());
+        ps.setTime(3, this.getAppointment_time());
+        ps.setString(4, "free");
+        ps.setInt(5, this.getId());
+        counter = ps.executeUpdate();
+
+        if (ps != null) {
+            ps.close();
+        }
+        c.close();
+        return counter;
+    }
+
+    public int delete() throws SQLException, ClassNotFoundException {
+        Connection c = DB.getinstend().getConntectin();
+        PreparedStatement ps = null;
+        int recordCounter = 0;
+        String sql = "DELETE FROM appointment WHERE ID=? ";
+        ps = c.prepareStatement(sql);
+        ps.setInt(1, this.getId());
+        recordCounter = ps.executeUpdate();
+
+        if (ps != null) {
+            ps.close();
+        }
+        c.close();
+        return recordCounter;
+    }
 
 }

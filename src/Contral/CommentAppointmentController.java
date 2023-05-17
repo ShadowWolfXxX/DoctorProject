@@ -5,7 +5,6 @@
  */
 package Contral;
 
-import static Contral.UpdatePatientController.AddorUpdate;
 import Modle.BookedAppointments;
 import Modle.User;
 import View.ViewManger;
@@ -80,7 +79,6 @@ public class CommentAppointmentController implements Initializable {
 
     @FXML
     private void save(ActionEvent event) throws SQLException {
-        BookedAppointments ba = new BookedAppointments(0, 0, AddorUpdate, AddorUpdate);
         ba.makeFinish(commentTA.getText());
     }
 

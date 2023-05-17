@@ -25,11 +25,17 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -67,18 +73,19 @@ public class ShowAppointmentController implements Initializable {
     @FXML
     private Button showBTN;
 
-    /**
-     * Initializes the controller class.
-     */
+    public static Appointment app;
+    public static Stage updateCrate;
+    public static String statie;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-           // name virable in class Appoitnment
-            idCol.setCellValueFactory(new PropertyValueFactory("id"));
-            appointment_date.setCellValueFactory(new PropertyValueFactory("appointment_date"));
-            appointment_day.setCellValueFactory(new PropertyValueFactory("appointment_day"));
-            appointment_time.setCellValueFactory(new PropertyValueFactory("appointment_time"));
-            status.setCellValueFactory(new PropertyValueFactory("status"));
-     
+        // name virable in class Appoitnment
+        idCol.setCellValueFactory(new PropertyValueFactory("id"));
+        appointment_date.setCellValueFactory(new PropertyValueFactory("appointment_date"));
+        appointment_day.setCellValueFactory(new PropertyValueFactory("appointment_day"));
+        appointment_time.setCellValueFactory(new PropertyValueFactory("appointment_time"));
+        status.setCellValueFactory(new PropertyValueFactory("status"));
+
     }
 
     @FXML
@@ -102,44 +109,69 @@ public class ShowAppointmentController implements Initializable {
     }
 
     @FXML
-    private void careteAppointment(ActionEvent event) {
-        UpdateAppointmentController.save("Create", null);
-        ViewManger.dashBorad.changeSceneToUpdateAppointment();
-
+    private void careteAppointment(ActionEvent event) throws IOException {
+        statie = "create";
+        FXMLLoader loaderUpdate = new FXMLLoader(getClass().getResource("/View/DoctorFxml/UpdateAppointment.fxml"));
+        Parent rootUpdate = loaderUpdate.load();
+        Scene updateUserScene = new Scene(rootUpdate);
+        updateCrate = new Stage();
+        updateCrate.setScene(updateUserScene);
+        updateCrate.setTitle("Insert user");
+        updateCrate.show();
     }
 
     @FXML
-    private void UpdateAppointment(ActionEvent event) {
-        Appointment app = tableView.getSelectionModel().getSelectedItem();
-        if (!Objects.isNull(app)) {
-            UpdateAppointmentController.save("Update", app);
-            ViewManger.dashBorad.changeSceneToUpdateAppointment();
+    private void UpdateAppointment(ActionEvent event) throws IOException {
+        if (tableView.getSelectionModel().getSelectedItem() != null) {
+            statie = "update";
+            app = tableView.getSelectionModel().getSelectedItem();
+            FXMLLoader loaderUpdate = new FXMLLoader(getClass().getResource("/View/DoctorFxml/UpdateAppointment.fxml"));
+            Parent rootUpdate = loaderUpdate.load();
+            Scene updateUserScene = new Scene(rootUpdate);
+            updateCrate = new Stage();
+            updateCrate.setScene(updateUserScene);
+            updateCrate.setTitle("Update Appointment");
+            updateCrate.show();
+
         }
     }
 
     @FXML
     private void deleteAppointment(ActionEvent event) {
-        Appointment app = tableView.getSelectionModel().getSelectedItem();
-        if (!Objects.isNull(app)) {
-            try {
-                Class.forName("com.mysql.cj.jdbc.Driver");
-                String url1 = "jdbc:mysql://127.0.0.1:3306/clinic_appointment?serverTimezone=UTC";
-                String usernameD = "root";
-                String passwordD = "";
-                Connection connection = DriverManager.getConnection(url1, usernameD, passwordD);
-                Statement stat = connection.createStatement();
-                String Sql = "DELETE FROM appointment WHERE id=" + app.getId();
-                int excut = stat.executeUpdate(Sql);
-                tableView.getItems().removeAll(app);
-            } catch (SQLException | ClassNotFoundException ex) {
-                Logger.getLogger(ShowPatientController.class.getName()).log(Level.SEVERE, null, ex);
-            }
+
+        if (tableView.getSelectionModel().getSelectedItem() != null) {
+            Appointment selectedApp = tableView.getSelectionModel().getSelectedItem();
+
+            Alert deleteConfirmAlert = new Alert(Alert.AlertType.CONFIRMATION);
+            deleteConfirmAlert.setTitle("Appointment delete");
+            deleteConfirmAlert.setContentText("Are you sure to delete this Appointment ?");
+            deleteConfirmAlert.showAndWait().ifPresent(response -> {
+                if (response == ButtonType.OK) {
+                    try {
+                        selectedApp.delete();
+                    } catch (SQLException ex) {
+                        Logger.getLogger(ShowAppointmentController.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (ClassNotFoundException ex) {
+                        Logger.getLogger(ShowAppointmentController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    Alert deletedSuccessAlert = new Alert(Alert.AlertType.INFORMATION);
+                    deletedSuccessAlert.setTitle("Appointment deleted");
+                    deletedSuccessAlert.setContentText("Appointment deleted");
+                    deletedSuccessAlert.show();
+                }
+            });
+
+        } else {
+            Alert warnAlert = new Alert(Alert.AlertType.WARNING);
+            warnAlert.setTitle("Select an Appointment");
+            warnAlert.setContentText("Please select an Appointment from the table view");
+            warnAlert.show();
         }
     }
 
     @FXML
     private void ShowAppointmentRelsut(ActionEvent event) throws SQLException {
-       ObservableList <Appointment> ul = FXCollections.observableArrayList(Appointment.getAll());
-      tableView.setItems(ul);
+        ObservableList<Appointment> ul = FXCollections.observableArrayList(Appointment.getAll());
+        tableView.setItems(ul);
     }
 }

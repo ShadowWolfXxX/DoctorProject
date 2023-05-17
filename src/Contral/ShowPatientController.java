@@ -22,8 +22,13 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -71,8 +76,9 @@ public class ShowPatientController implements Initializable {
     private TextField searchTF;
     @FXML
     private Button showBTN;
-    static User use;//update.use lollool
+    public static User use;
     public static Stage updateCrate;
+    public static String statie;
 
     /**
      * Initializes the controller class.
@@ -109,38 +115,66 @@ public class ShowPatientController implements Initializable {
     }
 
     @FXML
-    private void caretePatient(ActionEvent event) {
-        UpdatePatientController.save("Create", null);
-        ViewManger.dashBorad.changeSceneToUpdatePation();
+    private void caretePatient(ActionEvent event) throws IOException {
+        statie = "create";
+        FXMLLoader loaderUpdate = new FXMLLoader(getClass().getResource("/View/DoctorFxml/UpdatePatient.fxml"));
+        Parent rootUpdate = loaderUpdate.load();
+        Scene updateUserScene = new Scene(rootUpdate);
+        updateCrate = new Stage();
+        updateCrate.setScene(updateUserScene);
+        updateCrate.setTitle("Insert user");
+        updateCrate.show();
 
     }
 
     @FXML
-    private void UpdatePatient(ActionEvent event) {
-        User user = tableView.getSelectionModel().getSelectedItem();
-        if (!Objects.isNull(user)) {
-            UpdatePatientController.save("Update", user);
-            ViewManger.dashBorad.changeSceneToUpdatePation();
+    private void UpdatePatient(ActionEvent event) throws IOException {
+        if (tableView.getSelectionModel().getSelectedItem() != null) {
+            statie = "update";
+            use = tableView.getSelectionModel().getSelectedItem();
+            FXMLLoader loaderUpdate = new FXMLLoader(getClass().getResource("/View/DoctorFxml/UpdatePatient.fxml"));
+            Parent rootUpdate = loaderUpdate.load();
+            Scene updateUserScene = new Scene(rootUpdate);
+            updateCrate = new Stage();
+            updateCrate.setScene(updateUserScene);
+            updateCrate.setTitle("Update user " + use.getUsername());
+            updateCrate.show();
+
         }
     }
 
     @FXML
     private void deletePatient(ActionEvent event) {
-        User use = tableView.getSelectionModel().getSelectedItem();
-        if (!Objects.isNull(use)) {
-            try {
-                Class.forName("com.mysql.cj.jdbc.Driver");
-                String url1 = "jdbc:mysql://127.0.0.1:3306/clinic_appointment?serverTimezone=UTC";
-                String usernameD = "root";
-                String passwordD = "";
-                Connection connection = DriverManager.getConnection(url1, usernameD, passwordD);
-                Statement stat = connection.createStatement();
-                String Sql = "DELETE FROM users WHERE id=" + use.getId();
-                int excut = stat.executeUpdate(Sql);
-                tableView.getItems().removeAll(use);
-            } catch (SQLException | ClassNotFoundException ex) {
-                Logger.getLogger(ShowPatientController.class.getName()).log(Level.SEVERE, null, ex);
-            }
+
+        if (tableView.getSelectionModel().getSelectedItem() != null) {
+            User selectedUser = tableView.getSelectionModel().getSelectedItem();
+
+            Alert deleteConfirmAlert = new Alert(Alert.AlertType.CONFIRMATION);
+            deleteConfirmAlert.setTitle("User delete");
+            deleteConfirmAlert.setContentText("Are you sure to delete this user ?");
+            deleteConfirmAlert.showAndWait().ifPresent(response -> {
+                if (response == ButtonType.OK) {
+                 
+                    try {
+                        selectedUser.delete();
+                    } catch (SQLException ex) {
+                        Logger.getLogger(ShowPatientController.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (ClassNotFoundException ex) {
+                        Logger.getLogger(ShowPatientController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    
+                    Alert deletedSuccessAlert = new Alert(Alert.AlertType.INFORMATION);
+                    deletedSuccessAlert.setTitle("User deleted");
+                    deletedSuccessAlert.setContentText("User deleted");
+                    deletedSuccessAlert.show();
+                }
+            });
+
+        } else {
+            Alert warnAlert = new Alert(Alert.AlertType.WARNING);
+            warnAlert.setTitle("Select an user");
+            warnAlert.setContentText("Please select an user from the table view");
+            warnAlert.show();
         }
     }
 
@@ -148,11 +182,11 @@ public class ShowPatientController implements Initializable {
     private void search(ActionEvent event) throws SQLException {
 
         String word = searchTF.getText();
-        if(word.equals("")){
-            
-        }else{
-        ObservableList<User> ul = FXCollections.observableArrayList(User.search(word));
-        tableView.setItems(ul);
+        if (word.equals("")) {
+
+        } else {
+            ObservableList<User> ul = FXCollections.observableArrayList(User.search(word));
+            tableView.setItems(ul);
         }
     }
 
