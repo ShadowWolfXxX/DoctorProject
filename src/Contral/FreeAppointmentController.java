@@ -69,9 +69,23 @@ public class FreeAppointmentController implements Initializable {
     }
 
     @FXML
-    private void FreeAppointment(ActionEvent event) {
-        //here already
-    }
+    private void FreeAppointment(ActionEvent event) {       
+        
+                                 try {
+            String Sql="SELECT * FROM appointment WHERE appointment.status='free'";
+            ResultSet rs=stat.executeQuery(Sql);
+            while(rs.next()){
+               Appointment appointment=new  Appointment();
+               appointment.setId(rs.getInt("id"));
+               appointment.setAppointment_date(rs.getDate("appointment_date"));
+               appointment.setAppointment_day(rs.getString("appointment_day"));
+               appointment.setAppointment_time(rs.getTime("appointment_time"));
+               appointment.setStatus(rs.getString("status"));              
+                this.tableView.getItems().add(appointment);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ShowPatientController.class.getName()).log(Level.SEVERE, null, ex);
+        }    }
 
     @FXML
     private void MyBookedAppointment(ActionEvent event) {
