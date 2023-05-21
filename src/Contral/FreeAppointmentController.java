@@ -6,6 +6,7 @@
 package Contral;
 
 import Modle.Appointment;
+import Modle.BookedAppointments;
 import View.ViewManger;
 import java.io.IOException;
 import java.net.URL;
@@ -37,7 +38,7 @@ public class FreeAppointmentController implements Initializable {
     @FXML
     private Button logoutBTN;
     @FXML
-    private TableView<Appointment> viewTable; 
+    private TableView<Appointment> viewTable;
     @FXML
     private TableColumn<Appointment, Integer> idCol;
     @FXML
@@ -54,7 +55,6 @@ public class FreeAppointmentController implements Initializable {
     private static int userId;
     @FXML
     private Button showBTN;
-    
 
     /**
      * Initializes the controller class.
@@ -69,23 +69,9 @@ public class FreeAppointmentController implements Initializable {
     }
 
     @FXML
-    private void FreeAppointment(ActionEvent event) {       
-        
-                                 try {
-            String Sql="SELECT * FROM appointment WHERE appointment.status='free'";
-            ResultSet rs=stat.executeQuery(Sql);
-            while(rs.next()){
-               Appointment appointment=new  Appointment();
-               appointment.setId(rs.getInt("id"));
-               appointment.setAppointment_date(rs.getDate("appointment_date"));
-               appointment.setAppointment_day(rs.getString("appointment_day"));
-               appointment.setAppointment_time(rs.getTime("appointment_time"));
-               appointment.setStatus(rs.getString("status"));              
-                this.tableView.getItems().add(appointment);
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(ShowPatientController.class.getName()).log(Level.SEVERE, null, ex);
-        }    }
+    private void FreeAppointment(ActionEvent event) {
+        //here
+    }
 
     @FXML
     private void MyBookedAppointment(ActionEvent event) {
@@ -99,7 +85,23 @@ public class FreeAppointmentController implements Initializable {
     }
 
     @FXML
-    private void BookedAppointment(ActionEvent event) {
+    private void BookedAppointment(ActionEvent event) throws SQLException, ClassNotFoundException {
+        if (viewTable.getSelectionModel().getSelectedItem() != null) {
+            if (viewTable.getSelectionModel().getSelectedItem().getStatus().equals("free")) {
+                for (BookedAppointments appa : BookedAppointments.getAll()) {
+                    if (appa.getAppointment_id() == viewTable.getSelectionModel().getSelectedItem().getId() && appa.getUser_id() == userId) {
+                        break;
+                    } else {
+
+                    }
+                }
+                BookedAppointments app = new BookedAppointments(viewTable.getSelectionModel().getSelectedItem().getId(), userId, "waiting", "");
+                app.save();
+                Appointment apo = viewTable.getSelectionModel().getSelectedItem();
+                apo.setStatus("booked");
+                apo.update();
+            }
+        }
     }
 
     public void setUserId(int userId) {

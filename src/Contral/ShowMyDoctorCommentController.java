@@ -5,14 +5,17 @@
  */
 package Contral;
 
+import Modle.BookedAppointments;
 import View.ViewManger;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 
 /**
  * FXML Controller class
@@ -22,11 +25,15 @@ import javafx.scene.control.Button;
 public class ShowMyDoctorCommentController implements Initializable {
 
     @FXML
-    private Button FreeAppBTN;
+    private Button showComBTN;
     @FXML
-    private Button BookedAppBTN;
+    private Label commentShow;
     @FXML
-    private Button logoutBTN;
+    private Button backBTN;
+    
+        private static int appId;
+
+
 
     /**
      * Initializes the controller class.
@@ -36,22 +43,35 @@ public class ShowMyDoctorCommentController implements Initializable {
         // TODO
     }
 
-    @FXML
     private void FreeAppointment(ActionEvent event) {
         ViewManger.patient.changeSceneToFreeAppointment();
 
     }
 
-    @FXML
     private void MyBookedAppointment(ActionEvent event) {
         ViewManger.patient.changeSceneToMyBookedAppointment();
 
     }
 
-    @FXML
     private void Logout(ActionEvent event) throws IOException {
         ViewManger.closepatient();
 
+    }
+
+    @FXML
+    private void showComment(ActionEvent event) throws SQLException {
+       commentShow.setText(BookedAppointments.getComment(appId));
+    }
+
+    @FXML
+    private void goBack(ActionEvent event) {
+        commentShow.setText("");
+        ViewManger.patient.changeSceneToMyBookedAppointment();
+    }
+
+
+    public static void setAppId(int aAppId) {
+        appId = aAppId;
     }
 
 }

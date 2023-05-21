@@ -80,6 +80,7 @@ public class CommentAppointmentController implements Initializable {
     @FXML
     private void save(ActionEvent event) throws SQLException {
         ba.makeFinish(commentTA.getText());
+        ViewManger.dashBorad.changeSceneToBookedAppointment();
     }
 
     public static void save(BookedAppointments ba2) {

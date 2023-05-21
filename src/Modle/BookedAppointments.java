@@ -92,7 +92,7 @@ public class BookedAppointments {
         c.close();
         return counter;
     }
-
+    
     public static ArrayList<BookedAppointments> getAll() throws SQLException {
         Connection c = DB.getinstend().getConntectin();
         PreparedStatement ps = null;
@@ -114,6 +114,67 @@ public class BookedAppointments {
         return bookedP;
     }
 
+    public static ArrayList<BookedAppointments> getAllwaiting(int userID) throws SQLException {
+        Connection c = DB.getinstend().getConntectin();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        ArrayList<BookedAppointments> bookedP = new ArrayList<>();
+        String sql = "SELECT * FROM booked_appointments where status='waiting' and user_id ="+userID;
+        ps = c.prepareCall(sql);
+        rs = ps.executeQuery();
+        while (rs.next()) {
+            BookedAppointments bp = new BookedAppointments(rs.getInt(2), rs.getInt(3),
+                    rs.getString(4), rs.getString(5));
+            bp.setId(rs.getInt(1));
+            bookedP.add(bp);
+        }
+        if (ps != null) {
+            ps.close();
+        }
+        c.close();
+        return bookedP;
+    }
+    
+    
+    public static ArrayList<BookedAppointments> getAllfinished(int userID) throws SQLException {
+        Connection c = DB.getinstend().getConntectin();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        ArrayList<BookedAppointments> bookedP = new ArrayList<>();
+        String sql = "SELECT * FROM booked_appointments where status= 'finished' and user_id ="+userID;
+        ps = c.prepareCall(sql);
+        rs = ps.executeQuery();
+        while (rs.next()) {
+            BookedAppointments bp = new BookedAppointments(rs.getInt(2), rs.getInt(3),
+                    rs.getString(4), rs.getString(5));
+            bp.setId(rs.getInt(1));
+            bookedP.add(bp);
+        }
+        if (ps != null) {
+            ps.close();
+        }
+        c.close();
+        return bookedP;
+    }
+
+    public static String getComment(int AppID) throws SQLException {
+        Connection c = DB.getinstend().getConntectin();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        String sql = "SELECT doctor_commnet FROM booked_appointments where id="+AppID;
+        ps = c.prepareCall(sql);
+        rs = ps.executeQuery();
+        String comment="";
+        while (rs.next()) {
+           comment += rs.getString(1);
+        }
+        if (ps != null) {
+            ps.close();
+        }
+        c.close();
+        return comment;
+    }
+    
     public static ArrayList<BookedAppointments> search(String word) throws SQLException {
         Connection c = DB.getinstend().getConntectin();
         PreparedStatement ps = null;
@@ -166,7 +227,7 @@ public class BookedAppointments {
         Connection c = DB.getinstend().getConntectin();
         PreparedStatement ps = null;
         int recordCounter = 0;
-        String sql = "DELETE FROM booked_appointments WHERE ID=? ";
+        String sql = "DELETE FROM booked_appointments WHERE id=? ";
         ps = c.prepareStatement(sql);
         ps.setInt(1, this.getId());
         recordCounter = ps.executeUpdate();

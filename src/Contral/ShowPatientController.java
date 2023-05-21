@@ -96,22 +96,7 @@ public class ShowPatientController implements Initializable {
 
     @FXML
     private void ShowPatient(ActionEvent event) {
-        try {
-            String Sql="SELECT * FROM users where role='patient' ";
-            ResultSet rs=stat.executeQuery(Sql);
-            while(rs.next()){
-                User user=new User();
-                user.setId(rs.getInt("id"));
-                user.setUsername(rs.getString("username"));
-                user.setFname(rs.getString("firstname"));
-                user.setLname(rs.getString("lastname"));
-                user.setAge(rs.getString("age"));
-                user.setGender(rs.getString("gender"));
-                this.tableView.getItems().add(user);
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(ShowPatientController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    //here
     }
 
     @FXML

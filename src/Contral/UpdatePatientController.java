@@ -69,7 +69,7 @@ public class UpdatePatientController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        if (ShowAppointmentController.statie.equals("update")) {
+        if (ShowPatientController.statie.equals("update")) {
             this.oldUser = ShowPatientController.use;
             usernameTF.setText(oldUser.getUsername());
             emailTF.setText(oldUser.getEmail());
@@ -78,8 +78,10 @@ public class UpdatePatientController implements Initializable {
             lastNameTF.setText(oldUser.getLastname());
             phoneTF.setText(oldUser.getPhone());
             ageTF.setText(oldUser.getAge());
-            if (oldUser.getGender().equals("female")) {
+            if (oldUser.getGender().equals("Female")) {
                 ge.selectToggle(genderFemaleRB);
+            }else{
+                ge.selectToggle(genderMaleRB);
             }
 
         } else {

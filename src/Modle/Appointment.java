@@ -122,7 +122,7 @@ public class Appointment {
         ps.setDate(1, this.getAppointment_date());
         ps.setString(2, this.getAppointment_day());
         ps.setTime(3, this.getAppointment_time());
-        ps.setString(4, "free");
+        ps.setString(4, this.getStatus());
         ps.setInt(5, this.getId());
         counter = ps.executeUpdate();
 

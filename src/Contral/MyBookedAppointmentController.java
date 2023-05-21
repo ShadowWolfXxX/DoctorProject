@@ -6,16 +6,21 @@
 package Contral;
 
 import Modle.BookedAppointments;
+import Modle.User;
 import View.ViewManger;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 /**
  * FXML Controller class
@@ -46,14 +51,18 @@ public class MyBookedAppointmentController implements Initializable {
     private Button showCommentBTN;
 
     private static int userId;
-    
+
+    boolean showfinish = false;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+        bookedAppID.setCellValueFactory(new PropertyValueFactory("appointment_id"));
+        BookedAppstatus.setCellValueFactory(new PropertyValueFactory("status"));
+        doctorComment.setCellValueFactory(new PropertyValueFactory("doctor_commnet"));
+
     }
 
     @FXML
@@ -72,32 +81,27 @@ public class MyBookedAppointmentController implements Initializable {
     }
 
     @FXML
-    private void showWating(ActionEvent event) {
-        String sql="SELECT * FROM `booked_appointments` WHERE booked_appointments.status='waiting'";
-        ResultSet rs=stat.executeQuery(sql);
-            while(rs.next()){
-        BookedAppointments bookedAppointments=new BookedAppointments();
-            bookedAppointments.setId(rs.getInt("id"));
-            bookedAppointments.setStatus(rs.getString("status"));
-            bookedAppointments.setDoctor_commnet(rs.getString("doctor_commnet"));
-            this.tableView.getItems().add(bookedAppointments);
+    private void showWating(ActionEvent event) throws SQLException {
+        ObservableList<BookedAppointments> ul = FXCollections.observableArrayList(BookedAppointments.getAllwaiting(userId));
+        viewTable.setItems(ul);
+        showfinish = false;
     }
 
     @FXML
-    private void showFinised(ActionEvent event) {
-                String sql="SELECT * FROM `booked_appointments` WHERE booked_appointments.status='finised'";
-        ResultSet rs=stat.executeQuery(sql);
-            while(rs.next()){
-        BookedAppointments bookedAppointments=new BookedAppointments();
-            bookedAppointments.setId(rs.getInt("id"));
-            bookedAppointments.setStatus(rs.getString("status"));
-            bookedAppointments.setDoctor_commnet(rs.getString("doctor_commnet"));
-            this.tableView.getItems().add(bookedAppointments);
+    private void showFinised(ActionEvent event) throws SQLException {
+        ObservableList<BookedAppointments> ul = FXCollections.observableArrayList(BookedAppointments.getAllfinished(userId));
+        viewTable.setItems(ul);
+        showfinish = true;
     }
 
     @FXML
     private void showComment(ActionEvent event) {
+        if(showfinish){
+             if (viewTable.getSelectionModel().getSelectedItem() != null) {
+        ShowMyDoctorCommentController.setAppId(viewTable.getSelectionModel().getSelectedItem().getId());
         ViewManger.patient.changeSceneToShowMyDoctorComment();
+             }
+        }
     }
 
     public void setUserId(int userId) {

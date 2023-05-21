@@ -8,7 +8,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="403.0" prefWidth="543.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Contral.ShowMyDoctorCommentController">
    <children>
-      <Button layoutX="170.0" layoutY="349.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="348.0" style="-fx-background-color: lightgreen;" text="Show Comment" textFill="WHITE">
+      <Button fx:id="showComBTN" layoutX="170.0" layoutY="349.0" mnemonicParsing="false" onAction="#showComment" prefHeight="35.0" prefWidth="348.0" style="-fx-background-color: lightgreen;" text="Show Comment" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
@@ -18,12 +18,15 @@
             <Font name="System Bold Italic" size="19.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" layoutX="26.0" layoutY="67.0" prefHeight="271.0" prefWidth="492.0" style="-fx-border-color: gray; -fx-border-width: 3px; -fx-background-color: lightgray;" textAlignment="CENTER" wrapText="true">
+      <Label fx:id="commentShow" alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="26.0" layoutY="67.0" prefHeight="271.0" prefWidth="492.0" style="-fx-border-color: gray; -fx-border-width: 3px; -fx-background-color: lightgray;" textAlignment="CENTER" wrapText="true">
          <padding>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </padding>
+         <font>
+            <Font size="39.0" />
+         </font>
       </Label>
-      <Button layoutX="45.0" layoutY="349.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="101.0" style="-fx-background-color: red;" text=" &lt;- Go Back" textFill="WHITE">
+      <Button fx:id="backBTN" layoutX="45.0" layoutY="349.0" mnemonicParsing="false" onAction="#goBack" prefHeight="35.0" prefWidth="101.0" style="-fx-background-color: red;" text=" &lt;- Go Back" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>

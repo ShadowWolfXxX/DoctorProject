@@ -48,7 +48,7 @@
             <Font name="System Bold" size="11.0" />
          </font>
       </Label>
-      <RadioButton fx:id="genderMaleRB" layoutX="160.0" layoutY="408.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="125.0" selected="true" text="Male" textFill="#2b00ff">
+      <RadioButton fx:id="genderMaleRB" layoutX="160.0" layoutY="408.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="125.0" text="Male" textFill="#2b00ff">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
