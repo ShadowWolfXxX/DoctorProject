@@ -96,17 +96,23 @@ public class ShowAppointmentController implements Initializable {
     @FXML
     private void ShowAppointment(ActionEvent event) {
         @FXML
-    private void ShowAppointment(ActionEvent event) throws SQLException {
-        String sql="SELECT * FROM appointment ";
-          ResultSet rs=stat.executeQuery(sql);
-          while(rs.next()){
-          Appointment appointment=new Appointment();
-          appointment.setId(rs.getInt("id"));
-          appointment.setAppointment_date(rs.getDate("appointment_date"));
-          appointment.setAppointment_day(rs.getString("appointment_day"));
-          appointment.setAppointment_time(rs.getDate("appointment_time"));
-          appointment.setStatus(rs.getString("Status"));
-          this.tableView.getItems().add(appointment);
+       
+        
+             try {
+            String Sql="SELECT * FROM  appointment ";
+            ResultSet rs=stat.executeQuery(Sql);
+            while(rs.next()){
+               Appointment appointment=new  Appointment();
+               appointment.setId(rs.getInt("id"));
+               appointment.setAppointment_date(rs.getDate("appointment_date"));
+               appointment.setAppointment_day(rs.getString("appointment_day"));
+               appointment.setAppointment_time(rs.getTime("appointment_time"));
+               appointment.setStatus(rs.getString("status"));              
+                this.tableView.getItems().add(appointment);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ShowPatientController.class.getName()).log(Level.SEVERE, null, ex);
+        }
           }
     }
     }
