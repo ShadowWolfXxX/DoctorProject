@@ -73,10 +73,26 @@ public class MyBookedAppointmentController implements Initializable {
 
     @FXML
     private void showWating(ActionEvent event) {
+        String sql="SELECT * FROM `booked_appointments` WHERE booked_appointments.status='waiting'";
+        ResultSet rs=stat.executeQuery(sql);
+            while(rs.next()){
+        BookedAppointments bookedAppointments=new BookedAppointments();
+            bookedAppointments.setId(rs.getInt("id"));
+            bookedAppointments.setStatus(rs.getString("status"));
+            bookedAppointments.setDoctor_commnet(rs.getString("doctor_commnet"));
+            this.tableView.getItems().add(bookedAppointments);
     }
 
     @FXML
     private void showFinised(ActionEvent event) {
+                String sql="SELECT * FROM `booked_appointments` WHERE booked_appointments.status='finised'";
+        ResultSet rs=stat.executeQuery(sql);
+            while(rs.next()){
+        BookedAppointments bookedAppointments=new BookedAppointments();
+            bookedAppointments.setId(rs.getInt("id"));
+            bookedAppointments.setStatus(rs.getString("status"));
+            bookedAppointments.setDoctor_commnet(rs.getString("doctor_commnet"));
+            this.tableView.getItems().add(bookedAppointments);
     }
 
     @FXML
