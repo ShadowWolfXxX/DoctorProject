@@ -13,6 +13,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -37,12 +38,6 @@ public class PatientRegisterController implements Initializable {
     private RadioButton genderMaleRB;
     @FXML
     private ToggleGroup Gender;
-    @FXML
-    private RadioButton adminRB;
-    @FXML
-    private ToggleGroup Role;
-    @FXML
-    private RadioButton patientRB;
     @FXML
     private RadioButton genderFemaleRB;
     @FXML
@@ -77,7 +72,8 @@ public class PatientRegisterController implements Initializable {
 
     @FXML
     private void signin(ActionEvent event) throws SQLException, IOException {
-
+ArrayList<User> ul = User.getAllForAdmin();
+if(ul.isEmpty()){
         String username = usernameTF.getText();
         String email = emailTF.getText();
         String password = passwordTF.getText();
@@ -86,8 +82,7 @@ public class PatientRegisterController implements Initializable {
         String Age = ageTF.getText();
         String Phone = phoneTF.getText();
         String gender = ((RadioButton) Gender.getSelectedToggle()).getText();
-        String role = ((RadioButton) Role.getSelectedToggle()).getText();
-        User user = new User(username, Fname, Lname, email, password, Age, Phone, gender, role);
+        User user = new User(username, Fname, Lname, email, password, Age, Phone, gender, "Admin");
         int excut = user.save();
 
         if (excut > 0) {
@@ -103,6 +98,32 @@ public class PatientRegisterController implements Initializable {
             alret.showAndWait();
             ViewManger.getInstance().changeSceneToPatientLogin();
         }
+}else{
+    String username = usernameTF.getText();
+        String email = emailTF.getText();
+        String password = passwordTF.getText();
+        String Fname = firstNameTF.getText();
+        String Lname = lastNameTF.getText();
+        String Age = ageTF.getText();
+        String Phone = phoneTF.getText();
+        String gender = ((RadioButton) Gender.getSelectedToggle()).getText();
+        User user = new User(username, Fname, Lname, email, password, Age, Phone, gender, "patient");
+        int excut = user.save();
+
+        if (excut > 0) {
+            usernameTF.clear();
+            emailTF.clear();
+            passwordTF.clear();
+            firstNameTF.clear();
+            lastNameTF.clear();
+            ageTF.clear();
+            phoneTF.clear();
+            Alert alret = new Alert(Alert.AlertType.CONFIRMATION);
+            alret.setContentText("User have been add it");
+            alret.showAndWait();
+            ViewManger.getInstance().changeSceneToPatientLogin();
+        }
+}
     }
 
     @FXML
