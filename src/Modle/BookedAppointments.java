@@ -72,6 +72,8 @@ public class BookedAppointments {
         this.doctor_commnet = doctor_commnet;
     }
 
+    
+    //insert Bookedappointment
     public int save() throws SQLException {
         Connection c = DB.getinstend().getConntectin();
         PreparedStatement ps = null;
@@ -93,6 +95,8 @@ public class BookedAppointments {
         return counter;
     }
     
+    
+    //get all Bookedappointment
     public static ArrayList<BookedAppointments> getAll() throws SQLException {
         Connection c = DB.getinstend().getConntectin();
         PreparedStatement ps = null;
@@ -114,6 +118,8 @@ public class BookedAppointments {
         return bookedP;
     }
 
+    
+    //get all Bookedappointment waiting state
     public static ArrayList<BookedAppointments> getAllwaiting(int userID) throws SQLException {
         Connection c = DB.getinstend().getConntectin();
         PreparedStatement ps = null;
@@ -135,7 +141,7 @@ public class BookedAppointments {
         return bookedP;
     }
     
-    
+    //get all Bookedappointment finish state
     public static ArrayList<BookedAppointments> getAllfinished(int userID) throws SQLException {
         Connection c = DB.getinstend().getConntectin();
         PreparedStatement ps = null;
@@ -157,6 +163,7 @@ public class BookedAppointments {
         return bookedP;
     }
 
+    //get comment 
     public static String getComment(int AppID) throws SQLException {
         Connection c = DB.getinstend().getConntectin();
         PreparedStatement ps = null;
@@ -175,6 +182,7 @@ public class BookedAppointments {
         return comment;
     }
     
+    //search the Bookedappointment by word
     public static ArrayList<BookedAppointments> search(String word) throws SQLException {
         Connection c = DB.getinstend().getConntectin();
         PreparedStatement ps = null;
@@ -203,6 +211,8 @@ public class BookedAppointments {
         return bookedP;
     }
 
+    
+    //make satate finish
     public int makeFinish(String comment) throws SQLException {
         Connection c = DB.getinstend().getConntectin();
         PreparedStatement ps = null;
@@ -222,7 +232,7 @@ public class BookedAppointments {
     }
     
    
-
+//delete Bookedappointment
     public int delete() throws SQLException, ClassNotFoundException {
         Connection c = DB.getinstend().getConntectin();
         PreparedStatement ps = null;

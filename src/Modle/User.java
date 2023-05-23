@@ -121,6 +121,7 @@ public class User {
         this.phone = phone;
     }
 
+    //insert user
     public int save() throws SQLException {
         Connection c = DB.getinstend().getConntectin();
         PreparedStatement ps = null;
@@ -145,6 +146,8 @@ public class User {
         return counter;
     }
 
+    
+    //get all user pation
     public static ArrayList<User> getAll() throws SQLException {
         Connection c = DB.getinstend().getConntectin();
         PreparedStatement ps = null;
@@ -167,6 +170,8 @@ public class User {
         return users;
     }
 
+    
+    //get all admin user
     public static ArrayList<User> getAllForAdmin() throws SQLException {
         Connection c = DB.getinstend().getConntectin();
         PreparedStatement ps = null;
@@ -189,6 +194,7 @@ public class User {
         return users;
     }
 
+    //search for user by word
     public static ArrayList<User> search(String word) throws SQLException {
         Connection c = DB.getinstend().getConntectin();
         PreparedStatement ps = null;
@@ -211,6 +217,7 @@ public class User {
         return users;
     }
 
+    //update user object
     public int update() throws SQLException {
         Connection c = DB.getinstend().getConntectin();
         PreparedStatement ps = null;
@@ -235,7 +242,7 @@ public class User {
         c.close();
         return counter;
     }
-
+//delete user object 
     public int delete() throws SQLException, ClassNotFoundException {
         Connection c = DB.getinstend().getConntectin();
         PreparedStatement ps = null;

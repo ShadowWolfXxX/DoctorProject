@@ -72,6 +72,7 @@ public class Appointment {
         this.appointment_date = appointment_date;
     }
 
+    //add appointment
     public int save() throws SQLException {
         Connection c = DB.getinstend().getConntectin();
         PreparedStatement ps = null;
@@ -93,6 +94,7 @@ public class Appointment {
         return counter;
     }
 
+    //get all apointment
     public static ArrayList<Appointment> getAll() throws SQLException {
         Connection c = DB.getinstend().getConntectin();
         PreparedStatement ps = null;
@@ -113,6 +115,8 @@ public class Appointment {
         return appointments;
     }
     
+    
+    //upadte appointmet
     public int update() throws SQLException {
         Connection c = DB.getinstend().getConntectin();
         PreparedStatement ps = null;
@@ -133,6 +137,8 @@ public class Appointment {
         return counter;
     }
 
+    
+    //delete appointemt
     public int delete() throws SQLException, ClassNotFoundException {
         Connection c = DB.getinstend().getConntectin();
         PreparedStatement ps = null;

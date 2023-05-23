@@ -72,8 +72,15 @@ public class PatientRegisterController implements Initializable {
 
     @FXML
     private void signin(ActionEvent event) throws SQLException, IOException {
-ArrayList<User> ul = User.getAllForAdmin();
-if(ul.isEmpty()){
+        ArrayList<User> ul = User.getAllForAdmin();
+        String role = "";
+        
+        if (ul.isEmpty()) {
+            role = "Admin";
+        } else {
+            role = "patient";
+        }
+
         String username = usernameTF.getText();
         String email = emailTF.getText();
         String password = passwordTF.getText();
@@ -82,7 +89,7 @@ if(ul.isEmpty()){
         String Age = ageTF.getText();
         String Phone = phoneTF.getText();
         String gender = ((RadioButton) Gender.getSelectedToggle()).getText();
-        User user = new User(username, Fname, Lname, email, password, Age, Phone, gender, "Admin");
+        User user = new User(username, Fname, Lname, email, password, Age, Phone, gender, role);
         int excut = user.save();
 
         if (excut > 0) {
@@ -98,32 +105,6 @@ if(ul.isEmpty()){
             alret.showAndWait();
             ViewManger.getInstance().changeSceneToPatientLogin();
         }
-}else{
-    String username = usernameTF.getText();
-        String email = emailTF.getText();
-        String password = passwordTF.getText();
-        String Fname = firstNameTF.getText();
-        String Lname = lastNameTF.getText();
-        String Age = ageTF.getText();
-        String Phone = phoneTF.getText();
-        String gender = ((RadioButton) Gender.getSelectedToggle()).getText();
-        User user = new User(username, Fname, Lname, email, password, Age, Phone, gender, "patient");
-        int excut = user.save();
-
-        if (excut > 0) {
-            usernameTF.clear();
-            emailTF.clear();
-            passwordTF.clear();
-            firstNameTF.clear();
-            lastNameTF.clear();
-            ageTF.clear();
-            phoneTF.clear();
-            Alert alret = new Alert(Alert.AlertType.CONFIRMATION);
-            alret.setContentText("User have been add it");
-            alret.showAndWait();
-            ViewManger.getInstance().changeSceneToPatientLogin();
-        }
-}
     }
 
     @FXML

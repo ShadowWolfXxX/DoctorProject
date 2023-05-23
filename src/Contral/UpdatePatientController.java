@@ -65,7 +65,8 @@ public class UpdatePatientController implements Initializable {
     private User oldUser;
 
     /**
-     * Initializes the controller class.
+     * Initializes the controller class. and set the old value if you get here
+     * for upadte
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -80,7 +81,7 @@ public class UpdatePatientController implements Initializable {
             ageTF.setText(oldUser.getAge());
             if (oldUser.getGender().equals("Female")) {
                 ge.selectToggle(genderFemaleRB);
-            }else{
+            } else {
                 ge.selectToggle(genderMaleRB);
             }
 
@@ -89,67 +90,42 @@ public class UpdatePatientController implements Initializable {
         }
     }
 
- 
-
+    
+    
     @FXML
     private void signin(ActionEvent event) throws SQLException, IOException {
+        String username = usernameTF.getText();
+        String email = emailTF.getText();
+        String password = passwordTF.getText();
+        String Fname = firstNameTF.getText();
+        String Lname = lastNameTF.getText();
+        String Age = ageTF.getText();
+        String Phone = phoneTF.getText();
+        RadioButton genderrd = (RadioButton) ge.getSelectedToggle();
+        String gender = genderrd.getText();
+        String role = "patient";
+        User user = new User(username, Fname, Lname, email, password, Age, Phone, gender, role);
+        int excut = 0;
         if (ShowPatientController.statie.equals("create")) {
-            String username = usernameTF.getText();
-            String email = emailTF.getText();
-            String password = passwordTF.getText();
-            String Fname = firstNameTF.getText();
-            String Lname = lastNameTF.getText();
-            String Age = ageTF.getText();
-            String Phone = phoneTF.getText();
-            RadioButton genderrd = (RadioButton) ge.getSelectedToggle();
-            String gender = genderrd.getText();
-            String role = "patient";
-            User user = new User(username, Fname, Lname, email, password, Age, Phone, gender, role);
-            int excut = user.save();
-
-            if (excut > 0) {
-                usernameTF.clear();
-                emailTF.clear();
-                passwordTF.clear();
-                firstNameTF.clear();
-                lastNameTF.clear();
-                ageTF.clear();
-                phoneTF.clear();
-                Alert alret = new Alert(Alert.AlertType.CONFIRMATION);
-                alret.setContentText("User have been add it");
-                alret.showAndWait();
-                ShowPatientController.updateCrate.close();
-            }
+            excut = user.save();
         } else if (ShowPatientController.statie.equals("update")) {
-            String username = usernameTF.getText();
-            String email = emailTF.getText();
-            String password = passwordTF.getText();
-            String Fname = firstNameTF.getText();
-            String Lname = lastNameTF.getText();
-            String Age = ageTF.getText();
-            String Phone = phoneTF.getText();
-            RadioButton genderrd = (RadioButton) ge.getSelectedToggle();
-            String gender = genderrd.getText();
-            String role = "patient";
-            User user = new User(username, Fname, Lname, email, password, Age, Phone, gender, role);
             user.setId(this.oldUser.getId());
-            int excut = user.update();
-
-            if (excut > 0) {
-                usernameTF.clear();
-                emailTF.clear();
-                passwordTF.clear();
-                firstNameTF.clear();
-                lastNameTF.clear();
-                ageTF.clear();
-                phoneTF.clear();
-                Alert alret = new Alert(Alert.AlertType.CONFIRMATION);
-                alret.setContentText("User have been Updating it");
-                alret.showAndWait();
-                ShowPatientController.updateCrate.close();
-            } else {
-                //error here
-            }
+            excut = user.update();
+        } else {
+            //error here
+        }
+        if (excut > 0) {
+            usernameTF.clear();
+            emailTF.clear();
+            passwordTF.clear();
+            firstNameTF.clear();
+            lastNameTF.clear();
+            ageTF.clear();
+            phoneTF.clear();
+            Alert alret = new Alert(Alert.AlertType.CONFIRMATION);
+            alret.setContentText("User have been add it");
+            alret.showAndWait();
+            ShowPatientController.updateCrate.close();
         }
     }
 

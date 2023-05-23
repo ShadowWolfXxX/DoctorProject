@@ -14,7 +14,7 @@ import java.sql.SQLException;
  * @author HP
  */
 public class DB {
-
+//Make DB connection
     private static DB db;
 
     private DB() {

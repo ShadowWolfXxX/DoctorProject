@@ -59,42 +59,31 @@ public class UpdateAppointmentController implements Initializable {
 
     @FXML
     private void signin(ActionEvent event) throws SQLException {
+        Date appointment_date = Date.valueOf(appDate.getValue());
+        String appointment_day = appDay.getText();
+        Time appointment_time = Time.valueOf(appTime.getText());
+        Appointment appo = new Appointment(appointment_date, appointment_day, appointment_time, "free");
+        int excut = 0;
+
         if (ShowAppointmentController.statie.equals("create")) {
-            Date appointment_date = Date.valueOf(appDate.getValue());
-            String appointment_day = appDay.getText();
-            Time appointment_time = Time.valueOf(appTime.getText());
-            Appointment appo = new Appointment(appointment_date, appointment_day, appointment_time, "free");
-            int excut = appo.save();
-
-            if (excut > 0) {
-                appDate.setValue(null);
-                appDay.setText("");
-                appTime.setText("");
-                Alert alret = new Alert(Alert.AlertType.CONFIRMATION);
-                alret.setContentText("User have been add it");
-                alret.showAndWait();
-                ShowAppointmentController.updateCrate.close();
-            }
+            excut = appo.save();
         } else if (ShowAppointmentController.statie.equals("update")) {
-            Date appointment_date = Date.valueOf(appDate.getValue());
-            String appointment_day = appDay.getText();
-            Time appointment_time = Time.valueOf(appTime.getText());
-            Appointment appo = new Appointment(appointment_date, appointment_day, appointment_time, "free");
             appo.setId(this.oldapp.getId());
-            int excut = appo.update();
-
-            if (excut > 0) {
-                appDate.setValue(null);
-                appDay.setText("");
-                appTime.setText("");
-                Alert alret = new Alert(Alert.AlertType.CONFIRMATION);
-                alret.setContentText("User have been Updating it");
-                alret.showAndWait();
-                ShowAppointmentController.updateCrate.close();
-            } else {
-                //error here
-            }
+            excut = appo.update();
+        } else {
+            //error here
         }
+
+        if (excut > 0) {
+            appDate.setValue(null);
+            appDay.setText("");
+            appTime.setText("");
+            Alert alret = new Alert(Alert.AlertType.CONFIRMATION);
+            alret.setContentText("User have been add it");
+            alret.showAndWait();
+            ShowAppointmentController.updateCrate.close();
+        }
+
     }
 
     @FXML
